@@ -17,3 +17,6 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 [f000:e062]    0xfe062:	jne    0xfd2e1
 //jne指令：如果ZF标志位为0的时候跳转，即上一条指令cmpl的结果不是0时跳转，也就是$cs:0x6ac8地址处的值不是0x0时跳转。
 
+[f000:e066]    0xfe066:	xor    %dx,%dx
+//
+
