@@ -37,8 +37,8 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 [f000:d160]    0xfd160:	cld    
 //设置方向标识位为0，表示后续的串操作比如MOVS操作，内存地址的变化方向，如果为0代表从低地址值变为高地址
   
-
-
+[f000:d161]    0xfd161:	mov    $0x8f,%eax
+[f000:d167]    0xfd167:	out    %al,$0x70
 
 
 
