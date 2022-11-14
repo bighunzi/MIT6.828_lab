@@ -86,6 +86,7 @@ The target architecture is set to "i386".
 可见PC启动后的运行顺序为 BIOS --> boot loader --> 操作系统内核
 
 ## The Boot Loader
+看
 
 
 
