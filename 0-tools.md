@@ -11,3 +11,5 @@ git clone https://github.com/mit-pdos/6.828-qemu.git qemu
 ./configure --disable-kvm --disable-werror --target-list="i386-softmmu x86_64-softmmu"
 sudo make
 sudo make install
+
+## 
