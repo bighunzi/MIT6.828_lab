@@ -55,6 +55,9 @@ The target architecture is set to "i386".
 => 0xfd194:	mov    %eax,%ds
 => 0xfd196:	mov    %eax,%es
 => 0xfd198:	mov    %eax,%ss
+=> 0xfd19a:	mov    %eax,%fs
+=> 0xfd19c:	mov    %eax,%gs
+=> 0xfd19e:	mov    %ecx,%eax
 
 
 
