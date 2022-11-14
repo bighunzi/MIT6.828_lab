@@ -67,9 +67,11 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 [f000:d17d]    0xfd17d:	mov    %cr0,%eax
 [f000:d180]    0xfd180:	or     $0x1,%eax
 [f000:d184]    0xfd184:	mov    %eax,%cr0
-[f000:d187]    0xfd187:	ljmpl  $0x8,$0xfd18f
+//计算机中包含CR0~CR3四个控制寄存器，用来控制和确定处理器的操作模式。其中这三个语句的操作明显是要把CR0寄存器的最低位(0bit)置1。CR0寄存器的0bit是PE位，启动保护位，当该位被置1，代表开启了保护模式。
 
 //后面的应该就不是了
+[f000:d187]    0xfd187:	ljmpl  $0x8,$0xfd18f
+
 The target architecture is set to "i386".
 => 0xfd18f:	mov    $0x10,%eax
 => 0xfd194:	mov    %eax,%ds
