@@ -6,7 +6,8 @@ git diff origin/lab1将显示相对于为这个实验室提供的初始代码的
 提交系统能打分，不知道能不能用。
 PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇编器，二者依据所提供的 Brennan's Guide to Inline Assembly文件转化
 
-## Exercise 1.2(The ROM BIOS)
+##PC Bootstrap
+### Exercise 1.2(The ROM BIOS)
 //当PC机启动时，CPU运行在实模式(real mode)下，而当进入操作系统内核后，将会运行在保护模式下(protected mode)。
 //实模式下指令中出现的地址都是采用 (段基址：段内偏移)。
 //但是由于8088CPU中寄存器都是16位，而CPU地址总线是20位的，所以把段寄存器中的值左移4位，形成20位段基址，然后和16位段内偏移相加，就得到了真实地址
@@ -89,6 +90,8 @@ The target architecture is set to "i386".
 看boot/boot.S源码：
 
 看boot/main.c源码：
+
+###
 
 
 
