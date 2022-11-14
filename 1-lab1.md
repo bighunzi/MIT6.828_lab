@@ -50,4 +50,12 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 [f000:d184]    0xfd184:	mov    %eax,%cr0
 [f000:d187]    0xfd187:	ljmpl  $0x8,$0xfd18f
 
+The target architecture is set to "i386".
+=> 0xfd18f:	mov    $0x10,%eax
+=> 0xfd194:	mov    %eax,%ds
+=> 0xfd196:	mov    %eax,%es
+=> 0xfd198:	mov    %eax,%ss
+
+
+
 
