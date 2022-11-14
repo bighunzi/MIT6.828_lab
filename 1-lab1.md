@@ -55,10 +55,11 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 
 [f000:d16b]    0xfd16b:	in     $0x92,%al
 //0090-009F	System devices
-
 [f000:d16d]    0xfd16d:	or     $0x2,%al
-
+//按位或
 [f000:d16f]    0xfd16f:	out    %al,$0x92
+
+
 [f000:d171]    0xfd171:	lidtw  %cs:0x6ab8
 [f000:d177]    0xfd177:	lgdtw  %cs:0x6a74
 [f000:d17d]    0xfd17d:	mov    %cr0,%eax
