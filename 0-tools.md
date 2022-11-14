@@ -12,4 +12,5 @@ git clone https://github.com/mit-pdos/6.828-qemu.git qemu
 sudo make
 sudo make install
 
-## 
+## 安装工具报错时参考的几个网址
+
