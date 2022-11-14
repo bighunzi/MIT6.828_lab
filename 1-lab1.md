@@ -9,5 +9,5 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 ## Exercise 1.2(The ROM BIOS)
 [f000:fff0]    0xffff0:	ljmp   $0xf000,$0xe05b 
 //一条跳转指令，跳转到0xfe05b地址处
-//
+//16*0xf000 + 0xfff0=0xffff0 
 
