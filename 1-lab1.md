@@ -14,3 +14,6 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 [f000:e05b]    0xfe05b:	cmpl   $0x0,%cs:0x6ac8
 //把0x0这个立即数和$cs:0x6ac8所代表的内存地址处的值比较
 
+[f000:e062]    0xfe062:	jne    0xfd2e1
+//jne指令：如果ZF标志位为0的时候跳转，即上一条指令cmpl的结果不是0时跳转，也就是$cs:0x6ac8地址处的值不是0x0时跳转。
+
