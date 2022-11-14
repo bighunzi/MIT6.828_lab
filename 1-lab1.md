@@ -11,3 +11,6 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 //一条跳转指令，跳转到0xfe05b地址处
 //16*0xf000 + 0xfff0=0xffff0 
 
+[f000:e05b]    0xfe05b:	cmpl   $0x0,%cs:0x6ac8
+//
+
