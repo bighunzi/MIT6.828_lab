@@ -26,7 +26,12 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 //设置寄存器的值
 
 [f000:e076]    0xfe076:	jmp    0xfd15c
-//
+//跳转
+
+[f000:d15c]    0xfd15c:	mov    %eax,%ecx
+//寄存器
+[f000:d15f]    0xfd15f:	cli  
+
 
 
 
