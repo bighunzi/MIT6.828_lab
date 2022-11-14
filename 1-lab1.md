@@ -45,7 +45,7 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 
 //out，in 是用来操作IO端口的（设备控制器当中的寄存器）
 [f000:d167]    0xfd167:	out    %al,$0x70
-//
+//向
 [f000:d169]    0xfd169:	in     $0x71,%al
 [f000:d16b]    0xfd16b:	in     $0x92,%al
 
