@@ -63,6 +63,7 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 [f000:d171]    0xfd171:	lidtw  %cs:0x6ab8
 //lidt指令：加载中断向量表寄存器(IDTR)。
 [f000:d177]    0xfd177:	lgdtw  %cs:0x6a74
+//把从0xf6a74为起始地址处的6个字节的值加载到全局描述符表格寄存器中GDTR中。这个表实现保护模式非常重要的一部分，我们在介绍boot loader时会具体介绍它。
 [f000:d17d]    0xfd17d:	mov    %cr0,%eax
 [f000:d180]    0xfd180:	or     $0x1,%eax
 [f000:d184]    0xfd184:	mov    %eax,%cr0
