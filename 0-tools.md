@@ -13,4 +13,6 @@ sudo make
 sudo make install
 
 ## 安装工具报错时参考的几个网址
-
+https://felord.blog.csdn.net/article/details/104917602
+https://blog.csdn.net/qq_43012789/article/details/106343268
+https://blog.csdn.net/lishuaigell/article/details/124740342
