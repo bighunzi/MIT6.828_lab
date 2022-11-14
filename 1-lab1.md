@@ -8,7 +8,7 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 
 ## Exercise 1.2(The ROM BIOS)
 //当PC机启动时，CPU运行在实模式(real mode)下，而当进入操作系统内核后，将会运行在保护模式下(protected mode)。
-//实模式下
+//实模式下指令中出现的地址都是采用 (段基址：段内偏移)。
 
 [f000:fff0]    0xffff0:	ljmp   $0xf000,$0xe05b 
 //一条跳转指令，跳转到0xfe05b地址处
