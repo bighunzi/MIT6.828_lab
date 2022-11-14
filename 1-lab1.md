@@ -48,8 +48,11 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 //利用al寄存器读取出 $0x70的值
 [f000:d169]    0xfd169:	in     $0x71,%al
 //向$0x71 写入al寄存器的值
-//0070-0071	NMI Enable / Real Time Clock
+//0070-0071	NMI（不可屏蔽） Enable / Real Time Clock
 //见于
+//http://web.archive.org/web/20040501054447/http://members.iweb.net.au/~pstorr/pcbook/book2/ioassign.htm
+
+
 [f000:d16b]    0xfd16b:	in     $0x92,%al
 
 
