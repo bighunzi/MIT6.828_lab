@@ -20,5 +20,8 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 [f000:e066]    0xfe066:	xor    %dx,%dx
 //0xfe066表明上面的跳转指令并没有跳转。这条指令的功能是把dx寄存器清零。
 
+[f000:e068]    0xfe068:	mov    %dx,%ss
+//
+
 
 
