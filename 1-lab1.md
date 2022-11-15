@@ -49,9 +49,9 @@ source在左，destination在右
 
 //out，in 是用来操作IO端口的（设备控制器当中的寄存器）
 [f000:d167]    0xfd167:	out    %al,$0x70
-//利用al寄存器读取出 $0x70的值
+//利用al
 [f000:d169]    0xfd169:	in     $0x71,%al
-//向al寄存器的值
+//向al寄存器写入0x71
 //0070-0071	NMI（不可屏蔽中断） Enable / Real Time Clock
 //见于 http://web.archive.org/web/20040501054447/http://members.iweb.net.au/~pstorr/pcbook/book2/ioassign.htm
 
