@@ -90,8 +90,7 @@ The target architecture is set to "i386".
 
 ## The Boot Loader
 看boot/boot.S源码：
-
-参考 https://www.cnblogs.com/cyx-b/p/11809742.html
+参考 https://www.cnblogs.com/cyx-b/p/11809742.html与其他收藏教程
 几个知识点：
 test命令将两个操作数进行逻辑与运算，并根据运算结果设置相关的标志位。
 
