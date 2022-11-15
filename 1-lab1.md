@@ -95,6 +95,7 @@ The target architecture is set to "i386".
 test命令将两个操作数进行逻辑与运算，并根据运算结果设置相关的标志位。
 
 看boot/main.c源码：
+看收藏的博客即可，另外去重看一边CS:appS书 再回来看一遍这个。
 
 ### Exercise 3
 
