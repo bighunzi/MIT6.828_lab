@@ -6,7 +6,7 @@ git diff origin/lab1将显示相对于为这个实验室提供的初始代码的
 提交系统能打分，不知道能不能用。
 PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇编器，二者依据所提供的 Brennan's Guide to Inline Assembly文件转化
 本项目中使用的GNU汇编器使用AT&T/Unix语法:
-source在左，destination在
+source在左，destination在右
 
 ## PC Bootstrap
 ### Exercise 2(The ROM BIOS)
