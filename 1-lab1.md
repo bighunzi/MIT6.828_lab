@@ -51,7 +51,7 @@ source在左，destination在右
 [f000:d167]    0xfd167:	out    %al,$0x70
 //利用 0x70 端口写入al寄存器的值
 [f000:d169]    0xfd169:	in     $0x71,%al
-//向al寄存器 写入 0x71
+//向al寄存器 写入 0x71端口的值
 //0070-0071	NMI（不可屏蔽中断） Enable / Real Time Clock
 //见于 http://web.archive.org/web/20040501054447/http://members.iweb.net.au/~pstorr/pcbook/book2/ioassign.htm
 
