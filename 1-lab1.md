@@ -102,7 +102,7 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 1.At what point does the processor start executing 32-bit code? What exactly causes the switch from 16- to 32-bit mode?
   ljmp    $PROT_MODE_CSEG, $protcseg
 这条语句之前的几句开启了保护模式，这条语句跳转到了32位对应代码处
-是修改了CR0 bit0位导致了32位模式的
+是修改了CR0 bit0位导致了32位模式的开启
 
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
 ((void (*)(void)) (ELFHDR->e_entry))();
@@ -112,6 +112,7 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 
 
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
+
 
 
 
