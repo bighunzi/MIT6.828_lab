@@ -117,6 +117,7 @@ movw   $0x1234,0x472
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
 main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件中Program Header Table
 
+### exerc
 
 
 
