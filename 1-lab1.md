@@ -105,11 +105,11 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 是修改了CR0 bit0位导致了32位模式的开启
 
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
-d71:	ff 15 18 00 01 00    	call   *0x10018
-
+call   *0x10018
+movw   $0x1234,0x472
 
 3.Where is the first instruction of the kernel?
-
+0x10000c
 
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
 通过ELFHDR 指向的struct中的对象
