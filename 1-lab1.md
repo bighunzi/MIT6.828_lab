@@ -112,7 +112,8 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 
 
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
-通过ELFHDR
+通过ELFHDR 指向的struct中的对象
+
 
 
 
