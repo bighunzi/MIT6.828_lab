@@ -105,7 +105,7 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 是修改了CR0 bit0位导致了32位模式的开启
 
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
-7d71:	ff 15 18 00 01 00    	call   *0x10018
+d71:	ff 15 18 00 01 00    	call   *0x10018
 
 
 3.Where is the first instruction of the kernel?
