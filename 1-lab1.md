@@ -105,6 +105,7 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
 ((void (*)(void)) (ELFHDR->e_entry))();
 
+
 3.Where is the first instruction of the kernel?
 
 
