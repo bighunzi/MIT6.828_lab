@@ -98,7 +98,8 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 看收藏的博客即可，另外去重看一边CS:appS书 再回来看一遍这个。
 
 ### Exercise 3
-其中这个练习中的 boot.asm 并未细看，以后
+其中这个练习中的 boot.asm 并未细看，以后重看一下
+
 1.At what point does the processor start executing 32-bit code? What exactly causes the switch from 16- to 32-bit mode?
 boot.s文件中  ljmp    $PROT_MODE_CSEG, $protcseg
 这条语句之前的几句开启了保护模式，这条语句跳转到了32位对应代码处
