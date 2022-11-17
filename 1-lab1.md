@@ -118,6 +118,10 @@ movw   $0x1234,0x472
 main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件中Program Header Table
 
 ### Exercise 4
+看pointer.c的几行输出
+1，2,4行很简单
+3: 3[c]的写法很奇怪，没见过
+4:
 
 
 
