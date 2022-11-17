@@ -119,9 +119,9 @@ main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件
 
 ### Exercise 4
 看pointer.c的几行输出
-1，2,4行很简单
+1,2,4行很简单
 3: 3[c]的写法很奇怪，没见过
-4:
+5:注意window是小端
 
 
 
