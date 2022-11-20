@@ -134,8 +134,7 @@ Load Address是指程序被实际加载到内存的位置
 修改  $(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o $@.out $^  该行地址
 我将其改为0x7D00
 
-
-注意：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
+问题：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
 但是有一个问题我还不明白，为什么boot sector在修改链接地址后，BIOS还是将boot loader加载到0x7c00
 
 修改后重新编译，发生变化处：0x7c1e:	lgdtw  0x7d64
