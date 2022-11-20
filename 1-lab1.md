@@ -135,8 +135,10 @@ Load Address是指程序被实际加载到内存的位置
 我将其改为0x7D00
 
 问题：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
-但是有一个问题我还不明白，为什么boot sector在修改链接地址后，BIOS还是将boot loader加载到0x7c00
+但是有一个问题我还不明白，为什么boot sector在修改链接地址后，BIOS还是将boot loader加载到0x7c00，链接地址与加载地址实际的作用我还是不明白。
+下文均为参考博客进行的实验
 
 修改后重新编译，发生变化处：0x7c1e:	lgdtw  0x7d64
+![lab1_exercise5_1.png](0)
 
 
