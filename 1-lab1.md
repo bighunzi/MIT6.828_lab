@@ -148,9 +148,11 @@ https://blog.csdn.net/sgy1993/article/details/89281964表示链接地址和加�
 ### Exercise 6
 at the point the BIOS enters the boot loader：
 
+
 at the point the boot loader enters the kernel：
+
 
 他们为什么不同？
 
-
+在第二个情况下那里的东西是什么？
 
