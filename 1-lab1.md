@@ -130,3 +130,5 @@ main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件
 ### Exercise 5
 修改  $(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o $@.out $^  该行地址
 我将其改为0x7D00
+
+注意：BIOS将 boot loader加载到 0x7c00，所以咱们修改的结果是导致了boot.s以及后续的main.c的变化
