@@ -135,7 +135,7 @@ Load Address是指程序被实际加载到内存的位置
 我将其改为0x7D00
 
 问题：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
-https://blog.csdn.net/sgy1993/article/details/89281964表示链接地址和加载地址的区别，咱们
+https://blog.csdn.net/sgy1993/article/details/89281964表示链接地址和加载地址的区别，咱们只是修改了链接地址！！！！！
 
 下文均为参考博客进行的实验
 
