@@ -156,7 +156,7 @@ at the point the boot loader enters the kernel：
 
 他们为什么不同？
 bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entry))()， 其中e_entry字段的含义是这个可执行文件的第一条指令的虚拟地址。所以这句话的含义就是把控制权转移给操作系统内核。
-
+在这之前bootmain已经把kernel程序装载到
 
 在第二个情况下那里的东西是什么？
 
