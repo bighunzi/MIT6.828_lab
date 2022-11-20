@@ -155,7 +155,7 @@ at the point the boot loader enters the kernel：
 0x100010:	0x34000004	0x1000b812	0x220f0011	0xc0200fd8
 
 他们为什么不同？
-bootmain中最后一句加载内核的
+bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entry))();
 
 在第二个情况下那里的东西是什么？
 
