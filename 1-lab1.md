@@ -159,4 +159,6 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 在这之前bootmain已经把kernel程序装载到0x10000处了 从main.c就可以看出来，这几处有了改变。
 
 在第二个情况下那里的东西是什么？
+是kernel程序， 但是是程序的哪一部分我不清楚。
 
+## The Kernel
