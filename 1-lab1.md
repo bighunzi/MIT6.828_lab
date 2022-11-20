@@ -162,3 +162,4 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 是kernel程序， 但是是程序的哪一部分我不清楚。
 
 ## The Kernel
+### 
