@@ -128,6 +128,5 @@ main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件
 于是a[1]变为 90 f4 01 00(128144)   a[2]变为 00 01 00 00(256)
 
 ### Exercise 5
-修改  $(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7D00 -o $@.out $^  该行地址
-
-
+修改  $(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o $@.out $^  该行地址
+我将其改为0x7D00
