@@ -132,3 +132,7 @@ main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件
 我将其改为0x7D00
 
 注意：BIOS将 boot loader加载到 0x7c00，所以咱们修改的结果是导致了boot.s以及后续的main.c的变化
+
+修改后重新编译，发生变化0x7c1e:	lgdtw  0x7d64
+
+
