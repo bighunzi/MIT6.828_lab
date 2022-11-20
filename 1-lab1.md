@@ -147,9 +147,11 @@ https://blog.csdn.net/sgy1993/article/details/89281964表示链接地址和加�
 
 ### Exercise 6
 at the point the BIOS enters the boot loader：
-
+0x100000:	0x00000000	0x00000000	0x00000000	0x00000000
+0x100010:	0x00000000	0x00000000	0x00000000	0x00000000
 
 at the point the boot loader enters the kernel：
+
 
 
 他们为什么不同？
