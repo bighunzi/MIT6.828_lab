@@ -128,8 +128,12 @@ main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件
 于是a[1]变为 90 f4 01 00(128144)   a[2]变为 00 01 00 00(256)
 
 ### Exercise 5
+Link Address是指编译器指定代码和数据所需要放置的内存地址， 由链接器配置
+Load Address是指程序被实际加载到内存的位置
+
 修改  $(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o $@.out $^  该行地址
 我将其改为0x7D00
+
 
 注意：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
 但是有一个问题我还不明白，为什么boot sector在修改链接地址后，BIOS还是将boot loader加载到0x7c00
