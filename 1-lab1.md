@@ -206,7 +206,7 @@ What is the first instruction after the new mapping is established that would fa
 We have omitted a small fragment of code - the code necessary to print octal numbers using patterns of the form "%o". Find and fill in this code fragment.
 
 先分析一下三个文件：
-prin
+printf.c文件中有三个函数 putch(), vcprintf(), cprintf(),
 
 
 省略的部分在 printfmt.c文件208行处，修改为：
