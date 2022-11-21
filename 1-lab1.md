@@ -163,7 +163,8 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 
 ## The Kernel
 ### Exercise 7
-注：从kernel.asm可以看出来 kernel 的入口地址是0x10000c。
+注：从kernel.asm可以看出来 kernel 的入口地址是0x10000c（博客说的）。
+有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018
 
 stop at the movl %eax, %cr0.
 执行完该句的前一句指令，si提示下一句为movl %eax, %cr0时：
