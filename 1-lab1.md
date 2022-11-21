@@ -180,11 +180,15 @@ at 0xf0100000:
 0xf0100010 <entry+4>:	0x00000000	0x00000000	0x00000000	0x00000000
 0xf0100020 <entry+20>:	0x00000000	0x00000000
 
-
-使用stepi GDB命令执行完该指令.
+使用stepi (si) GDB命令执行完该指令.
 at 0x00100000:
+(gdb) x/10x 0x00100000 
+0x100000:	0x1badb002	0x00000000	0xe4524ffe	0x7205c766
+0x100010:	0x34000004	0x1000b812	0x220f0011	0xc0200fd8
+0x100020:	0x0100010d	0xc0220f80
 
 at 0xf0100000:
+
 
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
