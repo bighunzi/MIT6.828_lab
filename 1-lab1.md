@@ -213,3 +213,7 @@ We have omitted a small fragment of code - the code necessary to print octal num
 3.
 
 4.
+
+5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
+
+6.Let's say that GCC changed its calling convention so that it pushed arguments on the stack in declaration order, so that the last argument is pushed last. How would you have to change cprintf or its interface so that it would still be possible to pass it a variable number of arguments?
