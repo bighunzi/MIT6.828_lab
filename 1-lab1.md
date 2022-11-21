@@ -167,6 +167,7 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 stop at the movl %eax, %cr0.
 
 at 0x00100000:
+执行完该句指令的前一句：0x100015:	mov    $0x111000,%eax
 
 at 0xf0100000:
 
