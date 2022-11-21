@@ -202,3 +202,6 @@ What is the first instruction after the new mapping is established that would fa
 ![lab1_exercise7_1.png](0)
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
+### Exercise 8
+
+
