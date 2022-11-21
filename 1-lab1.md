@@ -163,3 +163,7 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 
 ## The Kernel
 ### Exercise 7
+stop at the movl %eax, %cr0.
+
+at 0x00100000:
+at 0xf0100000:
