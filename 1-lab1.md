@@ -211,3 +211,5 @@ We have omitted a small fragment of code - the code necessary to print octal num
 2.Explain the following from console.c:
 
 3.
+
+4.
