@@ -203,5 +203,7 @@ What is the first instruction after the new mapping is established that would fa
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
 ### Exercise 8
+We have omitted a small fragment of code - the code necessary to print octal numbers using patterns of the form "%o". Find and fill in this code fragment.
+
 
 
