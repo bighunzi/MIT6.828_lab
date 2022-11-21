@@ -198,5 +198,6 @@ at 0xf0100000:
 
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
-将entry.S文件中的%movl %eax, %cr0这句话注释掉
+将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
+
 
