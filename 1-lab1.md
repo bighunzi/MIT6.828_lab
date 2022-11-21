@@ -166,8 +166,7 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 注：从kernel.asm可以看出来 kernel 的入口地址是0x10000c。
 
 stop at the movl %eax, %cr0.
-
-执行完该句指令的前一句：0x100015:	mov    $0x111000,%eax，结果：
+执行完该句的前一句指令，si提示下一句为movl %eax, %cr0时：
 at 0x00100000:
 (gdb) x/10x 0x00100000 
 0x100000:	0x1badb002	0x00000000	0xe4524ffe	0x7205c766
@@ -188,6 +187,10 @@ at 0x00100000:
 0x100020:	0x0100010d	0xc0220f80
 
 at 0xf0100000:
+(gdb) x/10x 0xf0100000
+0xf0100000 <_start-268435468>:	0x1badb002	0x00000000	0xe4524ffe	0x7205c766
+0xf0100010 <entry+4>:	0x34000004	0x1000b812	0x220f0011	0xc0200fd8
+0xf0100020 <entry+20>:	0x0100010d	0xc0220f80
 
 
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
