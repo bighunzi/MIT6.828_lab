@@ -205,6 +205,9 @@ What is the first instruction after the new mapping is established that would fa
 ### Exercise 8
 We have omitted a small fragment of code - the code necessary to print octal numbers using patterns of the form "%o". Find and fill in this code fragment.
 
+在 printfmt.c文件208行处，修改为：
+
+
 并回答下列问题：
 1.Explain the interface between printf.c and console.c. Specifically, what function does console.c export? How is this function used by printf.c?
 
