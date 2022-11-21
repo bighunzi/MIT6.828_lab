@@ -166,10 +166,12 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 stop at the movl %eax, %cr0.
 
 at 0x00100000:
+
 at 0xf0100000:
 
 使用stepi GDB命令执行完该指令.
 at 0x00100000:
+
 at 0xf0100000:
 
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
