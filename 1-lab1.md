@@ -164,7 +164,7 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 ## The Kernel
 ### Exercise 7
 注：从kernel.asm可以看出来 kernel 的入口地址是0x10000c（博客说的）。
-有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018
+我有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018，那为什么入口是0x10000c?
 
 stop at the movl %eax, %cr0.
 执行完该句的前一句指令，si提示下一句为movl %eax, %cr0时：
@@ -198,4 +198,5 @@ at 0xf0100000:
 
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
+将entry.S文件中的%movl %eax, %cr0这句话注释掉
 
