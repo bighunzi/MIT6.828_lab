@@ -192,6 +192,8 @@ at 0xf0100000:
 0xf0100010 <entry+4>:	0x34000004	0x1000b812	0x220f0011	0xc0200fd8
 0xf0100020 <entry+20>:	0x0100010d	0xc0220f80
 
+可见原本存放在0xf0100000处的内容，已经被映射到0x00100000处了。
+
 
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
