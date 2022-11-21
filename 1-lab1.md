@@ -167,3 +167,8 @@ stop at the movl %eax, %cr0.
 
 at 0x00100000:
 at 0xf0100000:
+
+使用stepi GDB命令跳过该指令.
+at 0x00100000:
+at 0xf0100000:
+
