@@ -205,13 +205,15 @@ What is the first instruction after the new mapping is established that would fa
 ### Exercise 8
 We have omitted a small fragment of code - the code necessary to print octal numbers using patterns of the form "%o". Find and fill in this code fragment.
 
-先分析一下三个文件：
+分析一下三个文件：
 printf.c文件中有三个函数: 
 putch()调用consol.c中的cputchar(), 
 vcprintf()调用 printfmt.c中的 vprintfmt(), 
 cprintf()调用vcprintf().
 
 剩下两个文件代码太多了，先跟着博客一点点分析。
+先分析console.c：
+
 
 
 
