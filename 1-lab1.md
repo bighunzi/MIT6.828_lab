@@ -223,8 +223,8 @@ vprintfmt函数：
 
 答案：省略的部分在 printfmt.c文件208行处，修改为：
 case 'o':
-// Replace this with your code.
-//imitate (unsigned) hexadecimal and unsigned decimal part
+\qquad// Replace this with your code.
+\qquad\qquad//imitate (unsigned) hexadecimal and unsigned decimal part
 num = getuint(&ap, lflag);
 base=8;
 go to number;
