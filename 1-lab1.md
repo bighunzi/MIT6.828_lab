@@ -238,6 +238,7 @@ case 'o':
 并回答下列问题：
 1.Explain the interface between printf.c and console.c. Specifically, what function does console.c export? How is this function used by printf.c?
 printf.c中putch()调用consol.c中的cputchar()
+用来向显示屏上显示字符。
 
 2.Explain the following from console.c:
 
