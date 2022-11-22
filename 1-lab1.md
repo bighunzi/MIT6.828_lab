@@ -123,7 +123,9 @@ movw   $0x1234,0x472
 
 ![lab1_exercise3.png](0)
 
+> 问题4
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
+
 main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件中Program Header Table
 
 ### Exercise 4
@@ -163,7 +165,9 @@ at the point the boot loader enters the kernel：
 0x100000:	0x1badb002	0x00000000	0xe4524ffe	0x7205c766
 0x100010:	0x34000004	0x1000b812	0x220f0011	0xc0200fd8
 
+> 问题
 他们为什么不同？
+
 bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entry))()， 其中e_entry字段的含义是这个可执行文件的第一条指令的虚拟地址。所以这句话的含义就是把控制权转移给操作系统内核。
 在这之前bootmain已经把kernel程序装载到0x10000处了 从main.c就可以看出来，这几处有了改变。
 
