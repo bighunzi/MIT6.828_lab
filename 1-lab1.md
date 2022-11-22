@@ -120,6 +120,7 @@ movw   $0x1234,0x472
 3.Where is the first instruction of the kernel?
 
 0x10000c
+我有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018，那为什么入口是0x10000c?
 
 ![lab1_exercise3_1.png](0)
 
@@ -181,7 +182,7 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 
 ## The Kernel
 ### Exercise 7
-注：从Exercise 3看出来 kernel 的入口地址是0x10000c（博客说的）。
+注：从Exercise 3可以看出来 kernel 的入口地址是0x10000c（博客说的）。
 
 
 stop at the movl %eax, %cr0.
