@@ -242,6 +242,7 @@ printf.c中putch()调用consol.c中的cputchar()
 
 2.Explain the following from console.c:
 
+
 3.
 
 4.
