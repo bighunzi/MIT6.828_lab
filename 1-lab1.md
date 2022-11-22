@@ -171,7 +171,9 @@ at the point the boot loader enters the kernel：
 bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entry))()， 其中e_entry字段的含义是这个可执行文件的第一条指令的虚拟地址。所以这句话的含义就是把控制权转移给操作系统内核。
 在这之前bootmain已经把kernel程序装载到0x10000处了 从main.c就可以看出来，这几处有了改变。
 
+> 问题
 在第二个情况下那里的东西是什么？
+
 是kernel程序， 但是是程序的哪一部分我不清楚。
 
 ## The Kernel
@@ -208,7 +210,7 @@ at 0xf0100000:
 
 可见原本存放在0xf0100000处的内容，已经被映射到0x00100000处了。
 
-
+> 问题
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
