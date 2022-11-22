@@ -270,9 +270,11 @@ crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 > 问题3
 List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For cons_putc, list its argument as well. For va_arg, list what ap points to before and after the call. For vcprintf list the values of its two arguments.
 
-
+> 问题4
 4.
 
+> 问题5
 5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
 
+> 问题6
 6.Let's say that GCC changed its calling convention so that it pushed arguments on the stack in declaration order, so that the last argument is pushed last. How would you have to change cprintf or its interface so that it would still be possible to pass it a variable number of arguments?
