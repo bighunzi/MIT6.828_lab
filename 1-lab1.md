@@ -10,6 +10,10 @@ source在左，destination在右
 
 ## PC Bootstrap
 ### Exercise 2(The ROM BIOS)
+```language
+
+```
+
 //当PC机启动时，CPU运行在实模式(real mode)下，而当进入操作系统内核后，将会运行在保护模式下(protected mode)。
 //实模式下指令中出现的地址都是采用 (段基址：段内偏移)。
 //但是由于8088CPU中寄存器都是16位，而CPU地址总线是20位的，所以把段寄存器中的值左移4位，形成20位段基址，然后和16位段内偏移相加，就得到了真实地址
@@ -224,12 +228,12 @@ vprintfmt函数：
 答案：省略的部分在 printfmt.c文件208行处，修改为：
 ```language
 case 'o':
-// Replace this with your code.
-//imitate (unsigned) hexadecimal and unsigned decimal part
-num = getuint(&ap, lflag);
-base=8;
-go to number;
-//no break,because "break" is in number:
+	// Replace this with your code.
+	//imitate (unsigned) hexadecimal and unsigned decimal part
+	num = getuint(&ap, lflag);
+	base=8;
+	go to number;
+	//no break,because "break" is in number:
 ```
 
 并回答下列问题：
