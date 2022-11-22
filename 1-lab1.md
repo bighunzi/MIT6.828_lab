@@ -110,11 +110,15 @@ boot.s文件中  ljmp    $PROT_MODE_CSEG, $protcseg
 这条语句之前的几句开启了保护模式，这条语句跳转到了32位对应代码处
 是修改了CR0 bit0位导致了32位模式的开启
 
+> 问题2
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
 call   *0x10018
+
 movw   $0x1234,0x472
 
+> 问题3
 3.Where is the first instruction of the kernel?
+
 0x10000c
 
 ![lab1_exercise3.png](0)
