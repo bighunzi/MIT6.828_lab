@@ -103,8 +103,10 @@ test命令将两个操作数进行逻辑与运算，并根据运算结果设置�
 ### Exercise 3
 其中这个练习中的 boot.asm 并未细看，以后重看一下
 
+> 问题1
 1.At what point does the processor start executing 32-bit code? What exactly causes the switch from 16- to 32-bit mode?
 boot.s文件中  ljmp    $PROT_MODE_CSEG, $protcseg
+
 这条语句之前的几句开启了保护模式，这条语句跳转到了32位对应代码处
 是修改了CR0 bit0位导致了32位模式的开启
 
@@ -250,7 +252,7 @@ crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 > 问题3
 3.In the call to cprintf(), to what does fmt point? To what does ap point?
 
->
+> 问题3
 List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For cons_putc, list its argument as well. For va_arg, list what ap points to before and after the call. For vcprintf list the values of its two arguments.
 
 
