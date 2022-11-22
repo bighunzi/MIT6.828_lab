@@ -218,7 +218,7 @@ cprintf()调用vcprintf().
 
 再看printfmt.c:
 文件注释：精简的原语printf风格的格式化例程，通常由printf、sprintf、fprintf等使用。内核程序和用户程序也使用此代码。
-
+vprintfmt函数：
 
 答案：省略的部分在 printfmt.c文件208行处，修改为：
 
