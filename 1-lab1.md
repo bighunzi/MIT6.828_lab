@@ -242,6 +242,8 @@ printf.c中putch()调用consol.c中的cputchar()
 
 2.Explain the following from console.c:
 
+crt_buf:这是一个字符数组缓冲区，里面存放着要显示到屏幕上的字符
+crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 
 3.
 
