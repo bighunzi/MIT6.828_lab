@@ -121,7 +121,7 @@ movw   $0x1234,0x472
 
 0x10000c
 
-
+![lab1_exercise3_1.png](0)
 
 > 问题4
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
