@@ -211,6 +211,8 @@ putch()调用consol.c中的cputchar(),
 vcprintf()调用 printfmt.c中的 vprintfmt(), 
 cprintf()调用vcprintf().
 
+剩下两个文件代码太多了，先跟着博客一点点分析。
+
 
 
 省略的部分在 printfmt.c文件208行处，修改为：
