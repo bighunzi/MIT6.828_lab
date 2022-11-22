@@ -218,6 +218,7 @@ What is the first instruction after the new mapping is established that would fa
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
 ### Exercise 8
+> Exercise 8
 We have omitted a small fragment of code - the code necessary to print octal numbers using patterns of the form "%o". Find and fill in this code fragment.
 
 分析一下三个文件：
@@ -248,11 +249,15 @@ case 'o':
 ```
 
 并回答下列问题：
+> 问题1
 1.Explain the interface between printf.c and console.c. Specifically, what function does console.c export? How is this function used by printf.c?
+
 printf.c中putch()调用consol.c中的cputchar()
 用来向显示屏上显示字符。
 
+> 问题2
 2.Explain the following from console.c:
+
 crt_buf:这是一个字符数组缓冲区，里面存放着要显示到屏幕上的字符
 crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 
