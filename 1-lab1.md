@@ -270,7 +270,8 @@ crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 > 问题3
 3.In the call to cprintf(), to what does fmt point? To what does ap point?
 
-我并没有执行这个代码，因为总是编译失败
+我并没有执行这个代码，因为总是我自己创建文件之后总是编译失败。以后再来尝试吧，先把答案抄下来。。
+fmt 指向的是"x %d, y %x, z %d\n" 字符串
 
 > 问题3
 List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For cons_putc, list its argument as well. For va_arg, list what ap points to before and after the call. For vcprintf list the values of its two arguments.
