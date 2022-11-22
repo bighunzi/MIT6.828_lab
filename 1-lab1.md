@@ -223,12 +223,12 @@ vprintfmt函数：
 
 答案：省略的部分在 printfmt.c文件208行处，修改为：
 case 'o':
-	// Replace this with your code.
-	//imitate (unsigned) hexadecimal and unsigned decimal part
-	num = getuint(&ap, lflag);
-	base=8;
-	go to number;
-	//no break,because "break" is in number:
+// Replace this with your code.
+//imitate (unsigned) hexadecimal and unsigned decimal part
+num = getuint(&ap, lflag);
+base=8;
+go to number;
+//no break,because "break" is in number:
 
 并回答下列问题：
 1.Explain the interface between printf.c and console.c. Specifically, what function does console.c export? How is this function used by printf.c?
