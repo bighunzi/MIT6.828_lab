@@ -276,6 +276,8 @@ fmt 指向的是"x %d, y %x, z %d\n" 字符串，ap会指向所有输入参数�
 > 问题3
 List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For cons_putc, list its argument as well. For va_arg, list what ap points to before and after the call. For vcprintf list the values of its two arguments.
 
+这个问题以后可以编译了再解答。
+
 > 问题4
 4.
 
