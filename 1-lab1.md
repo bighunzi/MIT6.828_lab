@@ -121,7 +121,7 @@ movw   $0x1234,0x472
 
 0x10000c
 
-![lab1_exercise3.png](0)
+
 
 > 问题4
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
@@ -151,7 +151,9 @@ https://blog.csdn.net/sgy1993/article/details/89281964表示链接地址和加�
 下文均为参考博客进行的实验
 
 修改后重新编译，发生变化处：0x7c1e:	lgdtw  0x7d64
+
 ![lab1_exercise5_1.png](0)
+
 上面这条指令是把指令后面的值所指定内存地址处后6个字节的值输入全局描述符表寄存器GDTR，但是当前这条指令读取的内存地址是0x7d64，我们在图中也展示了一下这个地址处后面6个单元存放的值，发现是全部是0。这肯定是不对的，正确的应该是在0x7c64处存放的值，即图中最下面一样的值。可见，问题出在这里，GDTR表的值读取不正确，这是实现从实模式到保护模式转换的非常重要的一步。
 进一步执行，到后面这条语句发现：程序由于跳转地址的错误，已经无法执行了。(本人猜测，可能因为并没有0x7d32地址对应的指令，所以无法跳转。从boot.asm文件中可以看出，7d30和7d33有指令，7d32并没有）
 ![lab1_exercise5_2.png](1)
@@ -215,6 +217,7 @@ What is the first instruction after the new mapping is established that would fa
 
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
 ![lab1_exercise7_1.png](0)
+
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
 ### Exercise 8
