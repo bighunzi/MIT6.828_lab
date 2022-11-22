@@ -207,7 +207,9 @@ We have omitted a small fragment of code - the code necessary to print octal num
 
 先分析一下三个文件：
 printf.c文件中有三个函数: 
-putch()调用consol.c中的cputchar, vcprintf()调用 printfmt.c中的 vprintfmt, cprintf()调用vcprintf().
+putch()调用consol.c中的cputchar(), 
+vcprintf()调用 printfmt.c中的 vprintfmt(), 
+cprintf()调用vcprintf().
 
 
 
