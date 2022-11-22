@@ -217,7 +217,7 @@ cprintf()调用vcprintf().
 最重要的cputchar函数：其调用cons_putc,而根据注释,后者的功能是输出一个字符到控制台(计算机的屏幕)。
 
 再看printfmt.c:
-
+文件注释：精简的原语printf风格的格式化例程，通常由printf、sprintf、fprintf等使用。内核程序和用户程序也使用此代码。
 
 
 答案：省略的部分在 printfmt.c文件208行处，修改为：
