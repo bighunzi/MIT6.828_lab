@@ -317,7 +317,12 @@ cons_putc (c=120) at kern/console.c:434
 //从kernel.asm发现断点在0xf01011c1
 //ap before va_arg
 
+
 //ap after va_arg
+=> 0xf01011d6 <vprintfmt+806>:	jmp    0xf010118c <vprintfmt+732>
+0xf01011d6	75			return va_arg(*ap, int);
+(gdb) p ((int*)ap)[0]
+$7 = 0
 
 
 //vcprintf and its two arguments
