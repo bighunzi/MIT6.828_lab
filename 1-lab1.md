@@ -343,12 +343,17 @@ $7 = 0
 
 > 问题4
 4.What is the output? Explain how this output is arrived at in the step-by-step manner of the previous exercise. Here's an ASCII table that maps bytes to characters.
-The output depends on that fact that the x86 is little-endian. If the x86 were instead big-endian what would you set i to in order to yield the same output? Would you need to change 57616 to a different value?
 
 输出：He110 World
 %x按16位格式输出， 57616 16进制为e110
 %s按格式输出字符串，但是c语言中没有字符串，只有字符数组，那么该题中显然将int*指针所指的对象作为字符数组输出了。
-但是注意小端系统 int 0x 00 64 6c 72（按ASCII分别对应：空字符,d,l,r.）按byte存放的顺序是反着的，所以    
+但是注意小端系统 int 0x 00 64 6c 72（按ASCII分别对应：空字符,d,l,r.）按byte存放的顺序是反着的，所以现在按照地址递增打印字符的结果就是rld.
+
+> 问题4
+The output depends on that fact that the x86 is little-endian. If the x86 were instead big-endian what would you set i to in order to yield the same output? Would you need to change 57616 to a different value?
+
+
+    
 > 问题5
 5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
 输出： x=3 y=-267325684
