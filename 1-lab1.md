@@ -347,7 +347,7 @@ The output depends on that fact that the x86 is little-endian. If the x86 were i
 
 输出：He110 World
 %x按16位格式输出， 57616 16进制为e110
-%s按格式输出字符串，但是c语言中没有字符串，只有字符数组，那么该题中显然将int*指针所指的对象作为字符数组输出了。00 64 6c 72按ASCII分别对应：空字符，d,
+%s按格式输出字符串，但是c语言中没有字符串，只有字符数组，那么该题中显然将int*指针所指的对象作为字符数组输出了。00 64 6c 72按ASCII分别对应：空字符,d,l,r.
 
 > 问题5
 5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
