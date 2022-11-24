@@ -346,7 +346,7 @@ $7 = 0
 The output depends on that fact that the x86 is little-endian. If the x86 were instead big-endian what would you set i to in order to yield the same output? Would you need to change 57616 to a different value?
 
 输出：He110 World
-%x按16位格式输出
+%x按16位格式输出， 57616 16进制为e110
 
 > 问题5
 5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
