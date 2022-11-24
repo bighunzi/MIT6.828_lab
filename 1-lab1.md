@@ -302,6 +302,10 @@ $16 = 4
 > 问题3
 List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For cons_putc, list its argument as well. For va_arg, list what ap points to before and after the call. For vcprintf list the values of its two arguments.
 
+```language
+
+```
+
 
 
 > 问题4
