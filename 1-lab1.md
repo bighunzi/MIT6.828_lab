@@ -330,6 +330,8 @@ The output depends on that fact that the x86 is little-endian. If the x86 were i
 
 > 问题5
 5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
+x=3 y=-267325684
+
 
 > 问题6
 6.Let's say that GCC changed its calling convention so that it pushed arguments on the stack in declaration order, so that the last argument is pushed last. How would you have to change cprintf or its interface so that it would still be possible to pass it a variable number of arguments?
