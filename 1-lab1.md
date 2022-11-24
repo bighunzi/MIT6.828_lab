@@ -282,15 +282,12 @@ $1 = 0xf0101d8e "x %d, y %x, z %d\n"
 (gdb)  p ap
 $2 = (va_list) 0xf010eef4 "\001"
 
-//ap类型为char *，所以后续
+//ap类型为char *，所以后续要转换类型
 (gdb) ptype ap
 type = char *
 
 (gdb) p ((int*)ap)[0]
-
 $3 = 1
-
-
 
 (gdb) p ((int*)ap)[1]
 $15 = 3
