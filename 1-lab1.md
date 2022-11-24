@@ -307,9 +307,13 @@ List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For c
 
 
 //va_arg
-//before
+//ap before va_arg
 
-//vcprintf
+//ap after va_arg
+
+
+//vcprintf and its two arguments
+
 ```
 
 
