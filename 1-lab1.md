@@ -278,6 +278,19 @@ $1 = 0xf0101d8e "x %d, y %x, z %d\n"
 
 (gdb)  p ap
 $2 = (va_list) 0xf010eef4 "\001"
+(gdb) p *ap
+
+$14 = 1 '\001'
+
+(gdb) p ((int*)ap)[1]
+
+$15 = 3
+
+(gdb) p ((int*)ap)[2]
+
+$16 = 4
+
+
 ```
 
 可以看出fmt 指向的是"x %d, y %x, z %d\n" 字符串，ap会指向所有输入参数的集合。
