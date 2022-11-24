@@ -270,7 +270,7 @@ crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 > 问题3
 3.In the call to cprintf(), to what does fmt point? To what does ap point?
 
-自己写了个c文件，执行失败，运行起来qemu后再试一下！
+自己写了个c文件，执行失败，我！
 
 参考：https://zhuanlan.zhihu.com/p/168787600. 在kern/moniter.c  mon_backtrace()函数中添加了这两行代码并调试。
 从boj/kernel.asm中可以看到mon_backtrace()入口在 f0100877（1055行），所以在该处设置断点，进行调试。
