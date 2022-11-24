@@ -273,7 +273,7 @@ crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 自己写了个c文件，执行失败，我猜测原因是应该将qemu运行完后，将kernel对应文件装入内存才可以调用kern文件夹中的程序！
 
 所以参考：https://zhuanlan.zhihu.com/p/168787600. 在kern/moniter.c  mon_backtrace()函数中添加了这3，4，5题的代码并调试。
-从boj/kernel.asm中可以看到mon_backtrace()入口在 f0100877（1055行），而后续练习的代码自f0100895开始，所以将断电设置在此，然后开始调试。
+从boj/kernel.asm中可以看到mon_backtrace()入口在 f0100877（1055行），而后续练习的代码自f0100895开始，所以将断点设置在此，然后开始调试。
 ```language
 (gdb) p fmt
 $1 = 0xf0101d8e "x %d, y %x, z %d\n"
