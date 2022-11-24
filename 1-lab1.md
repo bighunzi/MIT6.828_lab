@@ -316,6 +316,13 @@ cons_putc (c=120) at kern/console.c:434
 //va_arg
 //从kernel.asm发现断点在0xf01011c1
 //ap before va_arg
+=> 0xf01011c1 <vprintfmt+785>:	mov    0x14(%ebp),%eax
+Breakpoint 1, vprintfmt (putch=0xf0100a52 <putch>, putdat=0xf010ef8c, fmt=0xf0101aa0 "entering test_backtrace %d\n", ap=0xf010efc4 "\005") at lib/printfmt.c:75
+75			return va_arg(*ap, int);
+
+(gdb) p ((int*)ap)[0]
+$2 = 5
+//不明白！
 
 
 //ap after va_arg
@@ -334,10 +341,11 @@ $7 = 0
 ```
 
 
-
 > 问题4
 4.What is the output? Explain how this output is arrived at in the step-by-step manner of the previous exercise. Here's an ASCII table that maps bytes to characters.
 The output depends on that fact that the x86 is little-endian. If the x86 were instead big-endian what would you set i to in order to yield the same output? Would you need to change 57616 to a different value?
+
+
 
 > 问题5
 5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
