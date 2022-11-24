@@ -351,9 +351,9 @@ $7 = 0
 
 > 问题4
 The output depends on that fact that the x86 is little-endian. If the x86 were instead big-endian what would you set i to in order to yield the same output? Would you need to change 57616 to a different value?
+lrd会反过来
+但是e110不会，因为读取的结果就是这个16进制数本身，不会按byte拆分。
 
-
-    
 > 问题5
 5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
 输出： x=3 y=-267325684
