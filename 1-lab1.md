@@ -314,6 +314,7 @@ cons_putc (c=120) at kern/console.c:434
 434	{
 
 //va_arg
+//从kernel.asm发现断点在0xf01011c1
 //ap before va_arg
 
 //ap after va_arg
