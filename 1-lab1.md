@@ -286,8 +286,11 @@ $2 = (va_list) 0xf010eef4 "\001"
 (gdb) ptype ap
 type = char *
 
-(gdb) p *ap
-$14 = 1 '\001'
+(gdb) p ((int*)ap)[0]
+
+$3 = 1
+
+
 
 (gdb) p ((int*)ap)[1]
 $15 = 3
