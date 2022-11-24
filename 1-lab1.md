@@ -269,8 +269,7 @@ crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 
 > 问题3
 3.In the call to cprintf(), to what does fmt point? To what does ap point?
-
-我并没有执行这个代码，因为总是我自己创建文件之后总是编译失败。以后再来尝试吧，先把答案抄下来。。
+参考：https://zhuanlan.zhihu.com/p/112462553
 fmt 指向的是"x %d, y %x, z %d\n" 字符串，ap会指向所有输入参数的集合。
 
 明天争取想办法创建个文件 运行成功，然后编译。
