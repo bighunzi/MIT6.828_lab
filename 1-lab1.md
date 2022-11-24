@@ -278,9 +278,13 @@ crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 (gdb) p fmt
 $1 = 0xf0101d8e "x %d, y %x, z %d\n"
 
-//ap的值和类型位
+//ap的值和类型
 (gdb)  p ap
 $2 = (va_list) 0xf010eef4 "\001"
+
+//ap类型为char *，所以后续
+(gdb) ptype ap
+type = char *
 
 (gdb) p *ap
 $14 = 1 '\001'
