@@ -324,6 +324,7 @@ cons_putc (c=120) at kern/console.c:434
 => 0xf0100a80 <vcprintf+12>:	add    $0xf888,%ebx
 0xf0100a80 in vcprintf (fmt=0xf0101dae "x %d, y %x, z %d\n", ap=0xf010eee4 "\001") at kern/printf.c:18
 18	{
+//与上个小问结果相同。
 ```
 
 
