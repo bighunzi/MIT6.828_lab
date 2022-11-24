@@ -303,7 +303,7 @@ $16 = 4
 List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For cons_putc, list its argument as well. For va_arg, list what ap points to before and after the call. For vcprintf list the values of its two arguments.
 
 注：根据c文件判断 cprintf()函数执行的调用顺序应该是(只列出与题干有关的函数):
-vcprintf(fmt, ap)->vprintfmt->putch()
+vcprintf(fmt, ap)->vprintfmt->putch()->cputchar()->cons_putc(c)
 vcprintf(fmt, ap)->vprintfmt->getint/getuint()->va_arg(*ap,long long)
 
 ```language
