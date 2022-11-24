@@ -304,7 +304,10 @@ List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For c
 
 ```language
 //cons_putc and its arguments
-
+(gdb) si
+=> 0xf0100364 <cons_putc>:	push   %ebp
+cons_putc (c=120) at kern/console.c:434
+434	{
 
 //va_arg
 //ap before va_arg
