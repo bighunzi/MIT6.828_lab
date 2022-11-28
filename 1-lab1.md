@@ -363,3 +363,6 @@ lrd会反过来
 6.Let's say that GCC changed its calling convention so that it pushed arguments on the stack in declaration order, so that the last argument is pushed last. How would you have to change cprintf or its interface so that it would still be possible to pass it a variable number of arguments?
 
 不是很清楚，主要也没有细看vp_list的定义，抄个答案吧：
+有两种方法。一种是程序员调用cprintf函数时按照从右到左的顺序来传递参数，这种方法不符合我们的阅读习惯、可读性较差。第二种方法是在原接口的最后增加一个int型参数，用来记录所有参数的总长度，这样我们可以根据栈顶元素找到格式化字符串的位置。这种方法需要计算所有参数的总长度，也比较麻烦。。。
+
+### Exercise 9
