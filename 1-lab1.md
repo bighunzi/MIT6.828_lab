@@ -437,13 +437,13 @@ f010006a:	83 ec 0c             	sub    $0xc,%esp
 后面要利用monitor.c中的backtrace函数了，所以注释掉之前修改的代码，然后重新编译
 
 一个前面描述尚无法解答的问题：Why can't the backtrace code detect how many arguments there actually are? How could this limitation be fixed?
-我猜，函数参数类型是一个问题，因为如果参数类型是固定的，那么可以通过ebp和esp确定参数数量
+
 
 正式开始练习11：
 > 段落引用
 Implement the backtrace function as specified above. Use the same format as in the example, since otherwise the grading script will be confused. When you think you have it working right, run make grade to see if its output conforms to what our grading script expects, and fix it if it doesn't. After you have handed in your Lab 1 code, you are welcome to change the output format of the backtrace function any way you like.
 
-ebp值表示进入该函数使用的堆栈的基指针，eip是函数的返回指令指针，
+ebp值表示进入该函数使用的堆栈的基指针，eip是函数的返回指令指针，至于为什么ebp
 
 
 
