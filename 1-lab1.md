@@ -366,3 +366,7 @@ lrd会反过来
 有两种方法。一种是程序员调用cprintf函数时按照从右到左的顺序来传递参数，这种方法不符合我们的阅读习惯、可读性较差。第二种方法是在原接口的最后增加一个int型参数，用来记录所有参数的总长度，这样我们可以根据栈顶元素找到格式化字符串的位置。这种方法需要计算所有参数的总长度，也比较麻烦。。。
 
 ### Exercise 9
+
+> 问题
+Determine where the kernel initializes its stack, and exactly where in memory its stack is located. How does the kernel reserve space for its stack? And at which "end" of this reserved area is the stack pointer initialized to point to?
+
