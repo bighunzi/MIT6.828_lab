@@ -438,6 +438,7 @@ f010006a:	83 ec 0c             	sub    $0xc,%esp
 
 正式开始练习11：
 一个前面描述尚无法解答的问题：Why can't the backtrace code detect how many arguments there actually are? How could this limitation be fixed?
+我猜，函数参数类型是一个问题，因为
 
 
 
