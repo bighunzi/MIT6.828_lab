@@ -371,6 +371,7 @@ lrd会反过来
 Determine where the kernel initializes its stack, and exactly where in memory its stack is located. How does the kernel reserve space for its stack? And at which "end" of this reserved area is the stack pointer initialized to point to?
 
 从kernel.asm可以看出来 kernel从此处初始化栈，esp位于0xf010f000。（esp指向的是整个堆栈中正在被使用的部分的最低地址。在这个地址之下的更低的地址空间都是还没有被利用的堆栈空间。）
+esp指向的是栈的低地址端
 ```language
 movl	$0x0,%ebp			# nuke frame pointer
 f010002f:	bd 00 00 00 00       	mov    $0x0,%ebp
