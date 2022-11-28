@@ -415,7 +415,12 @@ test_backtrace(int x)
 }
 //可以看出这个函数就是一个递归调用，一直调用自己直到x=0，调用monitor.c中的mon_backtrace(0, 0, 0)，也就是我们之前修改过的文件。
 ```
-si
+利用si指令 步进执行
+```language
+
+
+```
+
 函数首先调用cprintf()
 
 
