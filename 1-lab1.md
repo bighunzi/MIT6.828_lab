@@ -413,7 +413,9 @@ test_backtrace(int x)
 		mon_backtrace(0, 0, 0);
 	cprintf("leaving test_backtrace %d\n", x);
 }
-//可以看出这个函数就是一个递归调用，一直调用自己直到x=0，调用monitor.c中的mon_backtrace(0, 0, 0)，也就是我们
+//可以看出这个函数就是一个递归调用，一直调用自己直到x=0，调用monitor.c中的mon_backtrace(0, 0, 0)，也就是我们之前修改过的文件。
 ```
+
+
 
 
