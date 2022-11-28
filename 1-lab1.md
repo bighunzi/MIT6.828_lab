@@ -380,7 +380,12 @@ f0100034:	bc 00 f0 10 f0       	mov    $0xf010f000,%esp
 ```
 再进入entry.s查看
 ```language
-
+# Clear the frame pointer register (EBP)
+# so that once we get into debugging C code,
+# stack backtraces will be terminated properly.
+movl	$0x0,%ebp			# nuke frame pointer
+# Set the stack pointer
+movl	$(bootstacktop),%esp
 ```
-
+可以看到
 esp指向的是栈的低地址端
