@@ -392,5 +392,7 @@ bootstack:
 	.globl		bootstacktop   
 bootstacktop:
 ```
-可以看到
-esp指向的是栈的低地址端
+lab中文字也提到了 esp指向的是栈的低地址端
+
+
+
