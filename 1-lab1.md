@@ -397,4 +397,8 @@ lab中文字也提到了 esp指向的是栈的低地址端
 
 ### Exercise 10
 
+> 问题
+To become familiar with the C calling conventions on the x86, find the address of the test_backtrace function in obj/kern/kernel.asm, set a breakpoint there, and examine what happens each time it gets called after the kernel starts. How many 32-bit words does each recursive nesting level of test_backtrace push on the stack, and what are those words?
+
+test_backtrace函数 f0100040
 
