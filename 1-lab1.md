@@ -421,7 +421,7 @@ test_backtrace(int x)
 f0100040:	55                   	push   %ebp
 f0100041:	89 e5                	mov    %esp,%ebp
 f0100050:	8b 75 08             	mov    0x8(%ebp),%esi
-//与栈相关的指令只有上述三条，过程与lab前面的描述也一致，即
+//与栈相关的指令只有上述三条，过程与lab前面的描述也一致，即将ebp压栈，将esp赋给ebp，再减去
 ```
 
 函数首先调用cprintf()
