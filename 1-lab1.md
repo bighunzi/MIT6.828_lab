@@ -412,7 +412,7 @@ test_backtrace(int x)
 	else
 		mon_backtrace(0, 0, 0);
 	cprintf("leaving test_backtrace %d\n", x);
-
+}
 
 ```
 
