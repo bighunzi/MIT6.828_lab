@@ -378,4 +378,4 @@ f010002f:	bd 00 00 00 00       	mov    $0x0,%ebp
 	movl	$(bootstacktop),%esp
 f0100034:	bc 00 f0 10 f0       	mov    $0xf010f000,%esp
 ```
-栈用两个指针
+栈用两个指针ebp，esp保存
