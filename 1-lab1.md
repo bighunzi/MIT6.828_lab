@@ -443,7 +443,7 @@ f010006a:	83 ec 0c             	sub    $0xc,%esp
 > 段落引用
 Implement the backtrace function as specified above. Use the same format as in the example, since otherwise the grading script will be confused. When you think you have it working right, run make grade to see if its output conforms to what our grading script expects, and fix it if it doesn't. After you have handed in your Lab 1 code, you are welcome to change the output format of the backtrace function any way you like.
 
-ebp掉函数即可读取，eip是之前函数调用的
+ebp掉函数即可读取，eip是之前函数调用的ebp，也就i是
 
 
 
