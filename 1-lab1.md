@@ -418,6 +418,13 @@ test_backtrace(int x)
 
 其实后续利用si步进执行的结果和asm文件中没什么区别，只不过是多了循环调用的细节，故后续只在递归的过程中利用si查看
 ```language
+f0100040:	55                   	push   %ebp
+f0100041:	89 e5                	mov    %esp,%ebp
+f0100043:	56                   	push   %esi
+f0100044:	53                   	push   %ebx
+f0100045:	e8 72 01 00 00       	call   f01001bc <__x86.get_pc_thunk.bx>
+f010004a:	81 c3 be 02 01 00    	add    $0x102be,%ebx
+f0100050:	8b 75 08             	mov    0x8(%ebp),%esi
 
 
 ```
