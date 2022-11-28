@@ -415,27 +415,9 @@ test_backtrace(int x)
 }
 //可以看出这个函数就是一个递归调用，一直调用自己直到x=0，调用monitor.c中的mon_backtrace(0, 0, 0)，也就是我们之前修改过的文件。
 ```
-利用si指令 步进执行
+
+其实后续利用si
 ```language
-(gdb) c
-Continuing.
-The target architecture is set to "i386".
-=> 0xf0100040 <test_backtrace>:	push   %ebp
-Breakpoint 1, test_backtrace (x=5) at kern/init.c:13
-13	{
-
-(gdb) si
-=> 0xf0100041 <test_backtrace+1>:	mov    %esp,%ebp
-0xf0100041	13	{
-
-(gdb) si
-=> 0xf0100043 <test_backtrace+3>:	push   %esi
-0xf0100043	13	{
-
-(gdb) si
-=> 0xf0100044 <test_backtrace+4>:	push   %ebx
-0xf0100044	13	{
-//只有这三条指令与栈有关，
 
 ```
 
