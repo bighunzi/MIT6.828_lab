@@ -401,8 +401,18 @@ lab中文字也提到了 esp指向的是栈的低地址端
 To become familiar with the C calling conventions on the x86, find the address of the test_backtrace function in obj/kern/kernel.asm, set a breakpoint there, and examine what happens each time it gets called after the kernel starts. How many 32-bit words does each recursive nesting level of test_backtrace push on the stack, and what are those words?
 
 test_backtrace函数开始于 f0100040
-其c程序是这样的 （我没有在monitor.c文件中找到该函数，所以下面是）：
+其c程序是这样的 （我没有在monitor.c文件中找到该函数，所以下面是根据asm文件中提取出的对应c语言程序）：
 ```language
+void
+test_backtrace(int x)
+{
+	cprintf("entering test_backtrace %d\n", x);
+	if (x > 0)
+		test_backtrace(x-1);
+	else
+		mon_backtrace(0, 0, 0);
+	cprintf("leaving test_backtrace %d\n", x);
+
 
 ```
 
