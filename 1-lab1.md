@@ -371,12 +371,27 @@ lrd会反过来
 Determine where the kernel initializes its stack, and exactly where in memory its stack is located. How does the kernel reserve space for its stack? And at which "end" of this reserved area is the stack pointer initialized to point to?
 
 从kernel.asm可以看出来 kernel中的entry.s 从此处初始化栈，esp位于0xf010f000。（esp指向的是整个堆栈中正在被使用的部分的最低地址。在这个地址之下的更低的地址空间都是还没有被利用的堆栈空间。）
+
+继续往下看，找到bootstack标签，其中.space KSTKSIZE语句申请了大小为KSTKSIZE = 8 * PGSIZE = 8 * 4096 字节、初始值全为0的栈空间。再往后定义了bootstacktop标签，可见栈顶位置处于栈的最高地址上，而栈指针指向栈顶，亦即指向栈的最高地址，这也说明栈是由上到下（高地址向低地址）生长的
 ```language
 movl	$0x0,%ebp			# nuke frame pointer
 f010002f:	bd 00 00 00 00       	mov    $0x0,%ebp
 	# Set the stack pointer
 	movl	$(bootstacktop),%esp
 f0100034:	bc 00 f0 10 f0       	mov    $0xf010f000,%esp
+
+
+.data
+
+###################################################################
+# boot stack
+###################################################################
+	.p2align	PGSHIFT		# force page alignment
+	.globl		bootstack
+bootstack:
+	.space		KSTKSIZE
+	.globl		bootstacktop   
+bootstacktop:
 ```
 可以看到
 esp指向的是栈的低地址端
