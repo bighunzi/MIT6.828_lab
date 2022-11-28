@@ -421,7 +421,11 @@ test_backtrace(int x)
 f0100040:	55                   	push   %ebp
 f0100041:	89 e5                	mov    %esp,%ebp
 f0100053:	83 ec 08             	sub    $0x8,%esp
-//与栈相关的指令只有上述三条，过程与lab前面的描述也一致，即将ebp压栈，将esp赋给ebp，再减小esp以
+//与栈相关的指令只有上述三条，过程与lab前面的描述也一致，即将ebp压栈，将esp赋给ebp，再减小esp。
+
+//而后开始调用cprintf(),跳过这一部分，直接看递归调用
+//在
+
 
 ```
 
