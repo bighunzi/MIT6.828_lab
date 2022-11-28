@@ -440,7 +440,8 @@ f010006a:	83 ec 0c             	sub    $0xc,%esp
 我猜，函数参数类型是一个问题，因为如果参数类型是固定的，那么可以通过ebp和esp确定参数数量
 
 正式开始练习11：
-
+> 段落引用
+Implement the backtrace function as specified above. Use the same format as in the example, since otherwise the grading script will be confused. When you think you have it working right, run make grade to see if its output conforms to what our grading script expects, and fix it if it doesn't. After you have handed in your Lab 1 code, you are welcome to change the output format of the backtrace function any way you like.
 
 
 
