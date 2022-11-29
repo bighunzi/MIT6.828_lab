@@ -122,7 +122,6 @@ movw   $0x1234,0x472
 0x10000c
 我有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018，那为什么入口是0x10000c?
 
-![lab1_exercise3_1.png](0)
 
 > 问题4
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
@@ -503,7 +502,6 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 
 2.objdump -h obj/kern/kernel运行结果：
-![lab1_exercise12_1.png](0)
 
 
 3.objdump -G obj/kern/kernel的运行结果
