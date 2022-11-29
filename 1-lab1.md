@@ -475,13 +475,13 @@ Modify your stack backtrace function to display, for each eip, the function name
 先回答一些问题：
 > 段落引用
 In debuginfo_eip, where do __STAB_* come from? This question has a long answer; to help you to discover the answer, here are some things you might want to do:
-look in the file kern/kernel.ld for __STAB_*
-run objdump -h obj/kern/kernel
-run objdump -G obj/kern/kernel
-run gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c, and look at init.s.
-see if the bootloader loads the symbol table in memory as part of loading the kernel binary
+- look in the file kern/kernel.ld for __STAB_*
+- run objdump -h obj/kern/kernel
+- run objdump -G obj/kern/kernel
+- run gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c, and look at init.s.
+- see if the bootloader loads the symbol table in memory as part of loading the kernel binary
 
-从kernel.ld文件中可以看到：
+1. 从kernel.ld文件中可以看到：
 ```language
 	.stab : {
 		PROVIDE(__STAB_BEGIN__ = .);
@@ -500,6 +500,10 @@ see if the bootloader loads the symbol table in memory as part of loading the ke
 
 注：ld文件是链接脚本文件后缀，其中：
 PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
+
+2.objdump -h obj/kern/kernel运行结果：
+
+
 
 debuginfo_eip()的修改部分：
 ```language
