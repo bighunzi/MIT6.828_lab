@@ -529,7 +529,8 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 
 ```
 
-5.
+5.确认boot loader在加载内核时是否把符号表也加载到内存中。
+
 
 
 debuginfo_eip()的修改部分：
