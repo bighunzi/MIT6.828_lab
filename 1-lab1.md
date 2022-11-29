@@ -502,14 +502,11 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 //调试信息的传统格式被称为 STAB（符号表）。STAB 信息保存在 ELF 文件的 .stab 和 .stabstr 部分。
 //.stab节：符号表部分，这一部分的功能是程序报错时可以提供错误信息，具体的在往后的博客中介绍
 //.stabstr节：符号表字符串部分，具体的也会在往后的博客介绍
-————————————————
-版权声明：本文为CSDN博主「sssaltyfish」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/weixin_43344725/article/details/89102990
 ```
 
 
 
-2.objdump -h obj/kern/kernel运行结果（显示文件的整体头部摘要信息）：
+2.objdump -h obj/kern/kernel运行结果（-G, --stabs              Display (in raw form) any STABS info in the file）：
 ![lab1_exercise12_1.png](5)
 
 可以看到.stab段加载地址是 0x001021d0，size是0x00003895
