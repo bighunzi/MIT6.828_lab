@@ -477,7 +477,8 @@ Modify your stack backtrace function to display, for each eip, the function name
 where do __STAB_* come from?
 
 
-注：ld文件是链接脚本文件后缀
+注：ld文件是链接脚本文件后缀，其中：
+PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 
 debuginfo_eip()的修改部分：
 ```language
