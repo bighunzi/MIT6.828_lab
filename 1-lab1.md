@@ -476,7 +476,7 @@ Modify your stack backtrace function to display, for each eip, the function name
 > 段落引用
 where do __STAB_* come from?
 
-从
+从kernel.ld文件中可以看到：
 ```language
 	.stab : {
 		PROVIDE(__STAB_BEGIN__ = .);
