@@ -473,7 +473,8 @@ Modify your stack backtrace function to display, for each eip, the function name
 利用kern/kdebug.c.中的debuginfo_eip()函数即可，其注释清晰的表明了函数功能。
 注：ld后缀文件是一个链接脚本文件。
 
-同时这个函数还需要我们写一些代码来完成它，先展示debuginfo_eip()的修改部分：
+同时debuginfo_eip()函数还需要我们调用
+先展示debuginfo_eip()的修改部分：
 ```language
 
 ```
