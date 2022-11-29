@@ -476,6 +476,22 @@ Modify your stack backtrace function to display, for each eip, the function name
 > 段落引用
 where do __STAB_* come from?
 
+从
+```language
+	.stab : {
+		PROVIDE(__STAB_BEGIN__ = .);
+		*(.stab);
+		PROVIDE(__STAB_END__ = .);
+		BYTE(0)		/* Force the linker to allocate space for this section */
+	}
+	.stabstr : {
+		PROVIDE(__STABSTR_BEGIN__ = .);
+		*(.stabstr);
+		PROVIDE(__STABSTR_END__ = .);
+		BYTE(0)		/* Force the linker to allocate space for this section */
+	}
+```
+
 
 注：ld文件是链接脚本文件后缀，其中：
 PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
