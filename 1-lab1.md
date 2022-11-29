@@ -524,6 +524,12 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 
 ```
 
+4.gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c的运行结果“
+```language
+
+```
+
+5.
 
 
 debuginfo_eip()的修改部分：
