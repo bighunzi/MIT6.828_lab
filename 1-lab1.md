@@ -502,7 +502,7 @@ PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只�
 
 
 
-2.objdump -h obj/kern/kernel运行结果（显示每个文件的整体头部摘要信息）：
+2.objdump -h obj/kern/kernel运行结果（显示文件的整体头部摘要信息）：
 ![lab1_exercise12_1.png](5)
 
 3.objdump -G obj/kern/kernel的运行结果：（太长了，只截取一部分显示）
