@@ -434,7 +434,7 @@ f010006a:	83 ec 0c             	sub    $0xc,%esp
 更细节的东西，我没有推断，只是按照原理简单的陈述了一下。
 
 ### Exercise 11
-后面要利用monitor.c中的backtrace函数了，所以注释掉之前修改的代码，然后重新编译
+后面要利用monitor.c中的mon_backtrace函数了，所以注释掉之前修改的代码，然后重新编译
 
 一个前面描述尚无法解答的问题：Why can't the backtrace code detect how many arguments there actually are? How could this limitation be fixed?
 
@@ -539,7 +539,7 @@ debuginfo_eip()的修改部分：
 ```
 
 
-backtrace()的修改部分：
+mon_backtrace()的修改部分：
 ```language
 
 ```
