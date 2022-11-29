@@ -497,7 +497,9 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 		BYTE(0)		/* Force the linker to allocate space for this section */
 	}
 //注：ld文件是链接脚本文件后缀，其中：
-PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
+//PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
+
+//
 ```
 
 
