@@ -473,7 +473,11 @@ Modify your stack backtrace function to display, for each eip, the function name
 利用kern/kdebug.c.中的debuginfo_eip()函数即可，其注释清晰的表明了函数功能。同时debuginfo_eip()函数还需要我们调用stab_binsearch 来完成对line number 的查询。
 
 先回答一些问题：
+> 段落引用
+where do __STAB_* come from?
 
+
+注：ld文件是链接脚本文件后缀
 
 debuginfo_eip()的修改部分：
 ```language
