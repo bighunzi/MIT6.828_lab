@@ -470,7 +470,9 @@ while((int)ebp != 0x0){//the first ebp value is 0x0
 > 段落引用
 Modify your stack backtrace function to display, for each eip, the function name, source file name, and line number corresponding to that eip.
 
-利用debuginfo_eip()
+利用kern/kdebug.c.中的debuginfo_eip()函数即可，其注释清晰的表明了函数功能
+
+
 
 
 
