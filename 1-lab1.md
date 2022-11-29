@@ -486,7 +486,7 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 ```language
 	.stab : {
 		PROVIDE(__STAB_BEGIN__ = .);
-		*(.stab);//*符号代表任意输入文件，该句指令的意思应该是任何
+		*(.stab);//*符号代表任意输入文件，该句指令的意思应该是任何文件的stab段都放在这个部分
 		PROVIDE(__STAB_END__ = .);
 		BYTE(0)		/* Force the linker to allocate space for this section */
 	}
@@ -496,11 +496,11 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 		PROVIDE(__STABSTR_END__ = .);
 		BYTE(0)		/* Force the linker to allocate space for this section */
 	}
+//注：ld文件是链接脚本文件后缀，其中：
+PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 ```
 
 
-注：ld文件是链接脚本文件后缀，其中：
-PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 
 2.objdump -h obj/kern/kernel运行结果：
 ![lab1_exercise12_1.png](5)
