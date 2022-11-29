@@ -122,6 +122,7 @@ movw   $0x1234,0x472
 0x10000c
 我有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018，那为什么入口是0x10000c?
 
+![lab1_exercise3_1.png](0)
 
 > 问题4
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
@@ -217,7 +218,7 @@ at 0xf0100000:
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
-![lab1_exercise7_1.png](0)
+![lab1_exercise7_1.png](3)
 
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
