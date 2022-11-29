@@ -509,22 +509,13 @@ PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只�
 .stabstr段加载地址是0x00105a65  size是00001531
 
   
-3.objdump -G obj/kern/kernel的运行结果（解析保存在文件中的调试信息并以C语言的语法显示出来）：（太长了，只截取一部分显示）
+3.objdump -G obj/kern/kernel的运行结果（解析保存在文件中的调试信息并以C语言的语法显示出来）：（太长了，只截取想要解释的）
 ```language
 bighunzi@bighunzi-VirtualBox:~/MIT6.828/course_rep/lab$ objdump -G obj/kern/kernel
 obj/kern/kernel：     文件格式 elf32-i386
 .stab 节的内容：
 Symnum n_type n_othr n_desc n_value  n_strx String
 
--1     HdrSym 0      1294   00001973 1     
-0      SO     0      0      f0100000 1      {standard input}
-1      SOL    0      0      f010000c 18     kern/entry.S
-2      SLINE  0      44     f010000c 0      
-15     OPT    0      0      00000000 49     gcc2_compiled.
-16     LSYM   0      0      00000000 64     int:t(0,1)=r(0,1);-2147483648;2147483647;
-17     LSYM   0      0      00000000 106    char:t(0,2)=r(0,2);0;127;
-108    FUN    0      0      f0100040 2946   test_backtrace:F(0,25)
-118    FUN    0      0      f01000a6 2987   i386_init:F(0,25)
 
 ```
 
