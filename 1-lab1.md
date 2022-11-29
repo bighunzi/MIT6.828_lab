@@ -499,7 +499,12 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 //注：ld文件是链接脚本文件后缀，其中：
 //PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 
-//
+//调试信息的传统格式被称为 STAB（符号表）。STAB 信息保存在 ELF 文件的 .stab 和 .stabstr 部分。
+//.stab节：符号表部分，这一部分的功能是程序报错时可以提供错误信息，具体的在往后的博客中介绍
+//.stabstr节：符号表字符串部分，具体的也会在往后的博客介绍
+————————————————
+版权声明：本文为CSDN博主「sssaltyfish」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/weixin_43344725/article/details/89102990
 ```
 
 
