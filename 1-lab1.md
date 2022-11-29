@@ -513,7 +513,7 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 .stabstr段加载地址是0x00105a65  size是00001531
 
   
-3.objdump -G obj/kern/kernel的运行结果（-G, --stabs Display (in raw form) any STABS info in the file即显示可以看到kernel的.stab节的内容）：（太长了，只截取想要解释的）
+3.objdump -G obj/kern/kernel的运行结果（-G, --stabs Display (in raw form) any STABS info in the file 即可以看到kernel的.stab节的内容）：（太长了，只截取想要解释的）
 ```language
 bighunzi@bighunzi-VirtualBox:~/MIT6.828/course_rep/lab$ objdump -G obj/kern/kernel
 obj/kern/kernel：     文件格式 elf32-i386
