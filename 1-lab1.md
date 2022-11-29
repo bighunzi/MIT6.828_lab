@@ -445,7 +445,7 @@ Implement the backtrace function as specified above. Use the same format as in t
 
 ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数的返回指令指针。
 至于为什么ebp,eip，args分布在栈上这些位置，看下图：
-![lab1_exercise11_栈帧结构.png](0)
+![lab1_exercise11_栈帧结构.png](4)
 
 
 一定要记住ebp寄存器中保存的是指向栈的指针！另外， 代码中的类型转换也要注意！  循环的终止条件是前面练习中得出的结论，ebp寄存器中初始值是0x00,代码如下：
@@ -503,9 +503,12 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 
 2.objdump -h obj/kern/kernel运行结果：
-
+![lab1_exercise12_1.png](5)
 
 3.objdump -G obj/kern/kernel的运行结果
+```language
+
+```
 
 
 
