@@ -503,9 +503,7 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 
 2.objdump -h obj/kern/kernel运行结果：
-
 ![lab1_exercise12_1.png](0)
-
 
 3.objdump -G obj/kern/kernel的运行结果
 
