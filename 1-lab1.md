@@ -506,8 +506,10 @@ PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只�
 ![lab1_exercise12_1.png](5)
 
 可以看到.stab段加载地址是 0x001021d0，size是0x00003895
-.stabstr段加载地址是0x00105a65  size是00001531  f  
-3.objdump -G obj/kern/kernel的运行结果：（太长了，只截取一部分显示）
+.stabstr段加载地址是0x00105a65  size是00001531
+
+  
+3.objdump -G obj/kern/kernel的运行结果（）：（太长了，只截取一部分显示）
 ```language
 bighunzi@bighunzi-VirtualBox:~/MIT6.828/course_rep/lab$ objdump -G obj/kern/kernel
 obj/kern/kernel：     文件格式 elf32-i386
