@@ -486,7 +486,7 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 ```language
 	.stab : {
 		PROVIDE(__STAB_BEGIN__ = .);
-		*(.stab);
+		*(.stab);//*符号代表任意输入文件，该句指令的意思应该是任何
 		PROVIDE(__STAB_END__ = .);
 		BYTE(0)		/* Force the linker to allocate space for this section */
 	}
