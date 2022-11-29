@@ -462,13 +462,11 @@ while((int)ebp != 0x0){//the first ebp value is 0x0
 	cprintf(" %08x",*(ebp+4));
 	cprintf(" %08x",*(ebp+5));
 	cprintf(" %08x\n",*(ebp+6));
-		
-		ebp=(int *)(*ebp);
-
+	ebp=(int *)(*ebp);
 	}
-
-
 ```
+
+### Exercise 12
 
 
 
