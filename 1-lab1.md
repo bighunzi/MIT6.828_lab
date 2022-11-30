@@ -581,5 +581,41 @@ debuginfo_eip()的修改部分：
 
 mon_backtrace()的修改部分：
 ```language
+	uint32_t * ebp;
+	struct Eipdebuginfo info;
+	ebp=(uint32_t *)read_ebp();
+	cprintf("Stack backtrace:\n");
+	while((int)ebp != 0x0){//the first ebp value is 0x0
+		//Exercise 11
+		cprintf(" ebp %08x",(int) ebp);
+		cprintf(" eip %08x",*(ebp+1));
+		cprintf(" args");
+		// the order of arguments is reverse in the stack. For example, func(a,b), in the stack is b,a.
+		cprintf(" %08x",*(ebp+2));
+		cprintf(" %08x",*(ebp+3));
+		cprintf(" %08x",*(ebp+4));
+		cprintf(" %08x",*(ebp+5));
+
+		cprintf(" %08x\n",*(ebp+6));
+
+		
+
+		//Exercise 12
+
+		debuginfo_eip( ebp[1] , &info);
+
+		cprintf("\t%s:",info.eip_file);
+
+		cprintf("%d: ",info.eip_line);
+
+		cprintf("%.*s+%d\n", info.eip_fn_namelen , info.eip_fn_name , ebp[1] - info.eip_fn_addr );
+
+		
+
+		//
+
+		ebp=(uint32_t *)(*ebp);
+
+	}
 
 ```
