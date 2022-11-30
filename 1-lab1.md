@@ -567,6 +567,8 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 ```
 
 debuginfo_eip()的修改部分：
+理解stabs每行记录的含义后，调用stab_binsearch便能找到某个地址对应的行号了。
+由于前面的代码已经找到地址在哪个函数里面以及函数入口地址，将原地址减去函数入口地址即可得到偏移量，再根据偏移量在符号表中的指定区间查找对应的记录即可。代码如下所示
 ```language
 
 ```
