@@ -513,28 +513,26 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 .stabstr段加载地址是0x00105a65  size是00001531
 
   
-3.objdump -G obj/kern/kernel的运行结果（-G, --stabs Display (in raw form) any STABS info in the file 即可以看到kernel的.stab节的内容）：（太长了，只截取想要解释的）
+3.objdump -G obj/kern/kernel的运行结果（-G, --stabs Display (in raw form) any STABS info in the file 即可以看到kernel的.stab节的内容）：（太长了，只截取一部分）
 ```language
 bighunzi@bighunzi-VirtualBox:~/MIT6.828/course_rep/lab$ objdump -G obj/kern/kernel
 obj/kern/kernel：     文件格式 elf32-i386
 .stab 节的内容：
 Symnum n_type n_othr n_desc n_value  n_strx String
 -1     HdrSym  0      1206   00001530  1     
-
-0      SO      0      0      f0100000  1      {standard input}
-
-1      SOL     0      0      f010000c  18     kern/entry.S
- 
+0      SO      0      0      f0100000  1     {standard input}
+1      SOL     0      0      f010000c  18    kern/entry.S
 2      SLINE   0      44     f010000c  0      
-
 3      SLINE   0      57     f0100015  0      
-
 4      SLINE   0      58     f010001a  0      
-
 5      SLINE   0      60     f010001d  0      
-
 6      SLINE   0      61     f0100020  0    
-
+//据博客说：
+//Symnum是符号索引，换句话说，整个符号表看作一个数组，Symnum是当前符号在数组中的下标
+//n_type是符号类型，FUN指函数名，SLINE指在text段中的行号
+//n_othr目前没被使用，其值固定为0
+//n_desc表示在文件中的行号
+//n_value表示地址。特别要注意的是，这里只有FUN类型的符号的地址是绝对地址，SLINE符号的地址是偏移量，其实际地址为函数入口地址加上偏移量。比如第3行的含义是地址f01000b8(=0xf01000a6+0x00000012)对应文件第34行
 ```
 
 4.gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c生成的init.s文件：
