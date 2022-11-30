@@ -19,7 +19,8 @@ source在左，destination在右
 ## PC Bootstrap
 obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容，这个硬盘映像包含引导加载程序(obj/boot/boot)和内核(obj/kernel)。
 虚拟VGA显示器其实就在qemu窗口上。
-基本输入/输出系统(BIOS Basic Input/Output System)
+
+基本输入/输出系统(BIOS Basic Input/Output System)，BIOS负责执行基本的系统初始化，如激活显卡和检查所安装的内存量。在执行此初始化之后，BIOS从某些适当的位置(如软盘、硬盘、CD-ROM或网络)加载操作系统，并将计算机的控制传递给操作系统。
 
 ### Exercise 2(The ROM BIOS)
 ```language
