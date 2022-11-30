@@ -15,6 +15,8 @@ source在左，destination在右
 
 ## PC Bootstrap
 ### Exercise 2(The ROM BIOS)
+obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容
+
 ```language
 //当PC机启动时，CPU运行在实模式(real mode)下，而当进入操作系统内核后，将会运行在保护模式下(protected mode)。
 //实模式下指令中出现的地址都是采用 (段基址：段内偏移)。
