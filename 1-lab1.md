@@ -19,6 +19,7 @@ source在左，destination在右
 ## PC Bootstrap
 obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容，这个硬盘映像包含引导加载程序(obj/boot/boot)和内核(obj/kernel)。
 虚拟VGA显示器其实就在qemu窗口上。
+基本输入/输出系统(BIOS Basic Input/Output System)
 
 ### Exercise 2(The ROM BIOS)
 ```language
