@@ -5,6 +5,7 @@ PC's power-on bootstrap procedure：PC的开机引导程序。
 JOS 指的是6.828的kernel
 
 ## 一些暂时未尝试的东西
+提交 git commit -am 'my solution for lab1 exercise 9'
 git diff将显示自上次提交以来对代码的更改，
 git diff origin/lab1将显示相对于为这个实验室提供的初始代码的更改。
 提交系统能打分，不知道能不能用。
