@@ -531,7 +531,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 5.确认boot loader在加载内核时是否把符号表（stab）也加载到内存中。
 问题2中我们已经知道了stab的加载地址0x001021d0，所以我们只要看那块地址的信息就可以了
 ```language
-
+//还是同之前一样在kernel的入口0x10000c处设置
 ```
 
 
