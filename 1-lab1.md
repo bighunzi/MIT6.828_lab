@@ -1,7 +1,8 @@
 # lab1
 
 x86架构。
-
+PC's power-on bootstrap procedure：PC的开机引导程序。
+JOSke
 
 ## 一些暂时未尝试的东西
 git diff将显示自上次提交以来对代码的更改，
