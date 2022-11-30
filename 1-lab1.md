@@ -14,9 +14,12 @@ PC Assembly Language Book书中使用的是NASM汇编器，而项目使用GNU汇
 source在左，destination在右
 
 
-obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容，这个硬盘映像包含引导加载程序(obj/boot/boot)和内核(obj/kernel)。
+
 
 ## PC Bootstrap
+obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容，这个硬盘映像包含引导加载程序(obj/boot/boot)和内核(obj/kernel)。
+虚拟VGA显示器其实就在qemu窗口上。
+
 ### Exercise 2(The ROM BIOS)
 ```language
 //当PC机启动时，CPU运行在实模式(real mode)下，而当进入操作系统内核后，将会运行在保护模式下(protected mode)。
