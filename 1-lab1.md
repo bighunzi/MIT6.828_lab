@@ -595,27 +595,17 @@ mon_backtrace()的修改部分：
 		cprintf(" %08x",*(ebp+3));
 		cprintf(" %08x",*(ebp+4));
 		cprintf(" %08x",*(ebp+5));
-
 		cprintf(" %08x\n",*(ebp+6));
 
-		
-
 		//Exercise 12
-
 		debuginfo_eip( ebp[1] , &info);
-
 		cprintf("\t%s:",info.eip_file);
-
 		cprintf("%d: ",info.eip_line);
-
 		cprintf("%.*s+%d\n", info.eip_fn_namelen , info.eip_fn_name , ebp[1] - info.eip_fn_addr );
 
-		
-
 		//
-
 		ebp=(uint32_t *)(*ebp);
-
 	}
+//其实还是不怎么懂，之后重新看看吧。
 
 ```
