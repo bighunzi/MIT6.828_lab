@@ -551,13 +551,8 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 0xf0105ebe:	""
 0xf0105ebf:	""
 0xf0105ec0:	""
-
+//我运行的结果是这样的，好像并没有加载进去，很奇怪。。。。。。
 ```
-
-
-
-该写这部分了！！
-
 
 debuginfo_eip()的修改部分：
 ```language
