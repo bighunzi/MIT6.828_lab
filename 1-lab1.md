@@ -519,7 +519,21 @@ bighunzi@bighunzi-VirtualBox:~/MIT6.828/course_rep/lab$ objdump -G obj/kern/kern
 obj/kern/kernel：     文件格式 elf32-i386
 .stab 节的内容：
 Symnum n_type n_othr n_desc n_value  n_strx String
+-1     HdrSym  0      1206   00001530  1     
 
+0      SO      0      0      f0100000  1      {standard input}
+
+1      SOL     0      0      f010000c  18     kern/entry.S
+ 
+2      SLINE   0      44     f010000c  0      
+
+3      SLINE   0      57     f0100015  0      
+
+4      SLINE   0      58     f010001a  0      
+
+5      SLINE   0      60     f010001d  0      
+
+6      SLINE   0      61     f0100020  0    
 
 ```
 
