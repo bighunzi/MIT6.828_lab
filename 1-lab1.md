@@ -24,8 +24,7 @@ obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容，这个硬盘映�
 BIOS负责执行基本的系统初始化，如激活显卡和检查所安装的内存量。在执行此初始化之后，BIOS从某些适当的位置(如软盘、硬盘、CD-ROM或网络)加载操作系统，并将计算机的控制传递给操作系统。
 JOS将只使用PC的物理内存的前256MB。
 
-IBM PC在物理地址0x000ffff0开始执行，它位于预留给ROM BIOS的64KB区域的最顶端。
-笔记总结到这！！！！！！！！！！！！！！！！！！！
+IBM PC在物理地址0x000ffff0开始执行，它位于预留给ROM BIOS的64KB区域的最顶端（结合那个PC physical adress的图看）。
 
 
 ### Exercise 2(The ROM BIOS)
