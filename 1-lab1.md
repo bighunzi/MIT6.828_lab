@@ -24,9 +24,6 @@ obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容，这个硬盘映�
 BIOS负责执行基本的系统初始化，如激活显卡和检查所安装的内存量。在执行此初始化之后，BIOS从某些适当的位置(如软盘、硬盘、CD-ROM或网络)加载操作系统，并将计算机的控制传递给操作系统。
 JOS将只使用PC的物理内存的前256MB。
 
-IBM PC在物理地址0x000ffff0开始执行，它位于预留给ROM BIOS的64KB区域的最顶端（结合那个PC physical adress的图看）。
-
-
 ### Exercise 2(The ROM BIOS)
 ```language
 //当PC机启动时，CPU运行在实模式(real mode)下，而当进入操作系统内核后，将会运行在保护模式下(protected mode)。
@@ -34,6 +31,7 @@ IBM PC在物理地址0x000ffff0开始执行，它位于预留给ROM BIOS的64KB�
 //但是由于8088CPU中寄存器都是16位，而CPU地址总线是20位的，所以把段寄存器中的值左移4位，形成20位段基址，然后和16位段内偏移相加，就得到了真实地址
 
 [f000:fff0]    0xffff0:	ljmp   $0xf000,$0xe05b 
+//可以看到IBM PC在物理地址0x000ffff0开始执行，它位于预留给ROM BIOS的64KB区域的最顶端（结合那个PC physical adress的图看）。
 //一条跳转指令，跳转到0xfe05b地址处
 //16*0xf000 + 0xfff0=0xffff0 
 
