@@ -23,6 +23,10 @@ obj/kern/kernel.img是模拟PC的“虚拟硬盘”的内容，这个硬盘映�
 基本输入/输出系统(BIOS Basic Input/Output System)。在早期的pc中，BIOS保存在真正的只读存储器(ROM)中，但现在的pc将BIOS存储在可更新的闪存中。
 BIOS负责执行基本的系统初始化，如激活显卡和检查所安装的内存量。在执行此初始化之后，BIOS从某些适当的位置(如软盘、硬盘、CD-ROM或网络)加载操作系统，并将计算机的控制传递给操作系统。
 JOS将只使用PC的物理内存的前256MB。
+
+笔记总结到这！！！！！！！！！！！！！！！！！！！
+
+
 ### Exercise 2(The ROM BIOS)
 ```language
 //当PC机启动时，CPU运行在实模式(real mode)下，而当进入操作系统内核后，将会运行在保护模式下(protected mode)。
