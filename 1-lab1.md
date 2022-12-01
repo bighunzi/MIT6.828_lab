@@ -166,7 +166,8 @@ main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件
 于是a[1]变为 90 f4 01 00(128144)   a[2]变为 00 01 00 00(256)
 
 ### Exercise 5
-objdump -h obj/kern/kernel //查看
+objdump -h obj/kern/kernel //检查内核可执行文件中所有节的名称、大小和链接地址的完整列表
+
 Link Address是指编译器指定代码和数据所需要放置的内存地址，由链接器配置
 Load Address是指程序被实际加载到内存的位置
 
