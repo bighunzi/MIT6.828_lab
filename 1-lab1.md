@@ -281,9 +281,6 @@ cprintf()调用vcprintf().
 (4)va_list ap
 这个参数代表的是多个输入参数，即printf子程序中从第二个参数开始之后的参数，比如("These are %d test and %d test", n, m)，那么ap指的就是n，m
 
-我们可以发现，刚刚得到的fmt和ap正好可以被放在第3和第4个输入参数处！
-
-　　　　另外再看头两个参数，第一个参数是一个函数指针，这个函数必须能够实现把一个字符输出到某个地址处的功能。再看一下vcprintf中它赋给vprintfmt子程序的第一个参数是这个文件中的第一个子程序putch。
 答案：省略的部分在 printfmt.c文件208行处，修改为：
 ```language
 case 'o':
