@@ -359,7 +359,7 @@ cons_putc (c=120) at kern/console.c:434
 => 0xf01011c1 <vprintfmt+785>:	mov    0x14(%ebp),%eax
 Breakpoint 1, vprintfmt (putch=0xf0100a52 <putch>, putdat=0xf010ef8c, fmt=0xf0101aa0 "entering test_backtrace %d\n", ap=0xf010efc4 "\005") at lib/printfmt.c:75
 75			return va_arg(*ap, int);
-//据博客 ap应该是
+//据博客 ap应该是指向x
 
 (gdb) p ((int*)ap)[0]
 $2 = 5
