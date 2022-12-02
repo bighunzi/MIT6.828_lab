@@ -351,7 +351,7 @@ vprintfmt下一部分->getint/getuint()->va_arg(*ap,long long)
 => 0xf0100364 <cons_putc>:	push   %ebp
 cons_putc (c=120) at kern/console.c:434
 434	{
-//ascii码表中 120代表x
+//ascii码表中 120代表字符x
 
 //va_arg
 //从kernel.asm发现断点在0xf01011c1
