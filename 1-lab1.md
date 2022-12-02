@@ -268,24 +268,20 @@ cprintf()调用vcprintf().
 
 再看printfmt.c:
 文件注释：精简的原语printf风格的格式化例程，通常由printf、sprintf、fprintf等使用。内核程序和用户程序也使用此代码。
-其中根据注释，printfmt()函数是格式化和打印字符串的主要函数，而其调用vprintfmt函数我有4个参数，如下
+其中根据注释，printfmt()函数是格式化和打印字符串的主要函数，而其调用vprintfmt函数，其有4个参数，如下
 (1)void (*putch)(int, void*)：
+这个参数是一个函数指针，这类函数包含两个输入参数int, void*，int参数代表一个要输出的字符的值。void* 则代表要把这个字符输出的位置的地址
 
-　　　　 这个参数是一个函数指针，这类函数包含两个输入参数int, void*，int参数代表一个要输出的字符的值。void* 则代表要把这个字符输出的位置的地址
+(2)void *putdat
+这个参数就是输入的字符要存放在的内存地址的指针，就是和上面putch函数的第二个输入参数是一个含义。
 
- 　　　　(2)void *putdat
+(3)const char *fmt
+这个参数代表你在编写类似于printf这种格式化输出程序时，你指定格式的字符串，即printf函数的第一个输入参数，比如printf("This is %d test", n)，这个子程序中，fmt就是"This is %d test"。
 
-　      　这个参数就是输入的字符要存放在的内存地址的指针，就是和上面putch函数的第二个输入参数是一个含义。
+(4)va_list ap
+这个参数代表的是多个输入参数，即printf子程序中从第二个参数开始之后的参数，比如("These are %d test and %d test", n, m)，那么ap指的就是n，m
 
- 　　　　(3)const char *fmt
-
-　　　　这个参数代表你在编写类似于printf这种格式化输出程序时，你指定格式的字符串，即printf函数的第一个输入参数，比如printf("This is %d test", n)，这个子程序中，fmt就是"This is %d test"。
-
-　　　　 (4)va_list ap
-
-　　　　 这个参数代表的是多个输入参数，即printf子程序中从第二个参数开始之后的参数，比如("These are %d test and %d test", n, m)，那么ap指的就是n，m
-
-　　　　我们可以发现，刚刚得到的fmt和ap正好可以被放在第3和第4个输入参数处！
+我们可以发现，刚刚得到的fmt和ap正好可以被放在第3和第4个输入参数处！
 
 　　　　另外再看头两个参数，第一个参数是一个函数指针，这个函数必须能够实现把一个字符输出到某个地址处的功能。再看一下vcprintf中它赋给vprintfmt子程序的第一个参数是这个文件中的第一个子程序putch。
 答案：省略的部分在 printfmt.c文件208行处，修改为：
