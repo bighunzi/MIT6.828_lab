@@ -268,8 +268,7 @@ cprintf()调用vcprintf().
 
 再看printfmt.c:
 文件注释：精简的原语printf风格的格式化例程，通常由printf、sprintf、fprintf等使用。内核程序和用户程序也使用此代码。
-其中根据注释，printfmt()函数是格式化和打印字符串的主要函数，而其调用vprintfmt函数：
-我们说过它有4个参数，如下
+其中根据注释，printfmt()函数是格式化和打印字符串的主要函数，而其调用vprintfmt函数我有4个参数，如下
 (1)void (*putch)(int, void*)：
 
 　　　　 这个参数是一个函数指针，这类函数包含两个输入参数int, void*，int参数代表一个要输出的字符的值。void* 则代表要把这个字符输出的位置的地址
