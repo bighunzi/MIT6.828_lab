@@ -212,8 +212,7 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 JOS只使用前256MB的物理内存，因为我们把从物理地址0x00000000到0x0fffffff，分别映射到虚拟地址0xf0000000到0xffffffff。
 
 ### Exercise 7
-注：从Exercise 3可以看出来 kernel 的入口地址是0x10000c（博客说的）。
-
+注：从Exercise 3可以看出来 kernel 的入口地址是0x10000c。
 
 stop at the movl %eax, %cr0.
 执行完该句的前一句指令，si提示下一句为movl %eax, %cr0时：
