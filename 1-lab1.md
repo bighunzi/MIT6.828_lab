@@ -365,7 +365,6 @@ Breakpoint 1, vprintfmt (putch=0xf0100a52 <putch>, putdat=0xf010ef8c, fmt=0xf010
 $2 = 5
 //不明白！
 
-
 //ap after va_arg
 => 0xf01011d6 <vprintfmt+806>:	jmp    0xf010118c <vprintfmt+732>
 0xf01011d6	75			return va_arg(*ap, int);
