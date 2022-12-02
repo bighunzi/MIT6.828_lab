@@ -209,7 +209,7 @@ bootmain中最后一句加载内核的程序是((void (*)(void)) (ELFHDR->e_entr
 是kernel程序， 但是是程序的哪一部分我不清楚。
 
 ## The Kernel
-JOS只使用前256MB的物理内存，因为从物理地址0x00000000到0x0fffffff，分别映射到虚拟地址0xf0000000到0xffffffff。
+JOS只使用前256MB的物理内存，因为我们把从物理地址0x00000000到0x0fffffff，分别映射到虚拟地址0xf0000000到0xffffffff。
 
 ### Exercise 7
 注：从Exercise 3可以看出来 kernel 的入口地址是0x10000c（博客说的）。
