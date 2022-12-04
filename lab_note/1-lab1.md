@@ -579,7 +579,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 //n_type是符号类型，FUN指函数名，SLINE指在text段中的行号
 //n_othr目前没被使用，其值固定为0
 //n_desc表示在文件中的行号
-//n_value表示地址。特别要注意的是，这里只有FUN类型的符号的地址是绝对地址，SLINE符号的地址是偏移量（这一点会在kdebug.c中的），其实际地址为函数入口地址加上偏移量。
+//n_value表示地址。特别要注意的是，这里只有FUN类型的符号的地址是绝对地址，SLINE符号的地址是偏移量（这一点会在kdebug.c中的158行对addr做差的指令有关），其实际地址为函数入口地址加上偏移量。
 ```
 
 4.gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c生成的init.s文件：
@@ -629,7 +629,7 @@ debuginfo_eip()的修改部分：
 ```
 
 
-mon_backtrace()的修改部分：
+mon_backtrace()的修改部分，其实上个部分写出来了这个：
 ```language
 	uint32_t * ebp;
 	struct Eipdebuginfo info;
