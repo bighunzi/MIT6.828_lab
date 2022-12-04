@@ -614,6 +614,8 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 ```
 根据结果，显然是加载进来了
 
+在这！！！！！！！
+
 
 debuginfo_eip()的修改部分：
 理解stabs每行记录的含义后，调用stab_binsearch便能找到某个地址对应的行号了，stab_binsearch函数的注释也表明了stab_binsearch返回的就是行号。
