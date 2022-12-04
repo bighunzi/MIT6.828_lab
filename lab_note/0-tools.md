@@ -6,14 +6,13 @@
 % gcc -m32 -print-libgcc-file-name
 
 ## 安装QEMU
+```language
 git clone https://github.com/mit-pdos/6.828-qemu.git qemu
-安装网页上需要的包。
-
+//安装网页上需要的包。
 ./configure --disable-kvm --disable-werror --target-list="i386-softmmu x86_64-softmmu"
-
 sudo make
-
 sudo make install
+```
 
 ## 安装工具报错时参考的几个网址
 https://felord.blog.csdn.net/article/details/104917602
