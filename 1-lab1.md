@@ -486,6 +486,7 @@ Implement the backtrace function as specified above. Use the same format as in t
 
 ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数的返回指令指针。
 至于为什么ebp,eip，args分布在栈上这些位置，看下图：
+
 ![lab1_exercise11_栈帧结构.png](4)
 
 
