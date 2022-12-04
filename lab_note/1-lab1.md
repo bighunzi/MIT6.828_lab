@@ -162,11 +162,15 @@ movw   $0x1234,0x472
 main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件中Program Header Table
 
 ### Exercise 4
-看pointer.c的几行输出
-1,2,4,6行很简单，c语言基础
-3: 3[c]的写法很奇怪，没见过
+看pointer.c的几行输出：
+
+1,2,4,6行很简单，c语言基础。
+
+3: 3[c]的写法很奇怪，没见过。
+
 5:注意window是小端系统(数据的低位字节序的内容放在低地址处，即人读的顺序应该是从右到左)，所以拼接的时候注意顺序。
 修改前a[1]=400=0x00000190。 按byte存放：90 01 00 00
+
       a[2]=302=0x0000012e  按byte存放：2e 01 00 00
 修改后将 指针后移了1个byte 赋值500，即0x000001f4。 按byte存放：f4 01 00 00
 于是a[1]变为 90 f4 01 00(128144)   a[2]变为 00 01 00 00(256)
@@ -177,8 +181,9 @@ objdump -h obj/kern/kernel //检查内核可执行文件中所有节的名称、
 Link Address是指编译器指定代码和数据所需要放置的内存地址，由链接器配置
 Load Address是指程序被实际加载到内存的位置
 
-修改  $(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o $@.out $^  该行地址
-我将其改为0x7D00
+修改```language
+$(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o $@.out $^  
+```该行地址，我将其改为0x7D00。
 
 问题：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
 https://blog.csdn.net/sgy1993/article/details/89281964 表示链接地址和加载地址的区别，咱们只是修改了链接地址！！！！！
