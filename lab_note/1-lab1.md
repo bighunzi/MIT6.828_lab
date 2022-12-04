@@ -633,10 +633,12 @@ debuginfo_eip()的修改部分：
 
 mon_backtrace()的修改部分，其实上个部分写出来了这个就简单了：
 ```language
+	// Your code here.
 	uint32_t * ebp;
 	struct Eipdebuginfo info;
 	ebp=(uint32_t *)read_ebp();
 	cprintf("Stack backtrace:\n");
+
 	while((uint32_t)ebp != 0x0){//the first ebp value is 0x0
 		//Exercise 11
 		cprintf(" ebp %08x",(uint32_t) ebp);
@@ -650,14 +652,14 @@ mon_backtrace()的修改部分，其实上个部分写出来了这个就简单�
 		cprintf(" %08x\n",*(ebp+6));
 
 		//Exercise 12
-		debuginfo_eip( ebp[1] , &info);
+		debuginfo_eip(*(ebp+1) , &info);
 		cprintf("\t%s:",info.eip_file);
 		cprintf("%d: ",info.eip_line);
-		cprintf("%.*s+%d\n", info.eip_fn_namelen , info.eip_fn_name , ebp[1] - info.eip_fn_addr );
+		cprintf("%.*s+%d\n", info.eip_fn_namelen , info.eip_fn_name , *(ebp+1) - info.eip_fn_addr );
 
 		//
 		ebp=(uint32_t *)(*ebp);
 	}
-//其实还是不怎么懂，之后重新看看吧。
+//
 
 ```
