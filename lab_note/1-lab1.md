@@ -132,7 +132,7 @@ boot.s文件中  ljmp    $PROT_MODE_CSEG, $protcseg
 > 问题2
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
 
-![lab1_exercise3_1.png](0)
+![进入kernel的第一条指令](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise3_1-1670169739855.png?token=AVMRY3JG6R3Y73G7TYGST3LDRTCMM)
 
 call   *0x10018
 movw   $0x1234,0x472
