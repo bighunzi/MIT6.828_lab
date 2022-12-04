@@ -251,7 +251,7 @@ at 0xf0100000:
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
-![lab1_exercise7_1.png](3)
+![尝试结果](https://raw.githubusercontent.com/bighunzi/gitnote_img/main/gitnote/2022/12/04/lab1_exercise7_1-1670138343693.png?token=AVMRY3OUOIHD24DAFHJ3RWLDRRFCE)
 
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
