@@ -498,7 +498,7 @@ ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数�
 	uint32_t * ebp;
 	ebp=(uint32_t *)read_ebp();
 	cprintf("Stack backtrace:\n");
-	while((int)ebp != 0x0){//the first ebp value is 0x0
+	while((uint32_t)ebp != 0x0){//the first ebp value is 0x0
 		//Exercise 11
 		cprintf(" ebp %08x",(int) ebp);
 		cprintf(" eip %08x",*(ebp+1));
