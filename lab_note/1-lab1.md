@@ -112,7 +112,7 @@ The target architecture is set to "i386".
 
 ## The Boot Loader
 看boot/boot.S源码：
-参考 https://www.cnblogs.com/cyx-b/p/11809742.html与其他收藏教程
+参考 https://www.cnblogs.com/cyx-b/p/11809742.html  与其他收藏教程
 几个知识点：
 test命令将两个操作数进行逻辑与运算，并根据运算结果设置相关的标志位。
 
@@ -178,7 +178,7 @@ Load Address是指程序被实际加载到内存的位置
 我将其改为0x7D00
 
 问题：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
-https://blog.csdn.net/sgy1993/article/details/89281964表示链接地址和加载地址的区别，咱们只是修改了链接地址！！！！！
+https://blog.csdn.net/sgy1993/article/details/89281964 表示链接地址和加载地址的区别，咱们只是修改了链接地址！！！！！
 
 下文均为参考博客进行的实验
 
