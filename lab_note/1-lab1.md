@@ -181,9 +181,11 @@ objdump -h obj/kern/kernel //检查内核可执行文件中所有节的名称、
 Link Address是指编译器指定代码和数据所需要放置的内存地址，由链接器配置
 Load Address是指程序被实际加载到内存的位置
 
-修改```language
+修改下面这行地址，我将其改为0x7D00。
+```language
 $(V)$(LD) $(LDFLAGS) -N -e start -Ttext 0x7C00 -o $@.out $^  
-```该行地址，我将其改为0x7D00。
+```
+
 
 问题：BIOS将 boot loader加载到 0x7c00，所以咱们修改链接地址的结果是导致了boot.s以及后续的main.c的变化。
 https://blog.csdn.net/sgy1993/article/details/89281964 表示链接地址和加载地址的区别，咱们只是修改了链接地址！！！！！
