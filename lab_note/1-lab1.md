@@ -622,7 +622,7 @@ debuginfo_eip()的修改部分：
 ```language
 	stab_binsearch(stabs, &lline, &rline, N_SLINE, addr);
 	if (lline <= rline) {
-    		info->eip_line = stabs[lline].n_desc;
+    		info->eip_line = stabs[lline].n_desc;//n_desc表示在文件中的行号
 	} else {
     		return -1;
 	}	
