@@ -184,13 +184,14 @@ https://blog.csdn.net/sgy1993/article/details/89281964 表示链接地址和加�
 
 修改后重新编译，发生变化处：0x7c1e:	lgdtw  0x7d64
 
-![0x7d64与0x7c64处信息对比](https://raw.githubusercontent.com/bighunzi/gitnote_img/main/gitnote/2022/12/04/lab1_exercise5_1-1670138154455.png?token=AVMRY3JWDBP2Z7WPZCB6M3TDRREWK)
+![0x7d64与0x7c64处信息对比](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise5_1-1670169911012.png?token=AVMRY3MWNUQPGEZHGTYZEEDDRTCXC)
 
 
 上面这条指令是把指令后面的值所指定内存地址处后6个字节的值输入全局描述符表寄存器GDTR，但是当前这条指令读取的内存地址是0x7d64，我们在图中也展示了一下这个地址处与0x7c64处的差别。这是不对的，正确的应该是在0x7c64处存放的值，即图中最下面一样的值。可见，问题出在这里，GDTR表的值读取不正确，这是实现从实模式到保护模式转换的非常重要的一步。
 进一步执行，到后面这条语句发现：程序由于跳转地址的错误，已经无法执行了。(本人猜测，可能因为并没有0x7d32地址对应的指令，所以无法跳转。从boot.asm文件中可以看出，7d30和7d33有指令，7d32并没有）
 
-![程序已经无法执行](https://raw.githubusercontent.com/bighunzi/gitnote_img/main/gitnote/2022/12/04/lab1_exercise5_2-1670138269215.png?token=AVMRY3JT53LT4IXW6LO5GELDRRE5Q)
+![程序已经无法执行]
+![](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise5_2-1670169939804.png?token=AVMRY3POR23WJ2L2D2N66UDDRTCY4)
 
 ### Exercise 6
 at the point the BIOS enters the boot loader：
