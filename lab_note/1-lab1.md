@@ -579,7 +579,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 //n_type是符号类型，FUN指函数名，SLINE指在text段中的行号
 //n_othr目前没被使用，其值固定为0
 //n_desc表示在文件中的行号
-//n_value表示地址。特别要注意的是，这里只有FUN类型的符号的地址是绝对地址，SLINE符号的地址是偏移量，其实际地址为函数入口地址加上偏移量。比如第3行的含义是地址f01000b8(=0xf01000a6+0x00000012)对应文件第34行
+//n_value表示地址。特别要注意的是，这里只有FUN类型的符号的地址是绝对地址，SLINE符号的地址是偏移量，其实际地址为函数入口地址加上偏移量。比如第120行的地址是函数入口地址0xf01000a6+偏移地址00000012=0xf01000b8,代码对应在文件的第34行。
 ```
 
 4.gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c生成的init.s文件：
