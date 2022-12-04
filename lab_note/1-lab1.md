@@ -266,7 +266,8 @@ at 0xf0100000:
 What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
 
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
-![尝试结果]
+
+![尝试结果](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise7_1-1670170256566.png?token=AVMRY3MPAVEMKPCRPL5IJG3DRTDMW)
 
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
@@ -287,7 +288,8 @@ cprintf()调用vcprintf().
 
 再看printfmt.c:
 文件注释：精简的原语printf风格的格式化例程，通常由printf、sprintf、fprintf等使用。内核程序和用户程序也使用此代码。
-其中根据注释，printfmt()函数是格式化和打印字符串的主要函数，而其调用vprintfmt函数，其有4个参数，如下
+其中根据注释，printfmt()函数是格式化和打印字符串的主要函数，而其调用vprintfmt函数，其有4个参数，如下：
+
 (1)void (*putch)(int, void*)：
 这个参数是一个函数指针，这类函数包含两个输入参数int, void*，int参数代表一个要输出的字符的值。void* 则代表要把这个字符输出的位置的地址
 
