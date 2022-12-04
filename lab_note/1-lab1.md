@@ -504,7 +504,7 @@ f010006a:	83 ec 0c             	sub    $0xc,%esp
 
 
 正式开始练习11：
-> 段落引用
+> 问题
 Implement the backtrace function as specified above. Use the same format as in the example, since otherwise the grading script will be confused. When you think you have it working right, run make grade to see if its output conforms to what our grading script expects, and fix it if it doesn't. After you have handed in your Lab 1 code, you are welcome to change the output format of the backtrace function any way you like.
 
 ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数的返回指令指针。
@@ -534,13 +534,13 @@ ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数�
 ```
 
 ### Exercise 12
-> 段落引用
+> 问题
 Modify your stack backtrace function to display, for each eip, the function name, source file name, and line number corresponding to that eip.
 
 利用kern/kdebug.c.中的debuginfo_eip()函数即可，其注释清晰的表明了函数功能。同时debuginfo_eip()函数还需要我们调用stab_binsearch 来完成对line number 的查询。
 
 先回答一些问题：
-> 段落引用
+> 问题
 In debuginfo_eip, where do __STAB_* come from? This question has a long answer; to help you to discover the answer, here are some things you might want to do:
 - look in the file kern/kernel.ld for __STAB_*
 - run objdump -h obj/kern/kernel
