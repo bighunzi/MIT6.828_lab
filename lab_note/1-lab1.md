@@ -584,7 +584,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 
 4.gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c生成的init.s文件：
 ```language
-
+//太长了，在这里不记录了
 ```
 
 5.确认boot loader在加载内核时是否把符号表（stab）也加载到内存中。
