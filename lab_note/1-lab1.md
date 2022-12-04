@@ -549,6 +549,8 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 //调试信息的传统格式被称为 STAB（符号表）。STAB 信息保存在 ELF 文件的 .stab 和 .stabstr 部分。
 //.stab节：符号表部分，这一部分的功能是程序报错时可以提供错误信息
 //.stabstr节：符号表字符串部分。
+//stab(符号表字符串)是一种调试数据格式，用于存储有关计算机程序的信息，供符号和源代码级调试器使用。
+//汇编程序创建两个自定义部分，一个名为.stab的部分包含一个固定长度的结构数组，每个stab有一个结构，另一个名为.stabstr的部分包含由.stab部分中的stab引用的所有可变长度字符串。
 ```
 
 
