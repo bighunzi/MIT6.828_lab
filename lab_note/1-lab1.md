@@ -500,7 +500,7 @@ ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数�
 	cprintf("Stack backtrace:\n");
 	while((uint32_t)ebp != 0x0){//the first ebp value is 0x0
 		//Exercise 11
-		cprintf(" ebp %08x",(int) ebp);
+		cprintf(" ebp %08x",(uint32_t) ebp);
 		cprintf(" eip %08x",*(ebp+1));
 		cprintf(" args");
 		// the order of arguments is reverse in the stack. For example, func(a,b), in the stack is b,a.
@@ -632,9 +632,9 @@ mon_backtrace()的修改部分：
 	struct Eipdebuginfo info;
 	ebp=(uint32_t *)read_ebp();
 	cprintf("Stack backtrace:\n");
-	while((int)ebp != 0x0){//the first ebp value is 0x0
+	while((uint32_t)ebp != 0x0){//the first ebp value is 0x0
 		//Exercise 11
-		cprintf(" ebp %08x",(int) ebp);
+		cprintf(" ebp %08x",(uint32_t) ebp);
 		cprintf(" eip %08x",*(ebp+1));
 		cprintf(" args");
 		// the order of arguments is reverse in the stack. For example, func(a,b), in the stack is b,a.
