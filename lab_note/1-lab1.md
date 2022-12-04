@@ -601,7 +601,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 0x1021db:	""
 0x1021dc:	"\001"
 
-(gdb) x/8s 0xf0105eb9
+(gdb) x/8s 0x00105a65
 0xf0105eb9:	""
 0xf0105eba:	""
 0xf0105ebb:	""
