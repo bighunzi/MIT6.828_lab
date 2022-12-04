@@ -141,6 +141,8 @@ movw   $0x1234,0x472
 0x10000c处 
 即指令movw $0x1234, 0x472 位于/kern/entry.S文件中。
 
+![lab1_exercise3_1.png](0)
+
 我有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018，那为什么入口是0x10000c?
 ```language
 //答案在这
@@ -148,7 +150,7 @@ movw   $0x1234,0x472
 0x10018:	0x0c	0x00	0x10	0x00	0x34	0x00	0x00	0x00
 0x10020:	0x7c	0x52
 ```
-![lab1_exercise3_1.png](0)
+
 
 > 问题4
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
