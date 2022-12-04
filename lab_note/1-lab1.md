@@ -618,9 +618,9 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 
 
 debuginfo_eip()的修改部分：
-要利用的struct Eipdebuginfo数据结构在kdebug.h中定义。
+struct Eipdebuginfo数据结构在kdebug.h中定义。
 理解stabs每行记录的含义后，调用stab_binsearch便能找到某个地址对应的行号了，stab_binsearch函数的注释也表明了stab_binsearch返回的就是行号。
-由于前面的代码已经找到地址在哪个函数里面以及函数入口地址，将原地址减去函数入口地址即可得到偏移量，再根据偏移量在符号表中的指定区间查找对应的记录即可。代码如下所示（好吧其实我还是不懂，直接抄上吧，以后再看）
+由于前面的代码已经找到地址在哪个函数里面以及函数入口地址，将原地址减去函数入口地址即可得到偏移量，再根据偏移量在符号表中的指定区间查找对应的记录即可。代码如下所示:
 ```language
 	stab_binsearch(stabs, &lline, &rline, N_SLINE, addr);
 	if (lline <= rline) {
@@ -629,7 +629,6 @@ debuginfo_eip()的修改部分：
     		return -1;
 	}	
 ```
-
 
 mon_backtrace()的修改部分，其实上个部分写出来了这个就简单了：
 ```language
@@ -660,6 +659,6 @@ mon_backtrace()的修改部分，其实上个部分写出来了这个就简单�
 		//
 		ebp=(uint32_t *)(*ebp);
 	}
-//
+//注意
 
 ```
