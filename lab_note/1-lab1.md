@@ -170,9 +170,9 @@ main.c程序中通过ELFHDR指向的struct中的对象，也就是elf.h头文件
 
 5:注意window是小端系统(数据的低位字节序的内容放在低地址处，即人读的顺序应该是从右到左)，所以拼接的时候注意顺序。
 修改前a[1]=400=0x00000190。 按byte存放：90 01 00 00
-
       a[2]=302=0x0000012e  按byte存放：2e 01 00 00
-修改后将 指针后移了1个byte 赋值500，即0x000001f4。 按byte存放：f4 01 00 00
+
+修改后将 指针后移了1个byte 赋值500，即0x000001f4。 按byte存放：f4 01 00 00。
 于是a[1]变为 90 f4 01 00(128144)   a[2]变为 00 01 00 00(256)
 
 ### Exercise 5
@@ -201,13 +201,21 @@ https://blog.csdn.net/sgy1993/article/details/89281964 表示链接地址和加�
 ![程序已经无法执行](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise5_2-1670169939804.png?token=AVMRY3POR23WJ2L2D2N66UDDRTCY4)
 
 ### Exercise 6
-at the point the BIOS enters the boot loader：
+
+```language
+//at the point the BIOS enters the boot loader：
 0x100000:	0x00000000	0x00000000	0x00000000	0x00000000
 0x100010:	0x00000000	0x00000000	0x00000000	0x00000000
 
-at the point the boot loader enters the kernel：
+//at the point the boot loader enters the kernel：
 0x100000:	0x1badb002	0x00000000	0xe4524ffe	0x7205c766
 0x100010:	0x34000004	0x1000b812	0x220f0011	0xc0200fd8
+
+```
+
+
+
+
 
 > 问题
 他们为什么不同？
