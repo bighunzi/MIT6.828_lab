@@ -269,9 +269,7 @@ What is the first instruction after the new mapping is established that would fa
 
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
 
-![尝试结果](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise7_1-1670170256566.png?token=AVMRY3MPAVEMKPCRPL5IJG3DRTDMW)
-
-![title](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise7_1-1670171084004.png?token=AVMRY3J4EHBCOY46OUTZDYLDRTFAM)
+![尝试结果](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise7_1-1670171084004.png?token=AVMRY3J4EHBCOY46OUTZDYLDRTFAM)
 
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
@@ -514,7 +512,7 @@ Implement the backtrace function as specified above. Use the same format as in t
 ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数的返回指令指针。
 至于为什么ebp,eip，args分布在栈上这些位置，看下图：
 
-![栈帧结构](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise11_%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84-1670170429816.png?token=AVMRY3L5DBIBM2ELDND4Q7LDRTDXQ)
+![栈帧结构](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise11_%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84-1670171106779.png?token=AVMRY3JRWW5VG4D6QF2EBF3DRTFB2)
 
 一定要记住ebp寄存器中保存的是指向栈的指针！另外， 代码中的类型转换也要注意！  循环的终止条件是前面练习中得出的结论，ebp寄存器中初始值是0x00,代码如下：
 ```language
@@ -580,6 +578,7 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 
 ![运行结果]
 (https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise12_1-1670170455901.png?token=AVMRY3OMX6BDNLDJMWVCQUDDRTDZE)
+![](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise12_1-1670171142295.png?token=AVMRY3NRJAFZXUARBKXS44TDRTFEA)
 
 可以看到.stab段加载地址是 0x0010227c，size是0x0000327c
 .stabstr段加载地址是0x00105bad  size是00006bad
