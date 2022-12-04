@@ -135,9 +135,7 @@ boot.s文件中  ljmp    $PROT_MODE_CSEG, $protcseg
 > 问题2
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
 
-![进入kernel的第一条指令](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise3_1-1670169739855.png?token=AVMRY3JG6R3Y73G7TYGST3LDRTCMM)
-
-![](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise3_1-1670171020235.png?token=AVMRY3L6XZ5LKOYTUTONSOTDRTE4M)
+![进入kernel的第一条指令](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise3_1-1670171020235.png?token=AVMRY3L6XZ5LKOYTUTONSOTDRTE4M)
 
 call   *0x10018
 movw   $0x1234,0x472
@@ -196,13 +194,13 @@ https://blog.csdn.net/sgy1993/article/details/89281964 表示链接地址和加�
 
 修改后重新编译，发生变化处：0x7c1e:	lgdtw  0x7d64
 
-![0x7d64与0x7c64处信息对比](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise5_1-1670169911012.png?token=AVMRY3MWNUQPGEZHGTYZEEDDRTCXC)
+![0x7d64与0x7c64处信息对比](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise5_1-1670171049918.png?token=AVMRY3JXHWETXDJHZO24K6LDRTE6I)
 
 
 上面这条指令是把指令后面的值所指定内存地址处后6个字节的值输入全局描述符表寄存器GDTR，但是当前这条指令读取的内存地址是0x7d64，我们在图中也展示了一下这个地址处与0x7c64处的差别。这是不对的，正确的应该是在0x7c64处存放的值，即图中最下面一样的值。可见，问题出在这里，GDTR表的值读取不正确，这是实现从实模式到保护模式转换的非常重要的一步。
 进一步执行，到后面这条语句发现：程序由于跳转地址的错误，已经无法执行了。(本人猜测，可能因为并没有0x7d32地址对应的指令，所以无法跳转。从boot.asm文件中可以看出，7d30和7d33有指令，7d32并没有）
 
-![程序已经无法执行](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise5_2-1670169939804.png?token=AVMRY3POR23WJ2L2D2N66UDDRTCY4)
+![程序已经无法执行](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise5_2-1670171064951.png?token=AVMRY3K5SZEFIDDVEFFANVTDRTE7G)
 
 ### Exercise 6
 
@@ -272,6 +270,8 @@ What is the first instruction after the new mapping is established that would fa
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
 
 ![尝试结果](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise7_1-1670170256566.png?token=AVMRY3MPAVEMKPCRPL5IJG3DRTDMW)
+
+![title](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise7_1-1670171084004.png?token=AVMRY3J4EHBCOY46OUTZDYLDRTFAM)
 
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
