@@ -554,7 +554,7 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 
 
 2.objdump -h obj/kern/kernel运行结果（显示文件的整体头部摘要信息）：
-![运行结果](https://raw.githubusercontent.com/bighunzi/gitnote_img/main/gitnote/2022/12/04/lab1_exercise12_1-1670139313100.png?token=AVMRY3IJOGHE2IYXDJ7XXG3DRRG6Y)
+![运行结果](https://raw.githubusercontent.com/bighunzi/gitnote_img/main/gitnote/2022/12/04/lab1_exercise12_1-1670141720034.png?token=AVMRY3KLUR2NOQOQ3OZPGZ3DRRLVG)
 
 可以看到.stab段加载地址是 0x001021d0，size是0x00003895
 .stabstr段加载地址是0x00105a65  size是00001531
