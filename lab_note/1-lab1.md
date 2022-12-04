@@ -629,7 +629,7 @@ debuginfo_eip()的修改部分：
 ```
 
 
-mon_backtrace()的修改部分，其实上个部分写出来了这个：
+mon_backtrace()的修改部分，其实上个部分写出来了这个就简单了：
 ```language
 	uint32_t * ebp;
 	struct Eipdebuginfo info;
