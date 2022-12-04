@@ -131,8 +131,9 @@ boot.s文件中  ljmp    $PROT_MODE_CSEG, $protcseg
 
 > 问题2
 2.What is the last instruction of the boot loader executed, and what is the first instruction of the kernel it just loaded?
-call   *0x10018
 
+
+call   *0x10018
 movw   $0x1234,0x472
 
 > 问题3
