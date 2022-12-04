@@ -510,7 +510,7 @@ Implement the backtrace function as specified above. Use the same format as in t
 ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数的返回指令指针。
 至于为什么ebp,eip，args分布在栈上这些位置，看下图：
 
-![栈帧结构](https://raw.githubusercontent.com/bighunzi/gitnote_img/main/gitnote/2022/12/04/lab1_exercise11_%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84-1670139292214.png?token=AVMRY3OAJOCCJSNAJ37UPDLDRRG5O)
+![栈帧结构](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise11_%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84-1670170429816.png?token=AVMRY3L5DBIBM2ELDND4Q7LDRTDXQ)
 
 一定要记住ebp寄存器中保存的是指向栈的指针！另外， 代码中的类型转换也要注意！  循环的终止条件是前面练习中得出的结论，ebp寄存器中初始值是0x00,代码如下：
 ```language
@@ -572,10 +572,10 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 //汇编程序创建两个自定义部分，一个名为.stab的部分包含一个固定长度的结构数组，每个stab有一个结构，另一个名为.stabstr的部分包含由.stab部分中的stab引用的所有可变长度字符串。
 ```
 
-
-
 2.objdump -h obj/kern/kernel运行结果（显示文件的整体头部摘要信息）：
-![运行结果](https://raw.githubusercontent.com/bighunzi/gitnote_img/main/gitnote/2022/12/04/lab1_exercise12_1-1670141720034.png?token=AVMRY3KLUR2NOQOQ3OZPGZ3DRRLVG)
+
+![运行结果]
+(https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise12_1-1670170455901.png?token=AVMRY3OMX6BDNLDJMWVCQUDDRTDZE)
 
 可以看到.stab段加载地址是 0x0010227c，size是0x0000327c
 .stabstr段加载地址是0x00105bad  size是00006bad
