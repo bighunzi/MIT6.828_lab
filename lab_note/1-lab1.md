@@ -141,7 +141,6 @@ movw   $0x1234,0x472
 0x10000c处 
 即指令movw $0x1234, 0x472 位于/kern/entry.S文件中。
 
-![lab1_exercise3_1.png](0)
 
 我有一个问题，在boot.asm文件中可以看出最后一行指令是 call *0x10018，那为什么入口是0x10000c?
 ```language
