@@ -612,7 +612,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 0x105c58:	"uint32_t:t(0,4)"
 //我运行的结果是这样的，其他博客上记录的都是第二个结果，我现在也不太明白stab段 和stabstr的区别。。。。。。。。
 ```
-
+根据结果，显然是加载进来了
 
 
 debuginfo_eip()的修改部分：
