@@ -547,8 +547,8 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 //PROVIDE(symbol = expression)  用于：在某些情况下，链接器脚本只需要定义一个被引用的符号，并且该符号不是由链接中包含的任何对象定义的。
 
 //调试信息的传统格式被称为 STAB（符号表）。STAB 信息保存在 ELF 文件的 .stab 和 .stabstr 部分。
-//.stab节：符号表部分，这一部分的功能是程序报错时可以提供错误信息，具体的在往后的博客中介绍
-//.stabstr节：符号表字符串部分，具体的也会在往后的博客介绍
+//.stab节：符号表部分，这一部分的功能是程序报错时可以提供错误信息
+//.stabstr节：符号表字符串部分。
 ```
 
 
