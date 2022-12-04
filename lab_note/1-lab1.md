@@ -592,40 +592,28 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 ```language
 //还是同之前一样在kernel的入口0x10000c处设置断点，然后利用命令查看对应地址
 (gdb) x/8s 0x0010227c
-
 0x10227c:	"\001"
-
 0x10227e:	""
-
 0x10227f:	""
-
 0x102280:	""
-
 0x102281:	""
-
 0x102282:	"\303\004(\026"
-
 0x102287:	""
-
 0x102288:	"\001"
 
 (gdb) x/8s 0x00105bad
-
 0x105bad:	""
-
 0x105bae:	"{standard input}"
-
 0x105bbf:	"kern/entry.S"
-
 0x105bcc:	"kern/entrypgdir.c"
-
 0x105bde:	"gcc2_compiled."
-
 0x105bed:	"entry_pgdir:G(0,1)=ar(0,2)=r(0,2);0;4294967295;;0;1023;(0,3)=(0,4)=(0,5)=r(0,5);0;4294967295;"
 0x105c4b:	"pde_t:t(0,3)"
 0x105c58:	"uint32_t:t(0,4)"
-//我运行的结果是这样的，好像并没有加载进去，和其他博客的结果好像不一样。。。。。。。。
+//我运行的结果是这样的，其他博客上记录的都是第二个结果，我现在也不太明白stab段 和stabstr的区别。。。。。。。。
 ```
+
+
 
 debuginfo_eip()的修改部分：
 理解stabs每行记录的含义后，调用stab_binsearch便能找到某个地址对应的行号了，stab_binsearch函数的注释也表明了stab_binsearch返回的就是行号。
