@@ -588,10 +588,10 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 ```
 
 5.确认boot loader在加载内核时是否把符号表（stab）也加载到内存中。
-问题2中我们已经知道了stab的加载地址0x001021d0，stabstr的加载地址是0x00105a65，所以我们只要看那块地址的信息就可以了
+问题2中我们已经知道了stab的加载地址0x0010227c，stabstr的加载地址是0x00105bad，所以我们只要看那块地址的信息就可以了
 ```language
 //还是同之前一样在kernel的入口0x10000c处设置断点，然后利用命令查看对应地址
-(gdb) x/8s 0x001021d0
+(gdb) x/8s 0x0010227c
 0x1021d0:	"\001"
 0x1021d2:	""
 0x1021d3:	""
@@ -601,7 +601,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 0x1021db:	""
 0x1021dc:	"\001"
 
-(gdb) x/8s 0x00105a65
+(gdb) x/8s 0x00105bad
 0xf0105eb9:	""
 0xf0105eba:	""
 0xf0105ebb:	""
