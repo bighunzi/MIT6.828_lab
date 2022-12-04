@@ -148,7 +148,7 @@ movw   $0x1234,0x472
 0x10018:	0x0c	0x00	0x10	0x00	0x34	0x00	0x00	0x00
 0x10020:	0x7c	0x52
 ```
-![进入kernel的第一条指令](https://github.com/bighunzi/MIT6.828/blob/main/GitNote%20cache/lab1_exercise3_1.png)
+![进入kernel的第一条指令]()
 
 > 问题4
 4.How does the boot loader decide how many sectors it must read in order to fetch the entire kernel from disk? Where does it find this information?
