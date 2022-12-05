@@ -34,11 +34,9 @@ boot_alloc()函数中ROUNDUP(a,n)函数在inc/types.h中定义：目的是用来
 //
 // LAB 2: Your code here.
 result=nextfree;
-if(n){//必须要有，因为将
-	nextfree=ROUNDUP(nextfree+n, PGSIZE);
-	if(nextfree > npages_basemem * PGSIZE){
-		panic("boot_alloc out of memory");
-	}
+nextfree=ROUNDUP(nextfree+n, PGSIZE);
+if(nextfree > npages_basemem * PGSIZE){
+	panic("boot_alloc out of memory");
 }
 return result;
 ```
