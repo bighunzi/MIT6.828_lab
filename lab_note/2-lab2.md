@@ -3,7 +3,11 @@
 1 page : 4k bytes<br>
 为获取lab2所需文件，执行如下命令：
 ```language
-
+git pull
+git checkout -b lab2 origin/lab2
+git merge lab1
+//如果下列文件出现，则成功：
+//inc/memlayout.h; kern/pmap.c; kern/pmap.h; kern/kclock.h; kern/kclock.c
 ```
 
 
