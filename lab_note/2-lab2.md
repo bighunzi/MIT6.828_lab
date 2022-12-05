@@ -28,7 +28,7 @@ boot_alloc(); mem_init() (only up to the call to check_page_free_list(1)); page_
 check_page_free_list() and check_page_alloc() test your physical page allocator. You should boot JOS and see whether check_page_alloc() reports success. Fix your code so that it passes. You may find it helpful to add your own assert()s to verify that your assumptions are correct.
 
 boot_alloc()函数中ROUNDUP(a,n)函数在inc/types.h中定义：目的是用来进行地址向下对齐，即增大数a至n的倍数处。
-而boot_alloc()函数注释也解释：这个函数只分配内存，并不初始化内存，函数中
+而boot_alloc()函数注释也解释：这个函数只分配内存，并不初始化内存，函数中。所以我们仿照该函数中nextfree分配地址的方式分配内存即可。
 ```language
 //boot_alloc()函数修改处
 
