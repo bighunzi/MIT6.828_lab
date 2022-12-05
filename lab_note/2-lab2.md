@@ -31,7 +31,16 @@ boot_alloc()函数中ROUNDUP(a,n)函数在inc/types.h中定义：目的是用来
 而boot_alloc()函数注释也解释：这个函数只分配内存，并不初始化内存，函数中。所以我们仿照该函数中nextfree分配地址的方式分配内存即可。
 ```language
 //boot_alloc()函数修改处
-
+//
+// LAB 2: Your code here.
+result=nextfree;
+if(n){//必须要有，因为将
+	nextfree=ROUNDUP(nextfree+n, PGSIZE);
+	if(nextfree > npages_basemem * PGSIZE){
+		panic("boot_alloc out of memory");
+	}
+}
+return result;
 ```
 
 
