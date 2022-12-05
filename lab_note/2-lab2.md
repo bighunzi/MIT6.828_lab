@@ -27,7 +27,7 @@ In the file kern/pmap.c, you must implement code for the following functions (pr
 boot_alloc(); mem_init() (only up to the call to check_page_free_list(1)); page_init(); page_alloc(); page_free().
 check_page_free_list() and check_page_alloc() test your physical page allocator. You should boot JOS and see whether check_page_alloc() reports success. Fix your code so that it passes. You may find it helpful to add your own assert()s to verify that your assumptions are correct.
 
-在写代码前先观察相关程序及注释
+在写代码前先观察相关程序及注释：
 
 
 
