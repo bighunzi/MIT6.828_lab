@@ -30,7 +30,8 @@ check_page_free_list() and check_page_alloc() test your physical page allocator.
 在写代码前先观察相关程序及注释：
 
 ```language
-//boot_alloc()函数修改
+//boot_alloc()函数修改处
+
 ```
 
 
