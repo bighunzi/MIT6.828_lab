@@ -22,6 +22,12 @@ JOS以页面粒度管理PC的物理内存，这样它就可以使用MMU来映射
 ### Exercise 1
 这个练习将编写物理页面分配器。它使用结构体 PageInfo对象 的链表跟踪哪些页面是空闲的(与xv6不同的是，这些对象没有嵌入到空闲页面本身中)，每个页面对应一个物理页面。
 
+> 
+In the file kern/pmap.c, you must implement code for the following functions (probably in the order given).
+boot_alloc(); mem_init() (only up to the call to check_page_free_list(1)); page_init(); page_alloc(); page_free()
+
+check_page_free_list() and check_page_alloc() test your physical page allocator. You should boot JOS and see whether check_page_alloc() reports success. Fix your code so that it passes. You may find it helpful to add your own assert()s to verify that your assumptions are correct.
+
 
 
 
