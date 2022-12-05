@@ -17,7 +17,10 @@ inc/mmu.h也很重要，因为它包含许多对本实验有用的定义。
 在本实验室和后续的实验室中，完成实验室中描述的所有常规练习和至少一个挑战性问题。
 
 ## Part 1: Physical Page Management
-JOS manages the PC's physical memory with page granularity so that it can use the MMU to map and protect each piece of allocated memory.
+JOS以页面粒度管理PC的物理内存，这样它就可以使用MMU来映射和保护每一块已分配内存。
+
+### Exercise 1
+
 
 
 
