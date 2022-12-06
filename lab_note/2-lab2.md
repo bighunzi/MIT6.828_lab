@@ -41,7 +41,8 @@ if( (size_t) nextfree > npages_basemem * PGSIZE){//这句程序与博客不同�
 return result;
 ```
 
-
+UTOP地址是哪？
+mem_init()函数
 
 
 
