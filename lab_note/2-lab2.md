@@ -58,6 +58,9 @@ pages = boot_alloc(npages * sizeof(struct PageInfo) )
 memset(pages, 0, npages * sizeof(struct PageInfo);
 ```
 
+page_init()函数修改处：
+
+
 
 
 
