@@ -44,7 +44,6 @@ if( (uint32_t)nextfree<KERNBASE ){
 return result;
 ```
 
-UTOP地址是哪？
 mem_init()函数
 
 
