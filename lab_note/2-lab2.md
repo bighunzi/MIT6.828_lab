@@ -36,10 +36,11 @@ boot_alloc()函数中ROUNDUP(a,n)函数在inc/types.h中定义：目的是用来
 // LAB 2: Your code here.
 result=nextfree;
 nextfree=ROUNDUP(nextfree+n, PGSIZE);
-if( (uint32_t)nextfree <){
+if( (uint32_t)nextfree<KERNBASE){
 	panic("boot_alloc: out of memory\n");
 }
-//其中KERBASE就在memlayout.h文件中定义。这块检测内存不足的判定我也不确定，但根据lab1中我们的结论：将kernel加载到了虚拟地址0xf0000000处，所以判定应该是这样的。但是这又有一个问题：这个检测失去了意义，因为JOS只利用前256M内存
+//其中KERBASE就在memlayout.h文件中定义。这块检测内存不足的判定我也不确定，但根据lab1中我们的结论：将kernel加载到了虚拟地址0xf0000000处，所以判定应该是这样的。
+//这也与博客的写法 - KERNBASE > (npages*PGSIZE)
 return result;
 ```
 
