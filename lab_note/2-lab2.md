@@ -58,9 +58,30 @@ pages = boot_alloc(npages * sizeof(struct PageInfo) )
 memset(pages, 0, npages * sizeof(struct PageInfo);
 ```
 
-page_init()函数修改处（写这部分的时候要注意，lab1中对于kern读取进内存的部分的结论不能直接用了，因为你现在实际就是在进行这个过程，所有已知结论均通过pmap.c的）：
+page_init()函数修改处（写这部分的时候要注意，lab1中对于kern读取进内存的部分的结论不能直接用了，因为你现在实际就是在进行这个过程，所有已知结论均通过pmap.c的前文得出）：
 ```language
 //根据注释修改即可
+// Change the code to reflect this.
+// NB: DO NOT actually touch the physical memory corresponding to
+// free pages!
+size_t i;
+page_free_list = NULL;//其实是多余的，因为它本就是空指针，这只是为了方便阅读一点。
+uint32_t EXTPHYSMEM_alloc = (uint32_t)boot_alloc(0) - KERNBASE;//EXTPHYSMEM_alloc：在EXTPHYSMEM区域已经被占用的bytes数
+//从memlayout.h中可以看到 pp_ref是使用page_alloc分配的页 指向此页的指针（通常在页表条目中）数, 不太明白。。。。。 但我看博客上将使用的page 置1.
+for (i = 0; i < npages; i++) {
+	if( i==0 ||(i>=IOPHYSMEM/PGSIZE && i<(EXTPHYSMEM+EXTPHYSMEM_alloc)/PGSIZE) || ){//不标记为free的页
+	pages[i].pp_ref = 1;
+	}else{//标记为free的页
+		pages[i].pp_ref = 0;
+		pages[i].pp_link = page_free_list;
+
+			page_free_list = &pages[i];	
+
+		}
+
+
+
+	}
 ```
 
 
