@@ -58,7 +58,7 @@ pages = boot_alloc(npages * sizeof(struct PageInfo) )
 memset(pages, 0, npages * sizeof(struct PageInfo);
 ```
 
-page_init()函数修改处（）：
+page_init()函数修改处（写这部分的时候要注意，lab1中对于kern读取进内存的部分的结论不能直接用了，因为你现在实际就是在进行这个过程，所有已知结论均通过pmap.c的）：
 ```language
 //根据注释修改即可
 ```
