@@ -44,7 +44,8 @@ if( (uint32_t)nextfree<KERNBASE ){
 return result;
 ```
 
-mem_init()函数
+mem_init()函数修改处：
+
 
 
 
