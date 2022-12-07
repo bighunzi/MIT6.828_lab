@@ -81,7 +81,25 @@ for (i = 0; i < npages; i++) {
 
 page_alloc()函数修改处:
 ```language
+struct PageInfo *
+page_alloc(int alloc_flags)
+{
+	// Fill this function in
+	//不要增加页面的引用计数(pp_ref) - 调用方必须在必要时执行这些操作（显式或通过 page_insert ）。
+	struct PageInfo * res=NULL;
+	if(!page_free_list) return res;
 
+	res=page_free_list;
+	page_free_list=page_free_list -> pp_link;
+	res ->pp_link=NULL;
+	
+	if (alloc_flags & ALLOC_ZERO){//尚未发现ALLOC_ZERO宏在哪个文件中定义，直接根据注释来
+		memset(page2kva(res) , '\0' ,  PGSIZE );
+	}
+
+	//返回这个页表索引的地址即可(并非 page2kva(res) )
+	return res;
+}
 ```
 
 
