@@ -79,6 +79,13 @@ for (i = 0; i < npages; i++) {
 }
 ```
 
+page_alloc()函数修改处:
+```language
+
+```
+
+
+
 
 
 
