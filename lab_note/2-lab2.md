@@ -133,7 +133,9 @@ panic("mem_init: This function is not finished\n")
 > 练习2
 Look at chapters 5 and 6 of the Intel 80386 Reference Manual, if you haven't done so already. Read the sections about page translation and page-based protection closely (5.2 and 6.4). We recommend that you also skim the sections about segmentation; while JOS uses the paging hardware for virtual memory and protection, segment translation and segment-based protection cannot be disabled on the x86, so you will need a basic understanding of it.
 
-Chapter 5 Memory Management
+### Exercise 2 阅读笔记
+Chapter 5 Memory Management:<br>
+
 5.2 Page Translation：
 页面转换步骤是可选的。只有设置了CR0的PG位，页面转换才有效，该位通常由操作系统在软件初始化期间设置。
 
