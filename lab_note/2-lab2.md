@@ -69,8 +69,8 @@ page_free_list = NULL;//其实是多余的，因为它本就是空指针，这�
 uint32_t EXTPHYSMEM_alloc = (uint32_t)boot_alloc(0) - KERNBASE;//EXTPHYSMEM_alloc：在EXTPHYSMEM区域已经被占用的bytes数
 //从memlayout.h中可以看到 pp_ref是使用page_alloc分配的页 指向此页的指针（通常在页表条目中）数, 不太明白。。。。。 但我看博客上将使用的page 置1.
 for (i = 0; i < npages; i++) {
-	if( i==0 ||(i>=IOPHYSMEM/PGSIZE && i<(EXTPHYSMEM+EXTPHYSMEM_alloc)/PGSIZE) || ){//不标记为free的页
-	pages[i].pp_ref = 1;
+	if( i==0 ||(i>=IOPHYSMEM/PGSIZE && i<(EXTPHYSMEM+EXTPHYSMEM_alloc)/PGSIZE)){//不标记为free的页
+		pages[i].pp_ref = 1;
 	}else{//标记为free的页
 		pages[i].pp_ref = 0;
 		pages[i].pp_link = page_free_list;
