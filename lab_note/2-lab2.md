@@ -74,14 +74,9 @@ for (i = 0; i < npages; i++) {
 	}else{//标记为free的页
 		pages[i].pp_ref = 0;
 		pages[i].pp_link = page_free_list;
-
-			page_free_list = &pages[i];	
-
+		page_free_list = &pages[i];	
 		}
-
-
-
-	}
+}
 ```
 
 
