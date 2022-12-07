@@ -103,6 +103,35 @@ page_alloc(int alloc_flags)
 ```
 
 page_free()函数修改处:
+```language
+void
+page_free(struct PageInfo *pp)
+{
+	// Fill this function in
+	// Hint: You may want to panic if pp->pp_ref is nonzero or
+	// pp->pp_link is not NULL.
+	//assert()函数在 inc/assert.h文件中定义，其就是按格式调用panic。
+      	assert(pp->pp_ref == 0);
+      	assert(pp->pp_link == NULL);
+	
+	pp->pp_link=page_free_list;
+	page_free_list=pp;
+}
+```
+
+上述代码完成后，测试结果如下，说明代码正确(测试时不要忘记改动mem_init()中的该行语句的位置 )：
+```language
+panic("mem_init: This function is not finished\n")
+```
+
+![lab2_exercise1_测试成功.png](0)
+
+## Part 2: Virtual Memory
+先熟悉x86的保护模式内存管理体系结构:即段和页面转换。练习2就在做这个事情。
+
+### Exercise 2
+> 练习2
+Look at chapters 5 and 6 of the Intel 80386 Reference Manual, if you haven't done so already. Read the sections about page translation and page-based protection closely (5.2 and 6.4). We recommend that you also skim the sections about segmentation; while JOS uses the paging hardware for virtual memory and protection, segment translation and segment-based protection cannot be disabled on the x86, so you will need a basic understanding of it.
 
 
 
