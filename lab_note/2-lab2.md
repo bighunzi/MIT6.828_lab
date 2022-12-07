@@ -135,8 +135,9 @@ Look at chapters 5 and 6 of the Intel 80386 Reference Manual, if you haven't don
 
 ### Exercise 2 阅读笔记
 Chapter 5 Memory Management:<br>
+Intel 80386将逻辑地址(即程序员看到的地址)转换为物理地址(即物理内存中的实际地址)分为两个步骤:  1.  段转换，其中逻辑地址(由段选择器和段偏移量组成)被转换为线性地址。页面转换，将线性地址转换为物理地址。这个步骤是可选的，由系统软件设计人员自行决定。I
 
-5.2 Page Translation：
+5.2 Page Translation：<br>
 页面转换步骤是可选的。只有设置了CR0的PG位，页面转换才有效，该位通常由操作系统在软件初始化期间设置。
 
 
