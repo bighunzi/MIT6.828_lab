@@ -134,7 +134,7 @@ panic("mem_init: This function is not finished\n")
 Look at chapters 5 and 6 of the Intel 80386 Reference Manual, if you haven't done so already. Read the sections about page translation and page-based protection closely (5.2 and 6.4). We recommend that you also skim the sections about segmentation; while JOS uses the paging hardware for virtual memory and protection, segment translation and segment-based protection cannot be disabled on the x86, so you will need a basic understanding of it.
 
 ### Exercise 2 阅读笔记
-Chapter 5 Memory Management:<br>
+#### Chapter 5 Memory Management:<br>
 Intel 80386将逻辑地址(即程序员看到的地址)转换为物理地址(即物理内存中的实际地址)分为两个步骤:  1.  段转换，其中逻辑地址(由段选择子和段偏移量组成) 被转换为线性地址。2.  页转换，将线性地址转换为物理地址。这个步骤是可选的，由系统软件设计人员自行决定。
 
 5.2 Page Translation：<br>
