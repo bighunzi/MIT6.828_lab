@@ -151,4 +151,4 @@ Intel 80386将逻辑地址(即程序员看到的地址)转换为物理地址(即
 
 段是保护的单位。
 
-看到6.3.1.2 Limit Checking！！！！！！！！！！
+#### 6.4 Page-Level Protection
