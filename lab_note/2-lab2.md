@@ -159,4 +159,9 @@ Intel 80386将逻辑地址(即程序员看到的地址)转换为物理地址(即
 
 在boot/boot.S文件中，我们安装了一个全局描述符表(GDT)，其通过将所有段基址设置为0，将段限制为0xffffffff 来有效地禁用段转换。因此，“选择子”没有作用，线性地址总是等于虚拟地址的偏移量。在实验室3中，我们将不得不与段进行更多的交互，以设置特权级别，但对于内存转换，我们可以在整个JOS实验室中忽略段，而只关注页转换。
 
-回想一下，在实验1的第3部分中，我们安装了一个简单的页表，这样内核就可以在它的链接地址0xf0100000上运行，即使它实际上是在ROM BIOS上方的0x00100000上加载到物理内存中。这个页表只映射了4MB内存。在本实验中将为JOS设置的虚拟地址空间布局中，我们将扩展该布局，映射从虚拟地址0xf0000000开始的第一个256MB物理内存，并映射虚拟地址空间的许多其他区域。
+回想一下，在实验1的第3部分中，我们安装了一个简单的页表，这样内核就可以在它的链接地址0xf0100000上运行，即使它实际上是在ROM BIOS上方的0x00100000上加载到物理内存中。这个页表只映射了4MB内存。在本实验中将为JOS设置的虚拟地址空间布局中，我们将扩展该布局，来映射从虚拟地址0xf0000000开始的第一个256MB物理内存，并映射虚拟地址空间的许多其他区域。
+
+> 练习3
+While GDB can only access QEMU's memory by virtual address, it's often useful to be able to inspect physical memory while setting up virtual memory. Review the QEMU monitor commands from the lab tools guide, especially the xp command, which lets you inspect physical memory. To access the QEMU monitor, press Ctrl-a c in the terminal (the same binding returns to the serial console).
+Use the xp command in the QEMU monitor and the x command in GDB to inspect memory at corresponding physical and virtual addresses and make sure you see the same data.
+Our patched version of QEMU provides an info pg command that may also prove useful: it shows a compact but detailed representation of the current page tables, including all mapped memory ranges, permissions, and flags. Stock QEMU also provides an info mem command that shows an overview of which ranges of virtual addresses are mapped and with what permissions.
