@@ -173,3 +173,5 @@ Our patched version of QEMU provides an info pg command that may also prove usef
 Assuming that the following JOS kernel code is correct, what type should variable x have, uintptr_t or physaddr_t?
 
 x应该是uintptr_t。
+
+为了将物理地址转换为内核可以实际读写的虚拟地址，内核必须向物理地址添加0xf0000000，以便在重新映射的区域中找到其对应的虚拟地址。您应该使用KADDR(pa)来完成该添加。
