@@ -175,3 +175,5 @@ Assuming that the following JOS kernel code is correct, what type should variabl
 x应该是uintptr_t。
 
 为了将物理地址转换为内核可以实际读写的虚拟地址，内核必须向物理地址添加0xf0000000，以便在重新映射的区域中找到其对应的虚拟地址。您应该使用KADDR(pa)来完成该添加。
+
+内核全局变量和由boot_alloc()分配的内存位于加载内核的区域，从0xf0000000开始，正是我们映射所有物理内存的区域。因此，要将该区域中的虚拟地址转换为物理地址，内核可以简单地减去0xf0000000。您应该使用PADDR(va)来做这个减法。
