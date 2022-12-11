@@ -166,6 +166,16 @@ While GDB can only access QEMU's memory by virtual address, it's often useful to
 Use the xp command in the QEMU monitor and the x command in GDB to inspect memory at corresponding physical and virtual addresses and make sure you see the same data.
 Our patched version of QEMU provides an info pg command that may also prove useful: it shows a compact but detailed representation of the current page tables, including all mapped memory ranges, permissions, and flags. Stock QEMU also provides an info mem command that shows an overview of which ranges of virtual addresses are mapped and with what permissions.
 
+```language
+xp/Nx paddr //查看paddr物理地址处开始的，N个字的16进制的表示结果。
+info registers //展示所有内部寄存器的状态。
+info mem -//展示所有已经被页表映射的虚拟地址空间，以及它们的访问优先级。
+info pg //展示当前页表的结构。
+//具体去手册上看
+```
+
+
+
 为了帮助编写代码，JOS源代码区分了两种情况:uintptr_t类型表示不透明的虚拟地址，physaddr_t类型表示物理地址。JOS内核可以通过先将uintptr_t转换为指针类型来完成对uintptr_t的解引用。
 注意：内核不能绕过虚拟地址转换，因此不能直接加载和存储到物理地址。
 
