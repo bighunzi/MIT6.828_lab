@@ -171,3 +171,4 @@ Our patched version of QEMU provides an info pg command that may also prove usef
 > qustion
 Assuming that the following JOS kernel code is correct, what type should variable x have, uintptr_t or physaddr_t?
 
+x应该是uintptr_t。
