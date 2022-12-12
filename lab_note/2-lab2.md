@@ -196,3 +196,7 @@ x应该是uintptr_t。
 ### Exercise 4
 
 现在将编写一组例程来管理页表:插入和删除线性地址到物理地址映射，并在需要时创建页表页。
+
+> 练习4
+In the file kern/pmap.c, you must implement code for the following functions : pgdir_walk(), boot_map_region(), page_lookup(), page_remove(), page_insert().
+check_page(), called from mem_init(), tests your page table management routines. You should make sure it reports success before proceeding.
