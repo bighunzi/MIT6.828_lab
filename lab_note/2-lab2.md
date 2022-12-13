@@ -247,6 +247,18 @@ boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm
 
 page_lookup()代码：
 ```language
+//函数目的是返回虚拟地址  va 对应的页
+struct PageInfo *
+page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
+{
+	// Fill this function in
+	pte* pt_entry=pgdir_walk(pgdir,va,1);//博客上将create参数置0,并在后面检查了对应的present位，我很奇怪为什么要这么做。
+	if(pt_entry==NULL)  return NULL;		
 
+	if(pte_store) *pte_store=pt_entry;
+	
+	struct PageInfo* res=pa2page(PTE_ADDR(*pg_entry));
+	return res;
+}
 ```
 
