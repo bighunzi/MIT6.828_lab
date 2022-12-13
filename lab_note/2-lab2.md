@@ -262,7 +262,7 @@ page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 }
 ```
 
-page_lookup()代码：
+page_remove()代码：
 ```language
 
 ```
