@@ -257,7 +257,7 @@ page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 
 	if(pte_store) *pte_store=pt_entry;
 	
-	struct PageInfo* res=pa2page(PTE_ADDR(*pg_entry));
+	struct PageInfo* res=pa2page(PTE_ADDR(*pt_entry));
 	return res;
 }
 ```
