@@ -177,7 +177,7 @@ info pg //展示当前页表的结构。
 
 
 为了帮助编写代码，JOS源代码区分了两种情况:uintptr_t类型表示不透明的虚拟地址，physaddr_t类型表示物理地址。JOS内核可以通过先将uintptr_t转换为指针类型来完成对uintptr_t的解引用。
-注意：内核不能绕过虚拟地址转换，因此不能直接加载和存储到物理地址。
+注意：MMU会转换所有的内存引用！！！！！！！！！！！！！！！！内核不能绕过虚拟地址转换，因此不能直接加载和存储到物理地址。
 
 > qustion
 Assuming that the following JOS kernel code is correct, what type should variable x have, uintptr_t or physaddr_t?
