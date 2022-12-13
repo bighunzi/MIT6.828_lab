@@ -201,6 +201,8 @@ x应该是uintptr_t。
 In the file kern/pmap.c, you must implement code for the following functions : pgdir_walk(), boot_map_region(), page_lookup(), page_remove(), page_insert().
 check_page(), called from mem_init(), tests your page table management routines. You should make sure it reports success before proceeding.
 
+从头捋一下。
+
 pgdir_walk()代码：
 ```language
 
