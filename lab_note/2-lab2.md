@@ -245,4 +245,8 @@ boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm
 }
 ```
 
+page_lookup()代码：
+```language
+
+```
 
