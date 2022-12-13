@@ -227,5 +227,31 @@ pgdir_walk(pde_t *pgdir, const void *va, int create)
 
 boot_map_region()代码：
 ```language
+//这个函数的目的是添加size大小的虚拟地址和物理地址的映射关系，调用pgdir_walk()依次分配即可。
+//但是这个 参数pa 的输入和作用是什么我还没有搞清楚。
+static void
 
+boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm)
+
+{
+
+	// Fill this function in
+
+	pte_t* pg_entry;
+
+	for(int i=0; i<size;i+=PGSIZE){
+
+		pg_entry=pgdir(pgdir, (void *) va ,1);
+
+		* pg_entry=(*pg_entry |perm | PTE_P);//按照注释对pg_entry置标志位。
+
+		
+
+		pa+=PGSIZE;
+
+		va+=PGSIZE;
+
+	}
+
+}
 ```
