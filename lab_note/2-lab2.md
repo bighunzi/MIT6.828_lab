@@ -237,7 +237,7 @@ boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm
 	pte_t* pt_entry;
 	for(int i=0; i<size;i+=PGSIZE){
 		pt_entry=pgdir(pgdir, (void *) va ,1);
-		* pt_entry=(*pg_entry |perm | PTE_P);//按照注释对pg_entry置标志位。
+		* pt_entry=(*pt_entry |perm | PTE_P);//按照注释对pg_entry置标志位。
 	
 		pa+=PGSIZE;
 		va+=PGSIZE;
