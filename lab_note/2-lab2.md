@@ -203,83 +203,22 @@ check_page(), called from mem_init(), tests your page table management routines.
 
 pgdir_walk()代码：
 ```language
-pte_t *
-pgdir_walk(pde_t *pgdir, const void *va, int create)
-{
-	// Fill this function in
-	pde_t * dir_entry=pgdir+PDX(va); //PDX(va)返回page directory index,这是指向页目录中的DIR ENTRY(见图)的指针。
-	if( !(*dir_entry & PTE_P) ){//如果这个页表不存在
-		if(create==false) return NULL;
-		else{
-			struct PageInfo * new_pt =page_alloc(1);//别忘了这个它返回的是struct PageInfo *
-			if(new_pt==NULL){
-				return NULL;
-			}
-			new_pt->pp_ref++;
-			*dir_entry=(page2pa(new_pt) | PTE_P | PTE_W );//设置dir_entry的标志位。注释中说可以设置宽松，所以这里全部设置为最宽松：可读写，管理员级别使用。 dirty位 和access位不做设置。
-			memset(KADDR(page2pa(new_pt)) , '\0' ,  PGSIZE);//初始化new_page的物理内存			
-		}
-	}
-	//注意，返回的应该是虚拟内存。
-	return KADDR(PTE_ADDR(*dir_entry+PTX(va))) ;//PTE_ADDR()做了一个与，将pte中的12位之前的地址位取了出来。
-}
+
 ```
 
 boot_map_region()代码：
 ```language
-//这个函数的目的是添加size大小的虚拟地址和物理地址的映射关系，调用pgdir_walk()依次分配即可。
-//但是这个 参数pa 的输入和作用是什么我还没有搞清楚。
 
-static void
-boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm)
-{
-	// Fill this function in
-	pte_t* pt_entry;
-	for(int i=0; i<size;i+=PGSIZE){
-		pt_entry=pgdir(pgdir, (void *) va ,1);
-		* pt_entry=(*pt_entry |perm | PTE_P);//按照注释对pg_entry置标志位。
-	
-		pa+=PGSIZE;
-		va+=PGSIZE;
-	}
-}
 ```
 
 page_lookup()代码：
 ```language
-//函数目的是返回虚拟地址  va 对应的页
-struct PageInfo *
-page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
-{
-	// Fill this function in
-	pte* pt_entry=pgdir_walk(pgdir,va,1);//博客上将create参数置0,并在后面检查了对应的present位，我很奇怪为什么要这么做。
-	if(pt_entry==NULL)  return NULL;		
 
-	if(pte_store) *pte_store=pt_entry;
-	
-	struct PageInfo* res=pa2page(PTE_ADDR(*pt_entry));
-	return res;
-}
 ```
 
 page_remove()代码：
 ```language
-//函数目的：解除虚拟地址“va”的物理页的映射。
-//tlb_invalidate()的直接调用即可。
-//page_decref()作用：减少页面上的引用计数，如果没有更多的引用，则释放它。
 
-void
-page_remove(pde_t *pgdir, void *va)
-{
-	// Fill this function in
-	pte_t ** pte_store;
-	struct PageInfo * pp=page_lookup(pgdir,va,pte_store);
-	if(pp==NULL) return ;
-
-	page_decref(pp);
-	** pte_store=0;
-	tlb_invalidate(pgdir, va);
-}
 ```
 
 
