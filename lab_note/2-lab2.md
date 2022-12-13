@@ -264,6 +264,28 @@ page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 
 page_remove()代码：
 ```language
+//函数目的：解除虚拟地址“va”的物理页的映射。
+//tlb_invalidate()的直接调用即可。
+//page_decref()作用：减少页面上的引用计数，如果没有更多的引用，则释放它。
+
+void
+page_remove(pde_t *pgdir, void *va)
+{
+	// Fill this function in
+	pte_t ** pte_store;
+	struct PageInfo * pp=page_lookup(pgdir,va,pte_store);
+	if(pp==NULL) return ;
+
+	page_decref(pp);
+	** pte_store=0;
+	tlb_invalidate(pgdir, va);
+}
+```
+
+
+page_insert()代码：
+```language
 
 ```
+
 
