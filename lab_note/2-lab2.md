@@ -203,5 +203,26 @@ check_page(), called from mem_init(), tests your page table management routines.
 
 pgdir_walk()代码：
 ```language
-
+pte_t *
+pgdir_walk(pde_t *pgdir, const void *va, int create)
+{
+	// Fill this function in
+	pde_t * dir_entry=pgdir+PDX(va); //PDX(va)返回page directory index,这是指向页目录中的DIR ENTRY(见图)的指针。
+	if( !(*dir_entry & PTE_P) ){//如果这个页表不存在
+		if(create==false) return NULL;
+		else{
+			struct PageInfo * new_pg =page_alloc(1);//别忘了这个它返回的是struct PageInfo *
+			if(new_pt==NULL){
+				return NULL;
+			}
+			new_pt->pp_ref++;
+			*dir_entry=(page2pa(new_pg) | PTE_P | PTE_W );//设置dir_entry的标志位。注释中说可以设置宽松，所以这里全部设置为最宽松：可读写，管理员级别使用。 dirty位 和access位不做设置。
+			memset(KADDR(page2pa(new_pg)) , '\0' ,  PGSIZE);//初始化new_page的物理内存			
+		}
+	}
+	//注意，返回的应该是虚拟内存。
+	return KADDR(PTE_ADDR(*dir_entry+PTX(va))) ;//PTE_ADDR()做了一个与，将pte中的12位之前的地址位取了出来。
+}
 ```
+
+boot_map_region()代码：
