@@ -211,13 +211,13 @@ pgdir_walk(pde_t *pgdir, const void *va, int create)
 	if( !(*dir_entry & PTE_P) ){//如果这个页表不存在
 		if(create==false) return NULL;
 		else{
-			struct PageInfo * new_pg =page_alloc(1);//别忘了这个它返回的是struct PageInfo *
+			struct PageInfo * new_pt =page_alloc(1);//别忘了这个它返回的是struct PageInfo *
 			if(new_pt==NULL){
 				return NULL;
 			}
 			new_pt->pp_ref++;
-			*dir_entry=(page2pa(new_pg) | PTE_P | PTE_W );//设置dir_entry的标志位。注释中说可以设置宽松，所以这里全部设置为最宽松：可读写，管理员级别使用。 dirty位 和access位不做设置。
-			memset(KADDR(page2pa(new_pg)) , '\0' ,  PGSIZE);//初始化new_page的物理内存			
+			*dir_entry=(page2pa(new_pt) | PTE_P | PTE_W );//设置dir_entry的标志位。注释中说可以设置宽松，所以这里全部设置为最宽松：可读写，管理员级别使用。 dirty位 和access位不做设置。
+			memset(KADDR(page2pa(new_pt)) , '\0' ,  PGSIZE);//初始化new_page的物理内存			
 		}
 	}
 	//注意，返回的应该是虚拟内存。
