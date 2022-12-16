@@ -244,8 +244,9 @@ JOS将处理器的32位线性地址空间分为两部分。我们将在实验3�
 该练习将在UTOP上面设置地址空间:地址空间的内核部分。inc /memlayout.h显示了你应该使用的布局。将使用刚才编写的函数来设置适当的线性到物理映射。
 
 > 练习5
-Fill in the missing code in mem_init() after the call to check_page().
-Your code should now pass the check_kern_pgdir() and check_page_installed_pgdir() checks.
+在调用check_page()之后，填充mem_init()中缺失的代码。完成代码后应该可以通过check_kern_pgdir()和check_page_installed_pgdir()检查。
+
+
 
 
 
