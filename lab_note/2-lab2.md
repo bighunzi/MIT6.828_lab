@@ -271,7 +271,7 @@ JOS将处理器的32位线性地址空间分为两部分。我们将在实验3�
 > 问题5
 如果我们实际拥有最大数量的物理内存，那么管理内存的空间开销是多少?这些开销是如何分解的?
 
-最大物理内存即4G， 那么我们需要 1个page directory table (4K Bytes),1K个page entry table (4K Bytes) ,  1M个 struct PageInfo (如果存在内存对齐机制的话, 8K Bytes)，共计
+最大物理内存即4G， 那么我们需要 1个page directory table (4K Bytes),1K个page entry table (4K Bytes) ,  1M个 struct PageInfo (如果存在内存对齐机制的话, 8 Bytes)，共计 12M+ 4K Bytes. 
 
 > 问题6
 重新查看kern/entry.s和kern/entrypgdir.c中的页表设置。在我们立即打开分页之后，EIP仍然是一个较低的数字(略多于1MB)。我们在什么时候过渡到运行在KERNBASE之上的EIP ?在启用分页和开始在KERNBASE之上的EIP上运行之间，是什么使我们能够继续在低EIP上执行?为什么这种转变是必要的?
