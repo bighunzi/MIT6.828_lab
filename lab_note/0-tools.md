@@ -1,9 +1,11 @@
 # Tools准备
-先安装VirtualBox与Ubuntu,本人使用的版本是VirtualBox6.1.40 与 Ubuntu22.04。
+先安装VirtualBox与Ubuntu,我使用的版本是VirtualBox6.1.40 与 Ubuntu22.04。
 
-## 然后验证编译器工具链
+## 验证编译器工具链
+```
 % objdump -i
 % gcc -m32 -print-libgcc-file-name
+```
 
 ## 安装QEMU
 ```language
@@ -14,9 +16,11 @@ sudo make
 sudo make install
 ```
 
-## 安装工具报错时参考的几个网址
-https://felord.blog.csdn.net/article/details/104917602
+## 安装工具报错时参考的博客
+这是两篇其他人所写博客
+[MIT6.828 实验环境配置](https://blog.csdn.net/qq_43012789/article/details/106343268)
+[ubuntu22.04包依赖关系](https://blog.csdn.net/lishuaigell/article/details/124740342)
 
-https://blog.csdn.net/qq_43012789/article/details/106343268
+另外一定不要听某些博客的将python卸载了，会很难受！
 
-https://blog.csdn.net/lishuaigell/article/details/124740342
+
