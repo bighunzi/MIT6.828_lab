@@ -1,5 +1,5 @@
 # lab2
-这个实验是为操作系统编写内存管理代码。内存管理分为两部分： 内核的物理内存分配器，虚拟内·存。<br>
+这个实验是为操作系统编写内存管理代码。内存管理分为两部分： 内核的物理内存分配器，虚拟内存。<br>
 1 page : 4k bytes<br>
 为获取lab2所需文件，执行如下命令：
 ```language
@@ -9,7 +9,7 @@ git merge lab1
 //如果下列文件出现，则成功：
 //inc/memlayout.h; kern/pmap.c; kern/pmap.h; kern/kclock.h; kern/kclock.c
 ```
-其中Memlayout.h描述了必须通过修改pmap.c实现的虚拟地址空间布局，如果有不懂的地址名词就去这个文件里找！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+其中Memlayout.h描述了必须通过修改pmap.c实现的虚拟地址空间布局，如果有不懂的地址名词就去这个文件里找！！！！！！！！！！！！！！
 
 memlayout.h和mmap.h定义了PageInfo结构，您将使用该结构跟踪哪些物理内存页面是空闲的。kclock.c和kclock.h操作PC的电池支持时钟和CMOS RAM硬件，BIOS在其中记录PC所包含的物理内存量，以及其他内容。
 pmap.c中的代码需要读取这个设备硬件，以便计算出有多少物理内存，但这部分代码已经完成了:我们并不需要知道CMOS硬件如何工作的细节。
@@ -24,11 +24,10 @@ JOS以页面粒度管理PC的物理内存，这样它就可以使用MMU来映射
 这个练习将编写物理页面分配器。它使用结构体 PageInfo对象 的链表跟踪哪些页面是空闲的(与xv6不同的是，这些对象没有嵌入到空闲页面本身中)，每个页面对应一个物理页面。
 
 > 练习1
-In the file kern/pmap.c, you must implement code for the following functions (probably in the order given).
-boot_alloc(); mem_init() (only up to the call to check_page_free_list(1)); page_init(); page_alloc(); page_free().
-check_page_free_list() and check_page_alloc() test your physical page allocator. You should boot JOS and see whether check_page_alloc() reports success. Fix your code so that it passes. You may find it helpful to add your own assert()s to verify that your assumptions are correct.
+在文件kern/pmap.c中，必须实现以下函数的代码(可能按照给定的顺序)。
+boot_alloc ();Mem_init()(只到调用check_page_free_list(1));page_init ();page_alloc ();page_free()。
+Check_page_free_list()和check_page_alloc()测试物理页面分配器。您应该引导JOS并查看check_page_alloc()是否报告成功。修改代码，使其通过。您可能会发现添加自己的assert()来验证您的假设是否正确很有帮助。
 
-boot_alloc()函数中ROUNDUP(a,n)函数在inc/types.h中定义：目的是用来进行地址向下对齐，即增大数a至n的倍数减一处。
 而boot_alloc()函数注释也解释：这个函数只分配内存，并不初始化内存，函数中。所以我们仿照该函数中nextfree分配地址的方式分配内存即可。
 ```language
 //boot_alloc()函数修改处
@@ -60,7 +59,6 @@ memset(pages, 0, npages * sizeof(struct PageInfo);
 
 page_init()函数修改处（写这部分的时候要注意，lab1中对于kern读取进内存的部分的结论不能直接用了，因为你现在实际就是在进行这个过程，所有已知结论均通过pmap.c的前文得出）：
 ```language
-//根据注释修改即可
 // Change the code to reflect this.
 // NB: DO NOT actually touch the physical memory corresponding to
 // free pages!
@@ -124,25 +122,25 @@ page_free(struct PageInfo *pp)
 panic("mem_init: This function is not finished\n")
 ```
 
-![lab2_exercise1_测试成功.png](0)
+![lab2_exercise1_测试成功](.\MIT6828_img/lab2_exercise1_测试成功.png)
 
 ## Part 2: Virtual Memory
 先熟悉x86的保护模式内存管理体系结构:即段和页面转换。练习2就在做这个事情。
 
 ### Exercise 2
 > 练习2
-Look at chapters 5 and 6 of the Intel 80386 Reference Manual, if you haven't done so already. Read the sections about page translation and page-based protection closely (5.2 and 6.4). We recommend that you also skim the sections about segmentation; while JOS uses the paging hardware for virtual memory and protection, segment translation and segment-based protection cannot be disabled on the x86, so you will need a basic understanding of it.
+阅读英特尔80386参考手册的第5章和第6章，仔细阅读关于页面转换和基于页面的保护的章节(5.2和6.4)。我们建议你也略读关于段的部分;虽然JOS使用分页硬件进行虚拟内存和保护，但在x86上不能禁用段转换和基于段的保护，因此您需要对它有基本的了解。
 
 ### Exercise 2 阅读笔记
-#### Chapter 5 Memory Management:<br>
+#### Chapter 5 Memory Management
 Intel 80386将逻辑地址(即程序员看到的地址)转换为物理地址(即物理内存中的实际地址)分为两个步骤:  1.  段转换，其中逻辑地址(由段选择子和段偏移量组成) 被转换为线性地址。2.  页转换，将线性地址转换为物理地址。这个步骤是可选的，由系统软件设计人员自行决定。
 
-#### 5.2 Page Translation：<br>
+#### 5.2 Page Translation
 页面转换步骤是可选的。只有设置了CR0的PG位，页面转换才有效，该位通常由操作系统在软件初始化期间设置。
-![lab2_exercise2_1通过页表的地址转换.png](1)
+![通过页表的地址转换](.\MIT6828_img/lab2_exercise2_1通过页表的地址转换.png)
 当前页目录的物理地址存储在CPU寄存器CR3中，也称为页目录基寄存器(PDBR)。
 
-在对页进行读或写操作之前，处理器将两层页表中相应的访问位设置为1。（这可能与cpu多核处理相关）
+在对页进行读或写操作之前，处理器将两层页表中相应的访问位设置为1。
 
 当80386被用来执行为没有分段的体系结构设计的软件时，有效地“关闭”80386的分段功能可能是权宜宜之。80386没有禁用分段的模式，但是可以通过在段寄存器中初始加载包含整个32位线性地址空间的描述符的选择器来实现相同的效果。一旦加载，段寄存器不需要改变。80386指令使用的32位偏移量足以寻址整个线性地址空间。（这也是linux的寻址方式）
 
@@ -157,16 +155,18 @@ Intel 80386将逻辑地址(即程序员看到的地址)转换为物理地址(即
 ### Exercise 3 
 在x86术语中，虚拟地址由段选择子和段内的偏移量组成。线性地址是在段转换之后，页面转换之前得到的地址。物理地址是经过段和页转换后最终得到的地址，或者说最终通过硬件总线传输到RAM的地址。
 
-在boot/boot.S文件中，我们安装了一个全局描述符表(GDT)，其通过将所有段基址设置为0，将段限制为0xffffffff 来有效地禁用段转换。因此，“选择子”没有作用，线性地址总是等于虚拟地址的偏移量。在实验室3中，我们将不得不与段进行更多的交互，以设置特权级别，但对于内存转换，我们可以在整个JOS实验室中忽略段，而只关注页转换。
+在boot/boot.S文件中，我们有一个全局描述符表(GDT)，其通过将所有段基址设置为0，将段限制为0xffffffff 来有效地禁用段转换。因此，“选择子”没有作用，线性地址总是等于虚拟地址的偏移量。在实验室3中，我们将不得不与段进行更多的交互，以设置特权级别，但对于内存转换，我们可以在整个JOS实验中忽略段，而只关注页转换。
 
 回想一下，在实验1的第3部分中，我们安装了一个简单的页表，这样内核就可以在它的链接地址0xf0100000上运行，即使它实际上是在ROM BIOS上方的0x00100000上加载到物理内存中。这个页表只映射了4MB内存。在本实验中将为JOS设置的虚拟地址空间布局中，我们将扩展该布局，来映射从虚拟地址0xf0000000开始的第一个256MB物理内存，并映射虚拟地址空间的许多其他区域。
 
 > 练习3
-While GDB can only access QEMU's memory by virtual address, it's often useful to be able to inspect physical memory while setting up virtual memory. Review the QEMU monitor commands from the lab tools guide, especially the xp command, which lets you inspect physical memory. To access the QEMU monitor, press Ctrl-a c in the terminal (the same binding returns to the serial console).
-Use the xp command in the QEMU monitor and the x command in GDB to inspect memory at corresponding physical and virtual addresses and make sure you see the same data.
-Our patched version of QEMU provides an info pg command that may also prove useful: it shows a compact but detailed representation of the current page tables, including all mapped memory ranges, permissions, and flags. Stock QEMU also provides an info mem command that shows an overview of which ranges of virtual addresses are mapped and with what permissions.
+虽然GDB只能通过虚拟地址访问QEMU的内存，但在设置虚拟内存时检查物理内存通常是有用的。回顾实验工具指南中的QEMU监视器命令，特别是xp命令，该命令允许您检查物理内存。要访问QEMU监视器，请在终端中按Ctrl-a c(相同的绑定将返回到串行控制台)。
+在QEMU监控器中使用xp命令和在GDB中使用x命令检查相应物理地址和虚拟地址上的内存，并确保看到相同的数据。
+我们的QEMU补丁版本提供了一个info pg命令，这个命令也可能被证明是有用的:它显示了当前页表的紧凑而详细的表示，包括所有映射的内存范围、权限和标志。Stock QEMU还提供了一个info mem命令，用于显示映射的虚拟地址范围和权限的概述。
 
 ```language
+qemu-system-i386 -hda obj/kern/kernel.img -monitor stdio -gdb tcp::26000 -D qemu.log //使用文档中提到的qemu monitor进入方法并不好使，看到网上的一些博客说这条命令好使，我就尝试了一下，发现果然好使。。。
+
 xp/Nx paddr //查看paddr物理地址处开始的，N个字的16进制的表示结果。
 info registers //展示所有内部寄存器的状态。
 info mem -//展示所有已经被页表映射的虚拟地址空间，以及它们的访问优先级。
@@ -180,7 +180,7 @@ info pg //展示当前页表的结构。
 注意：MMU会转换所有的内存引用！！！！！！！！！！！！！！！！内核不能绕过虚拟地址转换，因此不能直接加载和存储到物理地址。
 
 > qustion
-Assuming that the following JOS kernel code is correct, what type should variable x have, uintptr_t or physaddr_t?
+假设下面的JOS内核代码是正确的，变量x应该有什么类型，uintptr_t还是physaddr_t?
 
 x应该是uintptr_t。
 
@@ -198,35 +198,117 @@ x应该是uintptr_t。
 现在将编写一组例程来管理页表:插入和删除线性地址到物理地址映射，并在需要时创建页表页。
 
 > 练习4
-In the file kern/pmap.c, you must implement code for the following functions : pgdir_walk(), boot_map_region(), page_lookup(), page_remove(), page_insert().
-check_page(), called from mem_init(), tests your page table management routines. You should make sure it reports success before proceeding.
+在kern/pmap.c文件中，必须实现以下函数的代码:pgdir_walk()， boot_map_region()， page_lookup()， page_remove()， page_insert()。
+
+利用mem_init()调用的Check_page()测试页表管理例程。在继续之前，您应该确保它报告成功。
 
 从头捋一下。
 
 pgdir_walk()代码：
 ```language
 
+pte_t *
+pgdir_walk(pde_t *pgdir, const void *va, int create)
+{
+
+	// Fill this function in
+
+	pde_t* dir_entry=pgdir+PDX(va); //PDX(va)返回page directory index,dir_entry是指向页目录中的DIR ENTRY(见图)的指针。
+
+	if( !(*dir_entry & PTE_P) ){//如果这个页表不存在
+		if(create==false) return NULL;
+		else{
+			struct PageInfo * new_pp =page_alloc(1);//别忘了这个它返回的是struct PageInfo *
+			if(new_pp==NULL){
+				return NULL;
+			}
+			new_pp->pp_ref++;
+
+			*dir_entry=(page2pa(new_pp) | PTE_P | PTE_W | PTE_U);//设置dir_entry的标志位。注释中说可以设置宽松，所以这里全部设置为最宽松：可读写，应用程序级别即可访问。 dirty位 和access位不做设置。
+			memset(page2kva(new_pp) , '\0' ,  PGSIZE);//初始化new_page的物理内存，一定要用虚拟地址!!!!!			
+		}
+	}
+
+	//注意，返回的应该是虚拟内存。PTE_ADDR()在mmu.h中定义，就是将pte转换为physaddr_t,再提取出前面表示地址的位。
+	pte_t * page_base = KADDR(PTE_ADDR(*dir_entry));//注意这块的类型定义，这涉及地址运算。 很重要，之前的bug就是因为这里!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	return  &page_base[PTX(va)];	
+
+}
 ```
 
 boot_map_region()代码：
 ```language
+static void
+boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm)
+{
+	// Fill this function in
+	pte_t* pt_entry;
+	for(int i=0; i<size;i+=PGSIZE){
+		pt_entry=pgdir_walk(pgdir, (void *) va ,1);
+		if (pt_entry == NULL) {
+            		panic("boot_map_region(): out of memory\n");
+        	}
+		* pt_entry=(pa |perm | PTE_P);//按照注释对pg_entry置标志位。
 
+		pa+=PGSIZE;
+		va+=PGSIZE;
+	}
+}
 ```
 
 page_lookup()代码：
 ```language
+struct PageInfo *
+page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
+{
+	// Fill this function in
+	pte_t * pt_entry=pgdir_walk(pgdir,va,0);
+	if(pt_entry==NULL)  return NULL;
+	if(!(*pt_entry & PTE_P))  return NULL;
 
+	if(pte_store) *pte_store=pt_entry;
+
+	struct PageInfo* res=pa2page(PTE_ADDR(*pt_entry));
+	return res;
+}
 ```
 
 page_remove()代码：
 ```language
+void
+page_remove(pde_t *pgdir, void *va)
+{
+	// Fill this function in
+	pte_t *pt_entry;
 
+	struct PageInfo * pp=page_lookup(pgdir,va,&pt_entry);
+	if(pp==NULL) return ;
+
+	page_decref(pp);
+	*pt_entry= 0;
+	tlb_invalidate(pgdir, va);
+}
 ```
 
 
 page_insert()代码：
 ```language
+int
+page_insert(pde_t *pgdir, struct PageInfo *pp, void *va, int perm)
+{
+	// Fill this function in
+	pte_t* pt_entry=pgdir_walk(pgdir,va,1);
+	if(pt_entry==NULL) return -E_NO_MEM;
+	
+	pp->pp_ref++;//这个一定要在前面，否则如果相同的pp 重新插入相同的va就会把  pp释放掉了。
 
+	if( (*pt_entry) & PTE_P ){//如果这个页已经存在
+		page_remove(pgdir, va);
+	}
+	*pt_entry= page2pa(pp);
+	*pt_entry = *pt_entry | perm | PTE_P ;
+	return 0;
+}
 ```
 报告成功！
 
@@ -248,7 +330,18 @@ JOS将处理器的32位线性地址空间分为两部分。我们将在实验3�
 
 添加的代码：
 ```language
+//这两行关于权限的解释没怎么看懂。
+// Your code goes here:
+//这里用ROUNDUP()是因为boot_map_region()注释中要求了size参数应该是PGSIZE的倍数，但其实按照我的写法不加也行。
+boot_map_region(kern_pgdir, UPAGES,ROUNDUP(npages * sizeof(struct PageInfo), PGSIZE) , PADDR(pages), PTE_U | PTE_P);
 
+// 意思好像是第二部分不进行映射
+//     Permissions: kernel RW, user NONE
+// Your code goes here:
+boot_map_region(kern_pgdir, KSTACKTOP - KSTKSIZE, KSTKSIZE, PADDR(bootstack), PTE_W);
+
+// Your code goes here:
+boot_map_region(kern_pgdir, KERNBASE, 0xffffffff-KERNBASE , 0, PTE_W);
 ```
 
 测试成功！
@@ -256,6 +349,10 @@ JOS将处理器的32位线性地址空间分为两部分。我们将在实验3�
 
 > 问题2
 此时页目录中的哪些条目(行)已被填充?它们映射哪些地址，指向哪里?换句话说，尽可能多地填写这个表格。
+
+![qemu monitor运行结果](.\MIT6828_img/lab2_exercise5_qemu%20monitor运行结果.png)
+
+
 
 > 问题3
 我们将内核和用户环境放在同一个地址空间中。为什么用户程序不能读写内核内存?保护内核内存的具体机制是什么?
@@ -265,6 +362,9 @@ JOS将处理器的32位线性地址空间分为两部分。我们将在实验3�
 
 > 问题4
 这个操作系统能支持的最大物理内存是多少?为什么?
+
+根据qemu日志来说，应该是131072K。这个显示是由pmap.c文件中的i386_detect_memory()函数显示出的。
+![qemu日志](.\MIT6828_img/lab2_exercise5_qemu日志.png)
 
 
 
@@ -276,7 +376,8 @@ JOS将处理器的32位线性地址空间分为两部分。我们将在实验3�
 > 问题6
 重新查看kern/entry.s和kern/entrypgdir.c中的页表设置。在我们立即打开分页之后，EIP仍然是一个较低的数字(略多于1MB)。我们在什么时候过渡到运行在KERNBASE之上的EIP ?在启用分页和开始在KERNBASE之上的EIP上运行之间，是什么使我们能够继续在低EIP上执行?为什么这种转变是必要的?
 
-
+答案：
+在entry.S文件中有一个指令 jmp *%eax，这个指令要完成跳转，就会重新设置EIP的值，把它设置为寄存器eax中的值，而这个值是大于KERNBASE的，所以就完成了EIP从小的值到大于KERNBASE的值的转换。在entry_pgdir这个页表中，也把虚拟地址空间[0, 4MB)映射到物理地址空间[0, 4MB)上，所以当访问位于[0, 4MB)之间的虚拟地址时，可以把它们转换为物理地址。
 
 
 我们在JOS中使用的地址空间布局并不是唯一可能的。操作系统可能会将内核映射到低线性地址，而将线性地址空间的上部留给用户进程。然而，x86内核通常不采用这种方法，因为x86的一种向后兼容模式，即虚拟8086模式，在处理器中“硬连接”以使用线性地址空间的底部，因此如果内核映射到那里，则这种兼容模式根本不能使用。

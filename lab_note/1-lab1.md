@@ -260,45 +260,39 @@ at 0xf0100000:
 ```
 可见原本存放在0xf0100000处地址空间，已经被映射到0x00100000处了，这样我们才能看到它所存储的内容与0x00100000处相同了。
 
-改到这了！！！！！！！！！！！！！！
-
 > 问题
-What is the first instruction after the new mapping is established that would fail to work properly if the mapping weren't in place? 
+建立新映射后，如果映射不到位就不能正常工作的第一条指令是什么?
 
 将entry.S文件中的%movl %eax, %cr0这句话注释掉，进行尝试：
 
-![尝试结果](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise7_1-1670171084004.png?token=AVMRY3J4EHBCOY46OUTZDYLDRTFAM)
+![尝试结果](.\MIT6828_img/lab1_exercise7_1.png)
 
 其中在0x10002a处的jmp指令，要跳转的位置是0xf010002C，由于没有进行分页管理，此时不会进行虚拟地址到物理地址的转化。所以报出错误。
 
 ### Exercise 8
 > Exercise 8
-We have omitted a small fragment of code - the code necessary to print octal numbers using patterns of the form "%o". Find and fill in this code fragment.
+程序中省略了一小段代码——使用“%o”形式的模式打印八进制数所必需的代码。找到并填写此代码片段。
 
 分析一下三个文件：
 printf.c文件中有三个函数: 
-putch()调用consol.c中的cputchar(), 
-vcprintf()调用 printfmt.c中的 vprintfmt(), 
-cprintf()调用vcprintf().
+* putch()调用consol.c中的cputchar(), 
+* vcprintf()调用 printfmt.c中的 vprintfmt(), 
+* cprintf()调用vcprintf().
 
 剩下两个文件代码太多了，先跟着博客一点点分析。
-先分析console.c：
+* 先分析console.c：
 这个文件中定义了如何把一个字符显示到console上，即我们的显示屏之上，里面包括很多对IO端口的操作。
-最重要的cputchar函数：其调用cons_putc,而根据注释,后者的功能是输出一个字符到控制台(计算机的屏幕)。（注意：putch主体是调用cputchar）
+* 最重要的cputchar函数：其调用cons_putc,而根据注释,后者的功能是输出一个字符到控制台(计算机的屏幕)。（注意：putch主体是调用cputchar）
 
-再看printfmt.c:
+* 再看printfmt.c:
 文件注释：精简的原语printf风格的格式化例程，通常由printf、sprintf、fprintf等使用。内核程序和用户程序也使用此代码。
 其中根据注释，printfmt()函数是格式化和打印字符串的主要函数，而其调用vprintfmt函数，其有4个参数，如下：
-
 (1)void (*putch)(int, void*)：
 这个参数是一个函数指针，这类函数包含两个输入参数int, void*，int参数代表一个要输出的字符的值。void* 则代表要把这个字符输出的位置的地址
-
 (2)void *putdat
 这个参数就是输入的字符要存放在的内存地址的指针，就是和上面putch函数的第二个输入参数是一个含义。
-
 (3)const char *fmt
 这个参数代表你在编写类似于printf这种格式化输出程序时，你指定格式的字符串，即printf函数的第一个输入参数，比如printf("This is %d test", n)，这个子程序中，fmt就是"This is %d test"。
-
 (4)va_list ap
 这个参数代表的是多个输入参数，即printf子程序中从第二个参数开始之后的参数，比如("These are %d test and %d test", n, m)，那么ap指的就是n，m
 
@@ -315,24 +309,24 @@ case 'o':
 
 并回答下列问题：
 > 问题1
-1.Explain the interface between printf.c and console.c. Specifically, what function does console.c export? How is this function used by printf.c?
+解释printf.c和console.c之间的接口。具体来说，console.c提供了什么函数?printf.c如何使用这个函数?
 
 printf.c中putch()调用consol.c中的cputchar()
 用来向显示屏上显示字符。
 
 > 问题2
-2.Explain the following from console.c:
+2.解释下列console.c中的代码：
 
 crt_buf:这是一个字符数组缓冲区，里面存放着要显示到屏幕上的字符
 crt_pos:这个表示当前最后一个字符显示在屏幕上的位置。
 当crt_pos >= CRT_SIZE，其中CRT_SIZE = 80*25，由于我们知道crt_pos取值范围是0 ~ (80 * 25 - 1)，那么这个条件如果成立则说明现在在屏幕上输出的内容已经超过了一页。所以此时要把页面向上滚动一行，即把原来的1 ~ 79号行放到现在的0 ~ 78行上，然后把79号行换成一行空格（当然并非完全都是空格，0号字符上要显示你输入的字符int c）。所以memcpy操作就是把crt_buf字符数组中1 ~ 79号行的内容复制到0 ~ 78号行的位置上。而紧接着的for循环则是把最后一行，79号行都变成空格。最后还要修改一下crt_pos的值。
 
 > 问题3
-3.In the call to cprintf(), to what does fmt point? To what does ap point?
+3.在调用cprintf()时，fmt指向什么?ap指向什么?
 
 自己写了个c文件，执行失败，我猜测原因是应该将qemu运行完后，将kernel对应文件装入内存才可以调用kern文件夹中的程序！
 
-所以参考：https://zhuanlan.zhihu.com/p/168787600. 在kern/moniter.c  mon_backtrace()函数中添加了这3，4，5题的代码并调试。
+所以参考：[c程序运行方法](https://zhuanlan.zhihu.com/p/168787600). 在kern/moniter.c  mon_backtrace()函数中添加了这3，4，5题的代码并调试。
 从boj/kernel.asm中可以看到mon_backtrace()入口在 0xf0100877（1055行），而后续练习的代码自0xf0100895开始，所以将断点设置在此，然后开始调试。
 ```language
 (gdb) p fmt
@@ -360,11 +354,11 @@ $16 = 4
 
 
 > 问题3
-List (in order of execution) each call to cons_putc, va_arg, and vcprintf. For cons_putc, list its argument as well. For va_arg, list what ap points to before and after the call. For vcprintf list the values of its two arguments.
+列出(按执行顺序)对con_putc、va_arg和vcprintf的每个调用。对于con_putc，也列出它的参数。对于va_arg，列出ap在调用前后所指向的内容。对于vcprintf，列出其两个参数的值。
 
 注：根据c文件判断 cprintf()函数执行的调用顺序应该是(只列出与题干有关的函数):
-vcprintf(fmt, ap)->vprintfmt->putch()->cputchar()->cons_putc(c)执行完成后
-vprintfmt下一部分->getint/getuint()->va_arg(*ap,long long)
+* vcprintf(fmt, ap)->vprintfmt->putch()->cputchar()->cons_putc(c)执行完成后
+* vprintfmt下一部分->getint/getuint()->va_arg(*ap,long long)
 
 ```language
 //cons_putc and its arguments
@@ -403,7 +397,7 @@ $7 = 0
 
 
 > 问题4
-4.What is the output? Explain how this output is arrived at in the step-by-step manner of the previous exercise. Here's an ASCII table that maps bytes to characters.
+输出是什么?解释如何按照前面练习的步骤一步一步地得到这个输出。
 
 输出：He110 World。
 %x按16位格式输出，57616 16进制为e110。
@@ -411,19 +405,19 @@ $7 = 0
 但是注意小端系统 int 0x 00 64 6c 72（按ASCII分别对应：空字符,d,l,r.）按byte存放的顺序是反着的，所以现在按照地址递增打印字符的结果就是rld.
 
 > 问题4
-The output depends on that fact that the x86 is little-endian. If the x86 were instead big-endian what would you set i to in order to yield the same output? Would you need to change 57616 to a different value?
+这个输出取决于x86是小端方式的这一事实。如果x86是大端，为了产生相同的输出，你会将i设置为什么?是否需要将57616更改为不同的值?
 
 lrd会反过来。
-但是e110不会，因为读取的结果就是这个16进制数本身，不会按byte拆分。
+但是e110不会，因为读取的结果就是这个数本身，不会按byte拆分。
 
 > 问题5
-5.In the following code, what is going to be printed after 'y='? (note: the answer is not a specific value.) Why does this happen?
+在下面的代码中，'y='后将打印什么?(注意:答案不是一个具体的值。)为什么会发生这种情况?
 
 输出： x=3 y=-267325684
 由于y并没有参数被指定，所以会输出一个不确定的值。
 
 > 问题6
-6.Let's say that GCC changed its calling convention so that it pushed arguments on the stack in declaration order, so that the last argument is pushed last. How would you have to change cprintf or its interface so that it would still be possible to pass it a variable number of arguments?
+假设GCC改变了它的调用约定，将参数按声明顺序推入堆栈，这样最后一个参数就被推到最后。您必须如何更改cprintf或它的接口，以便仍然可以向它传递可变数量的参数?
 
 不是很清楚，主要也没有细看vp_list的定义，抄个答案吧：
 有两种方法。一种是程序员调用cprintf函数时按照从右到左的顺序来传递参数，这种方法不符合我们的阅读习惯、可读性较差。第二种方法是在原接口的最后增加一个int型参数，用来记录所有参数的总长度，这样我们可以根据栈顶元素找到格式化字符串的位置。这种方法需要计算所有参数的总长度，也比较麻烦。。。
@@ -431,7 +425,7 @@ lrd会反过来。
 ### Exercise 9
 
 > 问题
-Determine where the kernel initializes its stack, and exactly where in memory its stack is located. How does the kernel reserve space for its stack? And at which "end" of this reserved area is the stack pointer initialized to point to?
+确定内核初始化堆栈的位置，以及堆栈在内存中的确切位置。内核如何为堆栈预留空间?初始的栈指针指向这个保留区域的哪个“端” ?
 
 从kernel.asm可以看出来 kernel中的entry.s 从此处初始化栈，esp位于0xf010f000。（可能因为我之前在exercise8中改过monitor.c的文件，所以和别人的结果不一样。 esp指向的是整个堆栈中正在被使用的部分的最低地址。在这个地址之下的更低的地址空间都是还没有被利用的堆栈空间。）
 
@@ -455,13 +449,14 @@ bootstack:
 	.globl		bootstacktop   
 bootstacktop:
 ```
-lab中文字也提到了 esp指向的是栈的低地址端
+lab中也提到了 esp指向的是栈的低地址端
 
 
 ### Exercise 10
 
 > 问题
 To become familiar with the C calling conventions on the x86, find the address of the test_backtrace function in obj/kern/kernel.asm, set a breakpoint there, and examine what happens each time it gets called after the kernel starts. How many 32-bit words does each recursive nesting level of test_backtrace push on the stack, and what are those words?
+要熟悉x86上的C调用约定，可以在obj/kern/kernel.asm中找到test_backtrace函数的地址，在那里设置一个断点，并检查每次内核启动后调用它时会发生什么。test_backtrace的每个递归嵌套层在堆栈上推了多少个32位单词，这些单词是什么?
 
 test_backtrace函数开始于 f0100040
 其c程序是这样的 （我没有在monitor.c文件中找到该函数，所以下面是根据asm文件中提取出的对应c语言程序）：
@@ -500,17 +495,17 @@ f010006a:	83 ec 0c             	sub    $0xc,%esp
 ### Exercise 11
 后面要利用monitor.c中的mon_backtrace函数了，所以注释掉之前修改的代码，然后重新编译
 
-一个前面描述尚无法解答的问题：Why can't the backtrace code detect how many arguments there actually are? How could this limitation be fixed?
+一个前面描述尚无法解答的问题：为什么回溯代码不能检测实际有多少个参数?如何修正这个限制呢?
 
 
 正式开始练习11：
 > 问题
-Implement the backtrace function as specified above. Use the same format as in the example, since otherwise the grading script will be confused. When you think you have it working right, run make grade to see if its output conforms to what our grading script expects, and fix it if it doesn't. After you have handed in your Lab 1 code, you are welcome to change the output format of the backtrace function any way you like.
+实现上面指定的回溯函数。使用与示例中相同的格式，否则评分脚本将被混淆。当您认为它可以正常工作时，运行make grade来查看它的输出是否符合我们的评分脚本的要求，如果不符合则修复它。在您提交Lab 1代码后，欢迎您以任何您喜欢的方式更改回溯函数的输出格式。
 
 ebp值表示进入该函数之前使用的堆栈的基指针，eip值是函数的返回指令指针。
 至于为什么ebp,eip，args分布在栈上这些位置，看下图：
 
-![栈帧结构](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise11_%E6%A0%88%E5%B8%A7%E7%BB%93%E6%9E%84-1670171106779.png?token=AVMRY3JRWW5VG4D6QF2EBF3DRTFB2)
+![栈帧结构](.\MIT6828_img/lab1_exercise11_栈帧结构.png)
 
 一定要记住ebp寄存器中保存的是指向栈的指针！另外， 代码中的类型转换也要注意！  循环的终止条件是前面练习中得出的结论，ebp寄存器中初始值是0x00,代码如下：
 ```language
@@ -541,7 +536,7 @@ Modify your stack backtrace function to display, for each eip, the function name
 
 先回答一些问题：
 > 问题
-In debuginfo_eip, where do __STAB_* come from? This question has a long answer; to help you to discover the answer, here are some things you might want to do:
+在debuginfo_eip中，__STAB_*来自哪里?这个问题的答案很长;为了帮助你找到答案，这里有一些你可能需要做的事情:
 - look in the file kern/kernel.ld for __STAB_*
 - run objdump -h obj/kern/kernel
 - run objdump -G obj/kern/kernel
@@ -574,7 +569,7 @@ In debuginfo_eip, where do __STAB_* come from? This question has a long answer; 
 
 2.objdump -h obj/kern/kernel运行结果（显示文件的整体头部摘要信息）：
 
-![运行结果](https://raw.githubusercontent.com/bighunzi/GitNote_img/main/gitnote/2022/12/05/lab1_exercise12_1-1670171142295.png?token=AVMRY3NRJAFZXUARBKXS44TDRTFEA)
+![运行结果](.\MIT6828_img/lab1_exercise12_1.png)
 
 可以看到.stab段加载地址是 0x0010227c，size是0x0000327c
 .stabstr段加载地址是0x00105bad  size是00006bad
@@ -632,7 +627,7 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 0x105c58:	"uint32_t:t(0,4)"
 //我运行的结果是这样的，其他博客上记录的都是第二个结果，我现在也不太明白stab段 和stabstr的区别。。。。。。。。
 ```
-根据结果，显然是加载进来了
+根据结果，显然是加载进来了。
 
 
 debuginfo_eip()的修改部分：
