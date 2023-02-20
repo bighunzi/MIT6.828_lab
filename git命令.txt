@@ -1,5 +1,13 @@
-git clone https://github.com/bighunzi/mytinySTL
+git clone https://github.com/bighunzi/MIT6.828_lab
 
 git add .
 git commit -m “提交信息”
 git push origin main
+
+ubuntu上传lab文件夹到github时，不要复制整个lab文件夹，先创建lab文件，再把那些子文件复制进lab文件夹中
+
+git config --global --unset http.proxy 
+git config --global --unset https.proxy
+
+
+
