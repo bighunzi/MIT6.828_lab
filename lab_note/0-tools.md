@@ -23,4 +23,6 @@ sudo make install
 
 另外一定不要听某些博客的将python卸载了，会很难受！
 
-
+另外这是后面调试程序时在网站上看到的资料
+[lab ppt GDB教学](https://pdos.csail.mit.edu/6.828/2018/lec/gdb_slides.pdf)
+可以使用 `b monitor.c:71`的类似方法来调试

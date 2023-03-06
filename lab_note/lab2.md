@@ -2,7 +2,7 @@
 这个实验是为操作系统编写内存管理代码。内存管理分为两部分： 内核的物理内存分配器，虚拟内存。<br>
 1 page : 4k bytes<br>
 为获取lab2所需文件，执行如下命令：
-```language
+```
 git pull
 git checkout -b lab2 origin/lab2
 git merge lab1
@@ -29,7 +29,7 @@ boot_alloc ();Mem_init()(只到调用check_page_free_list(1));page_init ();page_
 Check_page_free_list()和check_page_alloc()测试物理页面分配器。您应该引导JOS并查看check_page_alloc()是否报告成功。修改代码，使其通过。您可能会发现添加自己的assert()来验证您的假设是否正确很有帮助。
 
 而boot_alloc()函数注释也解释：这个函数只分配内存，并不初始化内存，函数中。所以我们仿照该函数中nextfree分配地址的方式分配内存即可。
-```language
+```c
 //boot_alloc()函数修改处
 //
 // LAB 2: Your code here.
@@ -44,7 +44,7 @@ return result;
 ```
 
 mem_init()函数修改处：
-```language
+```c
 //////////////////////////////////////////////////////////////////////
 // Allocate an array of npages 'struct PageInfo's and store it in 'pages'.
 // The kernel uses this array to keep track of physical pages: for
@@ -58,7 +58,7 @@ memset(pages, 0, npages * sizeof(struct PageInfo);
 ```
 
 page_init()函数修改处（写这部分的时候要注意，lab1中对于kern读取进内存的部分的结论不能直接用了，因为你现在实际就是在进行这个过程，所有已知结论均通过pmap.c的前文得出）：
-```language
+```c
 // Change the code to reflect this.
 // NB: DO NOT actually touch the physical memory corresponding to
 // free pages!
@@ -78,7 +78,7 @@ for (i = 0; i < npages; i++) {
 ```
 
 page_alloc()函数修改处:
-```language
+```c
 struct PageInfo *
 page_alloc(int alloc_flags)
 {
@@ -101,7 +101,7 @@ page_alloc(int alloc_flags)
 ```
 
 page_free()函数修改处:
-```language
+```c
 void
 page_free(struct PageInfo *pp)
 {
@@ -118,7 +118,7 @@ page_free(struct PageInfo *pp)
 ```
 
 上述代码完成后，测试结果如下，说明代码正确(测试时不要忘记改动mem_init()中的该行语句的位置 )：
-```language
+```c
 panic("mem_init: This function is not finished\n")
 ```
 
@@ -164,7 +164,7 @@ Intel 80386将逻辑地址(即程序员看到的地址)转换为物理地址(即
 在QEMU监控器中使用xp命令和在GDB中使用x命令检查相应物理地址和虚拟地址上的内存，并确保看到相同的数据。
 我们的QEMU补丁版本提供了一个info pg命令，这个命令也可能被证明是有用的:它显示了当前页表的紧凑而详细的表示，包括所有映射的内存范围、权限和标志。Stock QEMU还提供了一个info mem命令，用于显示映射的虚拟地址范围和权限的概述。
 
-```language
+``` s
 qemu-system-i386 -hda obj/kern/kernel.img -monitor stdio -gdb tcp::26000 -D qemu.log //使用文档中提到的qemu monitor进入方法并不好使，看到网上的一些博客说这条命令好使，我就尝试了一下，发现果然好使。。。
 
 xp/Nx paddr //查看paddr物理地址处开始的，N个字的16进制的表示结果。
@@ -205,7 +205,7 @@ x应该是uintptr_t。
 从头捋一下。
 
 pgdir_walk()代码：
-```language
+```c
 
 pte_t *
 pgdir_walk(pde_t *pgdir, const void *va, int create)
@@ -237,7 +237,7 @@ pgdir_walk(pde_t *pgdir, const void *va, int create)
 ```
 
 boot_map_region()代码：
-```language
+```c
 static void
 boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm)
 {
@@ -257,7 +257,7 @@ boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm
 ```
 
 page_lookup()代码：
-```language
+```c
 struct PageInfo *
 page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 {
@@ -274,7 +274,7 @@ page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 ```
 
 page_remove()代码：
-```language
+```c
 void
 page_remove(pde_t *pgdir, void *va)
 {
@@ -292,7 +292,7 @@ page_remove(pde_t *pgdir, void *va)
 
 
 page_insert()代码：
-```language
+```c
 int
 page_insert(pde_t *pgdir, struct PageInfo *pp, void *va, int perm)
 {
@@ -329,7 +329,7 @@ JOS将处理器的32位线性地址空间分为两部分。我们将在实验3�
 在调用check_page()之后，填充mem_init()中缺失的代码。完成代码后应该可以通过check_kern_pgdir()和check_page_installed_pgdir()检查。
 
 添加的代码：
-```language
+```c
 //这两行关于权限的解释没怎么看懂。
 // Your code goes here:
 //这里用ROUNDUP()是因为boot_map_region()注释中要求了size参数应该是PGSIZE的倍数，但其实按照我的写法不加也行。
