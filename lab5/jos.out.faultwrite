@@ -1,0 +1,36 @@
++ ld obj/kern/kernel
++ mk obj/kern/kernel.img
+6828 decimal is 15254 octal!
+Physical memory: 131072K available, base = 640K, extended = 130432K
+check_page_free_list() succeeded!
+check_page_alloc() succeeded!
+check_page() succeeded!
+check_kern_pgdir() succeeded!
+check_page_free_list() succeeded!
+check_page_installed_pgdir() succeeded!
+SMP: CPU 0 found 1 CPU(s)
+enabled interrupts: 1 2 4
+[00001000] user fault va 00000000 ip 00800033
+TRAP frame at 0xf026d000 from CPU 0
+  edi  0x00000000
+  esi  0x00000000
+  ebp  0xeebfdff0
+  oesp 0xefffffdc
+  ebx  0x00000000
+  edx  0x00000000
+  ecx  0x00000000
+  eax  0xeec00000
+  es   0x----0023
+  ds   0x----0023
+  trap 0x0000000e Page Fault
+  cr2  0x00000000
+  err  0x00000006 [user, write, not-present]
+  eip  0x00800033
+  cs   0x----001b
+  flag 0x00000282
+  esp  0xeebfdfd4
+  ss   0x----0023
+No runnable environments in the system!
+Welcome to the JOS kernel monitor!
+Type 'help' for a list of commands.
+qemu: terminating on signal 15 from pid 7741
