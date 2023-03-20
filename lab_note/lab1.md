@@ -598,13 +598,13 @@ Symnum n_type n_othr n_desc n_value  n_strx String
 ```
 
 4.gcc -pipe -nostdinc -O2 -fno-builtin -I. -MD -Wall -Wno-format -DJOS_KERNEL -gstabs -c -S kern/init.c生成的init.s文件：
-```language
+```
 //太长了，在这里不记录了
 ```
 
 5.确认boot loader在加载内核时是否把符号表（stab）也加载到内存中。
 问题2中我们已经知道了stab的加载地址0x0010227c，stabstr的加载地址是0x00105bad，所以我们只要看那块地址的信息就可以了
-```language
+```
 //还是同之前一样在kernel的入口0x10000c处设置断点，然后利用命令查看对应地址
 (gdb) x/8s 0x0010227c
 0x10227c:	"\001"
@@ -634,7 +634,7 @@ debuginfo_eip()的修改部分：
 struct Eipdebuginfo数据结构在kdebug.h中定义。
 理解stabs每行记录的含义后，调用stab_binsearch便能找到某个地址对应的行号了，stab_binsearch函数的注释也表明了stab_binsearch返回的就是行号。
 由于前面的代码已经找到地址在哪个函数里面以及函数入口地址，将原地址减去函数入口地址即可得到偏移量，再根据偏移量在符号表中的指定区间查找对应的记录即可。代码如下所示:
-```language
+```c
 	stab_binsearch(stabs, &lline, &rline, N_SLINE, addr);
 	if (lline <= rline) {
     		info->eip_line = stabs[lline].n_desc;//n_desc表示在文件中的行号
@@ -644,7 +644,7 @@ struct Eipdebuginfo数据结构在kdebug.h中定义。
 ```
 
 mon_backtrace()的修改部分，其实上个部分写出来了这个就简单了：
-```language
+```c
 	// Your code here.
 	uint32_t * ebp;
 	struct Eipdebuginfo info;
