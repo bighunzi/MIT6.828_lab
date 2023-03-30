@@ -1,0 +1,30 @@
++ ld obj/kern/kernel
++ mk obj/kern/kernel.img
+6828 decimal is 15254 octal!
+Physical memory: 131072K available, base = 640K, extended = 130432K
+check_page_free_list() succeeded!
+check_page_alloc() succeeded!
+check_page() succeeded!
+check_kern_pgdir() succeeded!
+check_page_free_list() succeeded!
+check_page_installed_pgdir() succeeded!
+SMP: CPU 0 found 1 CPU(s)
+enabled interrupts: 1 2 4
+PCI: 00:00.0: 8086:1237: class: 6.0 (Bridge device) irq: 0
+PCI: 00:01.0: 8086:7000: class: 6.1 (Bridge device) irq: 0
+PCI: 00:01.1: 8086:7010: class: 1.1 (Storage controller) irq: 0
+PCI: 00:01.3: 8086:7113: class: 6.80 (Bridge device) irq: 9
+PCI: 00:02.0: 1234:1111: class: 3.0 (Display controller) irq: 0
+PCI: 00:03.0: 8086:100e: class: 2.0 (Network controller) irq: 11
+PCI function 00:03.0 (8086:100e) enabled
+device status:[80080783]
+FS is running
+FS can do I/O
+Device 1 presence: 1
+block cache is good
+superblock is good
+bitmap is good
+ns: 52:54:00:12:34:56 bound to static IP 10.0.2.15
+NS: TCP/IP initialized.
+Waiting for http connections...
+qemu: terminating on signal 15 from pid 6756
