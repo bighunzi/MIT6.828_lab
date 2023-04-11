@@ -203,7 +203,7 @@ trap_dispatch(struct Trapframe *tf)
 			break;
 		case(T_SYSCALL):
 			//调用kern/syscall.c中的syscall(),然后将返回值传递回%eax，其将被传递回用户进程。
-			int32_t ret=syscall(tf->tf_regs.reg_eax, /*lab的文档中说应用程序将在寄存器中传递系统调用编号和系统调用参数。这样，内核就不需要遍历用户环境的栈或指令流。系统调用编号将进入%eax。但是在哪里实现的我也不清楚。*/
+			int32_t ret=syscall(tf->tf_regs.reg_eax,/*应用程序将在寄存器中传递系统调用编号和系统调用参数。系统调用编号将进入%eax。( 参见lib/syscall.c中syscall() )*/
 					tf->tf_regs.reg_edx,
 					tf->tf_regs.reg_ecx,
 					tf->tf_regs.reg_ebx,

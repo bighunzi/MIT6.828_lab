@@ -29,7 +29,7 @@ ipc_recv(envid_t *from_env_store, void *pg, int *perm_store)
 	
 	//thisenv在lib/libmain.c中定义。 currenv在kern/env.h中定义。
 	//这里注释要求用thisenv。
-	//我猜是因为用户环境下没有权限访问currenv，只能利用libmain()函数中定义的thisenv。
+	//是因为用户环境下没有权限访问currenv，只能利用libmain()函数中定义的thisenv。
 	if(from_env_store) *from_env_store = (r < 0? 0 : thisenv->env_ipc_from);
 	if(perm_store) *perm_store= (r<0? 0:thisenv->env_ipc_perm);
 	

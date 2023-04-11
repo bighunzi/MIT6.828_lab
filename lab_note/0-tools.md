@@ -16,13 +16,14 @@ sudo make
 sudo make install
 ```
 
-## 安装工具报错时参考的博客
-这是两篇其他人所写博客
+### 安装工具报错时参考的博客
 [MIT6.828 实验环境配置](https://blog.csdn.net/qq_43012789/article/details/106343268)
 [ubuntu22.04包依赖关系](https://blog.csdn.net/lishuaigell/article/details/124740342)
 
-另外一定不要听某些博客的将python卸载了，会很难受！
+一定不要听某些博客的将python卸载了，如果没备份的话，你会很难受！！
 
-另外这是后面调试程序时在网站上看到的资料
+这是调试程序相关的课程ppt
 [lab ppt GDB教学](https://pdos.csail.mit.edu/6.828/2018/lec/gdb_slides.pdf)
-可以使用 `b monitor.c:71`的类似方法来调试
+
+
+做完lab会发现： JOS是微内核。

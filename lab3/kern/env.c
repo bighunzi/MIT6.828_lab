@@ -541,6 +541,5 @@ env_run(struct Env *e)
 	// Step 2
 	env_pop_tf( &(curenv->env_tf) );
 
-	panic("env_run not yet implemented");//这是原程序自带的，为啥还要有这个？
-}
+	//panic("env_run not yet implemented");
 

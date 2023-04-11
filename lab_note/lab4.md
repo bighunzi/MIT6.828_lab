@@ -101,7 +101,7 @@ for (size_t i = 0; i < npages; i++) {
 1.将kern/mpentry.s和boot/boot.s并排比较。记住kern/mpentry.s被编译并链接到KERNBASE之上运行，就像内核中的其他所有东西一样。宏MPBOOTPHYS(见于kern/mpentry.s)的目的是什么?为什么它在kern/mpentry.s中是必要的，而在boot/boot.s中不是？换句话说，如果在kern/mpentry.S中省略了它，会发生什么问题?
 提示:回想一下我们在实验1中讨论过的链接地址和加载地址之间的差异。
 
-答：boot.S中，由于尚没有启用分页机制，所以我们能够指定程序开始执行的地方以及程序加载的地址(即加载地址)；但是，在mpentry.S的时候，由于当前CPU(即BSP)已经处于保护模式下了，因此是不能直接指定程序的物理地址的。所以通过这个宏我们通过当前地址s 计算出这段汇编代码所在的真实地址。
+答：boot.S中，由于尚处于实模式（boot.s中才启用保护模式），所以我们能够指定程序开始执行的地方以及程序加载的地址(即加载地址)；但是，在mpentry.S的时候，由于当前CPU(即BSP)已经处于保护模式下了，因此是不能直接指定程序的物理地址的。所以通过这个宏我们通过当前地址s 计算出这段汇编代码所在的真实地址。
 (见于mpentry.S注释：it uses MPBOOTPHYS to calculate absolute addresses of its symbols, rather than relying on the linker to fill them)
 
 ### Per-CPU状态及其初始化
@@ -110,7 +110,7 @@ for (size_t i = 0; i < npages; i++) {
 以下是你应该知道的per-CPU状态:
 * Per-CPU内核栈。
   因为多个cpu可能同时进入内核，我们需要为每个处理器提供一个单独的内核栈，以防止它们干扰彼此的执行。数组percpu_kstacks[NCPU][KSTKSIZE]为内核栈的NCPU's worth(???????不懂)保留空间。
-  引导堆栈将一部分物理内存称为BSP内核堆栈，在实验2中我们把这部分物理内存映射到KSTACKTOP下面。同样，在本实验中，您将把每个CPU的内核堆栈映射到这个区域，并使用保护页作为它们之间的缓冲区。CPU 0的堆栈仍然会从KSTACKTOP向下增长;CPU 1的堆栈将从CPU 0的堆栈底部以下的KSTKGAP字节开始，依此类推。incs/memlayout.h显示了映射布局。
+  引导堆栈将一部分物理内存称为BSP内核堆栈，在实验2中我们把这部分物理内存映射到KSTACKTOP下面。同样，在本实验中，您将把每个CPU的内核堆栈映射到这个区域，并使用保护页作为它们之间的缓冲区。CPU 0的堆栈仍然会从KSTACKTOP向下增长;CPU 1的堆栈将从CPU 0的堆栈底部以下的KSTKGAP字节开始，依此类推。inc/memlayout.h显示了映射布局。
 * Per-CPU的TSS和TSS描述符.
   还需要一个per-CPU任务状态段(task state segment, TSS)，用于指定每个CPU的内核栈所在的位置。CPU i的TSS存储在cpus[i].cpu_ts中，对应的TSS描述符定义在GDT项gdt[(GD_TSS0 >> 3) + i]中。在kern/trap.c中定义的全局ts变量将不再有用。
 * Per-CPU当前环境指针
@@ -187,7 +187,7 @@ SMP: CPU 3 starting
 测试成功！！！
 
 ### 锁
-我们当前的代码在mp_main()中初始化AP后旋转（啥？？？）。在让AP更进一步之前，我们需要首先解决多个cpu同时运行内核代码时的竞争情况。实现该目标的最简单方法是使用一个大的内核锁。大内核锁是一个全局锁，在环境进入核心态时持有，在环境返回用户态时释放。在该模型中，用户态环境可以在任何可用的cpu上并发运行，但内核态环境只能运行一个;任何其他试图进入核心态的环境都必须等待。
+我们当前的代码在mp_main()中初始化AP后自旋。在让AP更进一步之前，我们需要首先解决多个cpu同时运行内核代码时的竞争情况。实现该目标的最简单方法是使用一个大的内核锁。大内核锁是一个全局锁，在环境进入内核态时持有，在环境返回用户态时释放。在该模型中，用户态环境可以在任何可用的cpu上并发运行，但内核态环境只能运行一个;任何其他试图进入核心态的环境都必须等待。
 
 kern/spinlock.h声明了大内核锁，即kernel_lock。它还提供了lock_kernel()和unlock_kernel()，这是获取和释放锁的快捷方式。应该在4个位置应用大内核锁：
 * 在i386_init()中，在BSP唤醒其他cpu之前获取锁。
@@ -307,7 +307,7 @@ sched_yield(void)
 	//ENV_CREATE(user_primes, ENV_TYPE_USER);
 
 	//只是为了自己测试
-	//调用user/yield.c 为什么要用user_yield这个符号名，不太懂
+	//调用user/yield.c 
 	ENV_CREATE(user_yield, ENV_TYPE_USER);
 	ENV_CREATE(user_yield, ENV_TYPE_USER);
 	ENV_CREATE(user_yield, ENV_TYPE_USER);
@@ -334,7 +334,7 @@ Back in environment 00001002, iteration 1.
 >问题3
 在env_run()的实现中，你应该已经调用了lcr3()。在调用lcr3()之前和之后，代码都会引用变量e(至少应该这样)，它是env_run的参数。加载%cr3寄存器后，MMU使用的寻址上下文立即改变。但是，相对于给定的地址上下文，虚拟地址(即e)具有意义——地址上下文指定了虚拟地址映射到的物理地址。为什么在寻址开关前后都可以解引指针e？
 
-答：因为当前是运行在系统内核中的，而每个进程的页表中都是存在内核映射的。lab3中我们使用env_setup_vm()为新环境分配页目录，并初始化了新环境地址空间的内核部分。从中我们得知，每个进程页表中虚拟地址高于UTOP之上的地方，只有UVPT不一样，其余的都是一样的。所以其实它映射的物理地址都是一样的，e自然也是相同的。
+答：因为当前是运行在系统内核中的，而每个进程的页表中都是存在内核映射的。lab3中我们使用env_setup_vm()为新环境分配页目录，并初始化了新环境地址空间的内核部分。从中我们得知，每个进程页表中虚拟地址高于UTOP之上的地方，只有UVPT不一样，其余的都是一样的。指针e指向的UENVS区域也是这部分，e自然也是相同的。
 
 >问题4
 每当内核从一个环境切换到另一个环境时，它必须确保保存旧环境的寄存器，以便稍后可以正常恢复。为什么?这发生在哪里？
@@ -397,9 +397,7 @@ sys_env_set_status(envid_t envid, int status)
 
 //sys_page_alloc
 static int
-
 sys_page_alloc(envid_t envid, void *va, int perm)
-
 {
 	// LAB 4: Your code here.  先别考虑这么多异常值，先写主体！！
 	//panic("sys_page_alloc not implemented");
@@ -425,11 +423,8 @@ sys_page_alloc(envid_t envid, void *va, int perm)
 
 //sys_page_map
 static int
-
 sys_page_map(envid_t srcenvid, void *srcva,
-
 	     envid_t dstenvid, void *dstva, int perm)
-
 {
 	// LAB 4: Your code here.
 	//panic("sys_page_map not implemented");
@@ -499,7 +494,7 @@ sys_page_unmap(envid_t envid, void *va)
 很奇怪，我使用`make qemu` 出现了练习7中要求的效果，但`make grade`不通过，改改！！！！
 （是之前Exercise 6 sched_yield()函数出了错，以后每一步一定要仔细检查！！！）
 
-这就完成了实验的A部分;运行`make grade`时，请确保它通过了所有A部分的测试，并像往常一样使用`make handin`交上来。如果您试图弄清楚为什么特定的测试用例失败，请运行`./grade-lab4 -v`，它将向您显示内核构建的输出，并为每个测试运行QEMU，直到测试失败。当测试失败时，脚本将停止，然后您可以检查jos.out去看看内核实际上打印了什么。
+这就完成了实验的A部分;运行`make grade`时，请确保它通过了所有A部分的测试。如果您试图弄清楚为什么特定的测试用例失败，请运行`./grade-lab4 -v`，它将向您显示内核构建的输出，并为每个测试运行QEMU，直到测试失败。当测试失败时，脚本将停止，然后您可以检查jos.out去看看内核实际上打印了什么。
 
 OK 测试通过！！！
 
@@ -713,9 +708,9 @@ JOS用户异常栈的大小也是一页，其顶部被定义为虚拟地址UXSTA
 fork()的基本控制流程如下:
 * 1.父进程使用之前实现的set_pgfault_handler()函数，将pgfault()安装为c级别的页面错误处理程序。
 * 2.父进程调用sys_exofork()创建子环境。
-* 3.对于位于UTOP下的地址空间中的每个可写页或写时复制页，父进程都会调用		duppage，该函数会将页的写时复制映射到子进程的地址空间中，然后在自己的地址空间中重新映射页的写时复制。【注意:这里的排序(即先在子页面中标记为COW，再在父页面中标记)实际上很重要!你知道为什么吗?试着想一个具体的例子，如果颠倒顺序可能会引起麻烦。】 duppage设置了两个pte（父子），使得该页不可写，并将PTE_COW包含在"avail"字段中，以区分写时复制的页和真正的只读页。
-  不过，异常栈不会以这种方式重新映射。相反，您需要在子进程中为异常栈分配一个新页。由于页错误处理程序将执行实际的复制，而页错误处理程序运行在异常栈上，因此不能在写时复制异常栈:谁会复制它呢?
-  Fork()也需要处理存在但不可写或写时复制的页面。
+* 3.对于位于UTOP下的地址空间中的每个可写页或写时复制页，父进程都会调用	duppage，该函数会将页的写时复制映射到子进程的地址空间中，然后在自己的地址空间中重新映射页的写时复制。【注意:这里的排序(即先在子页面中标记为COW，再在父页面中标记)实际上很重要!你知道为什么吗?试着想一个具体的例子，如果颠倒顺序可能会引起麻烦。 **用户栈！！！！！，这应该也是用户调换顺序后输出错误的原因**】 duppage设置了两个pte（父子），使得该页不可写，并将PTE_COW包含在"avail"字段中，以区分写时复制的页和真正的只读页。
+**不过，异常栈不会以这种方式重新映射。相反，您需要在子进程中为异常栈分配一个新页。由于页错误处理程序将执行实际的复制，而页错误处理程序运行在异常栈上，因此不能在写时复制异常栈:谁会复制它呢?**
+  fork()也需要处理存在但不可写或写时复制的页面。
 * 4.父进程设置user page fault entrypoint，使子进程看起来像自己的。
 * 5.子进程现在可以运行了，因此父进程将其标记为runnable。
   
@@ -865,7 +860,7 @@ Part B到此结束。运行`make grade`，请确保通过了所有Part B测试�
 
 在inc/trap.h中，IRQ_OFFSET定义为十进制32。因而IDT项32-47对应于IRQs 0-15。例如，时钟中断是IRQ 0。因而，IDT[IRQ_OFFSET+0]（即IDT[32]）包含了内核中时钟中断处理程序例程的地址。选择该IRQ_OFFSET是为了使设备中断不与处理器异常重叠，这显然可能导致混淆。(事实上，在运行MS-DOS的pc的早期，IRQ_OFFSET实际上是0，这确实在处理硬件中断和处理处理器异常之间造成了巨大的混乱!)
 
-在JOS中，与xv6 Unix相比，我们做了一个关键简化。外部设备中断在内核中总是禁用的(与xv6类似，在用户空间启用)。外部中断由%eflags寄存器的FL_IF标志位控制(参见inc/mmu.h)。在设置该比特位时，将启用外部中断。虽然位可以通过几种方式进行修改，但由于我们的简化，我们将只通过在进入和离开用户模式时保存和恢复%eflags寄存器的过程来处理它。
+**在JOS中，与xv6 Unix相比，我们做了一个关键简化。外部设备中断在内核中总是禁用的(与xv6类似，在用户空间启用)**。外部中断由%eflags寄存器的FL_IF标志位控制(参见inc/mmu.h)。在设置该比特位时，将启用外部中断。虽然位可以通过几种方式进行修改，但由于我们的简化，我们将只通过在进入和离开用户模式时保存和恢复%eflags寄存器的过程来处理它。
 
 你必须确保运行时在用户环境中设置FL_IF标志位，以便在中断到达时，它被传递到处理器并由中断代码处理。否则，中断将被屏蔽或忽略，直至重新启用中断。我们用引导加载程序的第一个指令屏蔽了中断(也就是lab1中我们看到的`cli`)，到目前为止，我们还没有重新启用它们。
 
@@ -933,10 +928,10 @@ e->env_tf.tf_eflags |= FL_IF;
 		break;
 ```
 
-> 疑问！！！！！！
+> 注意！！！！！！
 另外在此实验中，我看到[其他人的博客](https://www.jianshu.com/p/8d8425e45c49)中发现了对SETGATE()宏中istrap参数的争议。 
 查阅过后发现：应该是将系统调用设置为1,因为它应该允许其他中断干扰它。而其他均设置为0，因为这些异常以及中断不应该再被干扰。
-但是！！！！！！！经过实验发现，该lab中就是应该设置成0，不然不通过。。。。。。。
+但是！！！！！！！上文加粗部分提到：JOS对此做了简化，所以。。。。都应该设置为0。
 
 这是做回归测试的好时机。确保你没有通过启用中断来破坏实验之前正常工作的任何部分(例如forktree)。此外，请尝试使用`make CPUS =2 target`运行多个cpu。你现在也应该能够通过`stresssched`了。运行`make grade`。你现在应该得到这个实验的65/80分。
 
@@ -1090,5 +1085,5 @@ ipc_send(envid_t to_env, uint32_t val, void *pg, int perm)
 通过测试！！！
 
 Part C结束。确保你通过了所有的`make grade`测试。
-在提交之前，使用`git status`和`git diff`检查您的更改。使用` git commit -am 'my solutions to lab 4' `提交你的更改，然后`make handin`。
+在提交之前，使用`git status`和`git diff`检查您的更改。使用` git commit -am 'my solutions to lab 4' `提交你的更改。
 

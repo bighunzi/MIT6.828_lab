@@ -398,7 +398,7 @@ syscall(uint32_t syscallno, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a4, 
 
 	// panic("syscall not implemented");
 	
-	//依据不同的syscallno， 调用lib/system.c中的不同函数
+	//依据不同的syscallno， 调用kern/system.c中的不同函数
 	switch (syscallno) 
 	{
 		case SYS_cputs:
