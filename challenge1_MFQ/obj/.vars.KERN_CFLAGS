@@ -1,0 +1,1 @@
+   -O1 -fno-builtin -I. -MD -fno-omit-frame-pointer -std=gnu99 -static -fno-pie -Wall -Wno-format -Wno-unused -gstabs -m32  -fno-tree-ch -I./net/lwip/include -I./net/lwip/include/ipv4 -I./net/lwip/jos -fno-stack-protector -DJOS_KERNEL -gstabs
