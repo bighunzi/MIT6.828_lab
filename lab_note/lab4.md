@@ -34,7 +34,7 @@ git merge lab3
 在本实验的第一部分中，您将首先扩展JOS以在多处理器系统上运行，然后实现一些新的JOS内核系统调用，以允许用户级环境创建额外的新环境。还将实现协作式轮询调度，允许内核在当前环境主动放弃CPU(或退出)时从一个环境切换到另一个环境。在part C后面的内容中，将实现抢占式调度，它允许内核在一段时间后从环境重新获得对CPU的控制权，即使那个环境不配合。
 
 ### 多处理器支持
-我们将使JOS支持“对称多处理”(symmetric multiprocessing, SMP)，这是一种多处理器模型，在这种模型中，所有cpu对系统资源(如内存和I/O总线)具有相同的访问权限。虽然在SMP中所有cpu的功能都是相同的，但在启动过程中，cpu可以分为两类:引导处理器(bootstrap processor, BSP)负责初始化系统和引导操作系统;只有在操作系统启动并运行之后，BSP才会激活应用程序处理器(application processors,APs)。哪个处理器是BSP是由硬件和BIOS决定的。到目前为止，所有现有的JOS代码都在BSP上运行。
+我们将使JOS支持**对称多处理(symmetric multiprocessing, SMP)**，这是一种多处理器模型，在这种模型中，所有cpu对系统资源(如内存和I/O总线)具有相同的访问权限。虽然在SMP中所有cpu的功能都是相同的，但在启动过程中，cpu可以分为两类:**引导处理器**(bootstrap processor, BSP)负责初始化系统和引导操作系统;只有在操作系统启动并运行之后，BSP才会激活**应用程序处理器**(application processors,APs)。哪个处理器是BSP是由硬件和BIOS决定的。**到目前为止，所有现有的JOS代码都在BSP上运行。**
 
 在SMP系统中，每个CPU都有一个相应的本地APIC (LAPIC)单元。LAPIC单元负责在整个系统中交付中断。LAPIC还为其连接的CPU提供一个唯一的标识符。在本实验中，我们利用了以下LAPIC单元的基本功能(在kern/lapic.c中):
 * 读取LAPIC标识符(APIC ID)来判断代码当前运行在哪个CPU上(参见cpunum())。
@@ -66,7 +66,7 @@ mmio_map_region(physaddr_t pa, size_t size)
 ```
 
 ### 应用程序处理器引导
-在启动APs之前，BSP应该首先收集有关多处理器系统的信息，例如cpu的总数、APIC id和LAPIC单元的MMIO地址。kern/mpconfig.c（mp就是multiprocessing的缩写！！！）中的mp_init()函数通过读取位于BIOS内存区域中的MP配置表来获取该信息。
+在启动APs之前，BSP应该首先收集有关多处理器系统的信息，例如cpu的总数、APIC id和LAPIC单元的MMIO地址。kern/mpconfig.c（mp就是multiprocessing的缩写）中的mp_init()函数通过读取位于BIOS内存区域中的MP配置表来获取该信息。
 
 boot_aps()函数(在kern/init.c中)驱动AP引导进程。APs在实模式(real mode)中启动，就像引导加载程序在boot/boot.s中启动一样，因此，boot_aps()将AP入口代码(kern/mpentry.S)复制到实模式下可寻址的内存位置。与引导加载程序不同，我们对AP开始执行代码的位置有一定的控制;我们将条目代码复制到0x7000 (MPENTRY_PADDR)，但是任何低于640KB的未使用的、按页对齐的物理地址都可以工作。
 
@@ -109,7 +109,7 @@ for (size_t i = 0; i < npages; i++) {
 
 以下是你应该知道的per-CPU状态:
 * Per-CPU内核栈。
-  因为多个cpu可能同时进入内核，我们需要为每个处理器提供一个单独的内核栈，以防止它们干扰彼此的执行。数组percpu_kstacks[NCPU][KSTKSIZE]为内核栈的NCPU's worth(???????不懂)保留空间。
+  因为多个cpu可能同时进入内核，我们需要为每个处理器提供一个单独的内核栈，以防止它们干扰彼此的执行。数组percpu_kstacks[NCPU][KSTKSIZE]为内核栈的保留空间。
   引导堆栈将一部分物理内存称为BSP内核堆栈，在实验2中我们把这部分物理内存映射到KSTACKTOP下面。同样，在本实验中，您将把每个CPU的内核堆栈映射到这个区域，并使用保护页作为它们之间的缓冲区。CPU 0的堆栈仍然会从KSTACKTOP向下增长;CPU 1的堆栈将从CPU 0的堆栈底部以下的KSTKGAP字节开始，依此类推。inc/memlayout.h显示了映射布局。
 * Per-CPU的TSS和TSS描述符.
   还需要一个per-CPU任务状态段(task state segment, TSS)，用于指定每个CPU的内核栈所在的位置。CPU i的TSS存储在cpus[i].cpu_ts中，对应的TSS描述符定义在GDT项gdt[(GD_TSS0 >> 3) + i]中。在kern/trap.c中定义的全局ts变量将不再有用。
@@ -349,7 +349,7 @@ Back in environment 00001002, iteration 1.
 Unix提供了fork()系统调用作为创建进程的原语。Unix fork()复制调用进程(父进程)的整个地址空间，以创建一个新进程(子进程)。从用户空间观察到的唯一区别是它们的进程id和父进程id(由getpid和getppid返回)。在父进程中，fork()返回子进程的进程ID，而在子进程中，fork()返回0。默认情况下，每个进程都有自己的私有地址空间，两个进程对内存的修改对另一个进程都不可见。
 
 您将提供一组不同的、更原始的JOS系统调用，用于创建新的用户模式环境。通过这些系统调用，您将能够完全在用户空间中实现类unix的fork()，以及其他创建环境的风格。为JOS编写的新系统调用如下：
-* sys_exofork: 该系统调用创建了一个几乎是空白的新环境:没有任何东西映射到其地址空间的用户部分，环境是不可运行的。在sys_exofork调用时，新环境将具有与父环境相同的寄存器状态。在父进程中，sys_exofork将返回新创建环境的envid_t(如果环境分配失败，则返回负的错误码)。然而，在子进程中，它将返回0。(由于子进程一开始被标记为不可运行，sys_exofork实际上不会在子进程中返回，直到父进程通过使用...标记子进程可运行来明确允许。
+* sys_exofork: 该系统调用创建了一个几乎是空白的新环境:没有任何东西映射到其地址空间的用户部分，环境是不可运行的。在sys_exofork调用时，新环境将具有与父环境相同的寄存器状态。在父进程中，sys_exofork将返回新创建环境的envid_t(如果环境分配失败，则返回负的错误码)。然而，在子进程中，它将返回0。(由于子进程一开始被标记为不可运行，**sys_exofork实际上不会在子进程中返回，直到父进程通过使用...标记子进程可运行来明确允许。**）
 * sys_env_set_status: 将指定环境的状态设置为ENV_RUNNABLE或ENV_NOT_RUNNABLE。该系统调用通常用于标记一个新环境，在其地址空间和寄存器状态完全初始化之后，该环境就可以运行了。
 * sys_page_alloc: 分配一页物理内存，并将其映射到给定环境的地址空间中的给定虚拟地址。
 * sys_page_map: 将页映射(而不是页的内容)从一个环境的地址空间复制到另一个环境的地址空间，保持内存共享，使得新映射和旧映射都指向物理内存的同一页。
@@ -674,6 +674,8 @@ JOS用户异常栈的大小也是一页，其顶部被定义为虚拟地址UXSTA
 		}
 ```
 
+此处要区分清楚：  _pgfault_handler和_pgfault_upcall。 _pgfault_upcall是入口点，它调用_pgfault_handler，处理完成后，它再通过汇编还原回用户进程发生异常的状态。
+
 最后总结一下：
 三个练习的调用顺序为：11（设置handler）->9（切换到异常栈）->10（运行handler，切换回正常栈）
 用户级别的页错误处理的步骤是：
@@ -689,8 +691,6 @@ JOS用户异常栈的大小也是一页，其顶部被定义为虚拟地址UXSTA
 可以找到`user fault va 00000000 ip 0080003a` 是trap.c中的page_fault_handler()中 curenv->env_pgfault_upcall 为空的输出。也就是说我们的程序并没有成功设置curenv->env_pgfault_upcall。
 
 最后发现是忘记在syscall()中加入 `case`代码了。（之前笔记已经补上了）
-
-调试的时候感觉程序运行顺序，功能都捋不清了，重复看一下lab3！！！
 
 
 >问题
@@ -708,7 +708,7 @@ JOS用户异常栈的大小也是一页，其顶部被定义为虚拟地址UXSTA
 fork()的基本控制流程如下:
 * 1.父进程使用之前实现的set_pgfault_handler()函数，将pgfault()安装为c级别的页面错误处理程序。
 * 2.父进程调用sys_exofork()创建子环境。
-* 3.对于位于UTOP下的地址空间中的每个可写页或写时复制页，父进程都会调用	duppage，该函数会将页的写时复制映射到子进程的地址空间中，然后在自己的地址空间中重新映射页的写时复制。【注意:这里的排序(即先在子页面中标记为COW，再在父页面中标记)实际上很重要!你知道为什么吗?试着想一个具体的例子，如果颠倒顺序可能会引起麻烦。 **用户栈！！！！！，这应该也是用户调换顺序后输出错误的原因**】 duppage设置了两个pte（父子），使得该页不可写，并将PTE_COW包含在"avail"字段中，以区分写时复制的页和真正的只读页。
+* 3.对于位于UTOP下的地址空间中的每个可写页或写时复制页，父进程都会调用	duppage，该函数会将页的写时复制映射到子进程的地址空间中，然后在自己的地址空间中重新映射页的写时复制。【注意:这里的排序(即先在子页面中标记为COW，再在父页面中标记)实际上很重要!你知道为什么吗?试着想一个具体的例子，如果颠倒顺序可能会引起麻烦。 **我的理解是用户栈会出现问题。先标父进程的话，在你给r赋值的时候就会修改用户栈上的值（见duppage，注意系统调用不使用用户栈，反而是修改r这个局部变量时会用栈），那么此时父进程触发用户异常，另开一个物理页开始写，然后你再复制子进程的映射时就不是原来的栈了，栈换了不要紧，但是之后父进程还要继续执行fork，还要写这个栈，这个时候父进程就会修改这个栈还不用另开内存，因为此时已经触发完异常了，栈页已经是可写的了，而不是cow的了，这就污染了子进程的栈**】 duppage设置了两个pte（父子），使得该页不可写，并将PTE_COW包含在"avail"字段中，以区分写时复制的页和真正的只读页。
 **不过，异常栈不会以这种方式重新映射。相反，您需要在子进程中为异常栈分配一个新页。由于页错误处理程序将执行实际的复制，而页错误处理程序运行在异常栈上，因此不能在写时复制异常栈:谁会复制它呢?**
   fork()也需要处理存在但不可写或写时复制的页面。
 * 4.父进程设置user page fault entrypoint，使子进程看起来像自己的。
@@ -719,7 +719,7 @@ fork()的基本控制流程如下:
 * 2.pgfault()检查异常是否是写异常(检查错误码中的FEC_WR)，并且该页的PTE标记是否为PTE_COW。如果不是，那就panic。
 * 3.pgfault()分配一个映射在临时位置的新页，并将发生故障的页的内容复制到临时位置。然后，错误处理程序将新页映射到具有读/写权限的适当地址，而不是旧的只读映射。
   
-用户级的lib/fork.c代码在执行上述几个操作时，必须查阅环境的页表(例如，某一页的PTE为PTE_COW)。内核将环境的页表映射到UVPT正是为此目的。它使用了一个巧妙的映射技巧，使用户代码查找PTE变得容易。lib/entry.s设置了uvpt和uvpd，使您可以轻松查找lib/fork.c中的页表信息。
+用户级的lib/fork.c代码在执行上述几个操作时，必须查阅环境的页表(例如，某一页的PTE为PTE_COW)。内核将环境的页表映射到UVPT正是为此目的。它使用了一个[巧妙的映射技巧](https://pdos.csail.mit.edu/6.828/2018/labs/lab4/uvpt.html) （这个trick我回去重复看才看懂，trick中为页目录项赋值的语句位于 pmap.c中的mem_init()中`kern_pgdir[PDX(UVPT)] = PADDR(kern_pgdir) | PTE_U | PTE_P;`），使用户代码查找PTE变得容易。lib/entry.s设置了uvpt和uvpd，使您可以轻松查找lib/fork.c中的页表信息。
 
 ### Exercise 12
 >练习12
@@ -856,7 +856,7 @@ Part B到此结束。运行`make grade`，请确保通过了所有Part B测试�
 运行user/spin测试程序。这个测试程序分支出一个子环境，一旦它接收到CPU的控制，它就永远在一个紧密的循环中旋转。父环境和内核都不会重新获得该CPU。就保护系统不受用户态环境中的bug或恶意代码的影响而言，这显然不是理想的情况，因为任何用户态环境都可能导致整个系统停止，只要进入无限循环，而CPU就永远不会被占用。为了允许内核抢占运行环境，强制重新获得对CPU的控制，我们必须扩展JOS内核以支持来自时钟硬件的外部硬件中断。
 
 ### 中断规则
-外部中断(即设备中断)称为IRQ。有16个可能的IRQ，编号从0到15。IRQ编号到IDT项的映射不是固定的。picirq.c中的pic_init将IRQ 0 ~ 15映射到IDT项IRQ_OFFSET到IRQ_OFFSET+15。
+**外部中断(即设备中断)称为IRQ。有16个可能的IRQ，编号从0到15。IRQ编号到IDT项的映射不是固定的。picirq.c中的pic_init将IRQ 0 ~ 15映射到IDT项IRQ_OFFSET到IRQ_OFFSET+15。**
 
 在inc/trap.h中，IRQ_OFFSET定义为十进制32。因而IDT项32-47对应于IRQs 0-15。例如，时钟中断是IRQ 0。因而，IDT[IRQ_OFFSET+0]（即IDT[32]）包含了内核中时钟中断处理程序例程的地址。选择该IRQ_OFFSET是为了使设备中断不与处理器异常重叠，这显然可能导致混淆。(事实上，在运行MS-DOS的pc的早期，IRQ_OFFSET实际上是0，这确实在处理硬件中断和处理处理器异常之间造成了巨大的混乱!)
 
@@ -1054,7 +1054,7 @@ ipc_recv(envid_t *from_env_store, void *pg, int *perm_store)
 
 	//thisenv在lib/libmain.c中定义。 currenv在kern/env.h中定义。
 	//这里注释要求用thisenv。
-	//我猜是因为用户环境下没有权限访问currenv，只能利用libmain()函数中定义的thisenv。
+	//因为用户环境下没有权限访问currenv，只能利用libmain()函数中定义的thisenv。
 	if(from_env_store) *from_env_store = (r < 0? 0 : thisenv->env_ipc_from);
 	if(perm_store) *perm_store= (r<0? 0:thisenv->env_ipc_perm);
 

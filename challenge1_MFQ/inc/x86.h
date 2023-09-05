@@ -248,6 +248,9 @@ read_tsc(void)
 	return tsc;
 }
 
+
+//xchg：xchg()函数使用GCC的内联汇编语句，该函数中通过xchg原子性交换spinlock.locked和newval，并返回spinlock.locked原来的值。
+//当返回值为1时，说明其他线程占用了该锁，继续循环等待；当返回值为0时，说明其他地方没有占用该锁，同时locked本设置成1了，所以该锁被此处占用。
 static inline uint32_t
 xchg(volatile uint32_t *addr, uint32_t newval)
 {
@@ -257,7 +260,7 @@ xchg(volatile uint32_t *addr, uint32_t newval)
 	asm volatile("lock; xchgl %0, %1"
 		     : "+m" (*addr), "=a" (result)
 		     : "1" (newval)
-		     : "cc");
+		     : "cc");//
 	return result;
 }
 

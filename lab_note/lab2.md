@@ -183,7 +183,7 @@ x应该是uintptr_t。
 
 为了将物理地址转换为内核可以实际读写的虚拟地址，内核必须向物理地址添加0xf0000000，以便在重新映射的区域中找到其对应的虚拟地址。您应该使用KADDR(pa)来完成该添加。
 
-内核全局变量和由boot_alloc()分配的内存位于加载内核的区域，从0xf0000000开始，正是我们映射所有物理内存的区域。因此，要将该区域中的虚拟地址转换为物理地址，内核可以简单地减去0xf0000000。您应该使用PADDR(va)来做这个减法。
+**内核全局变量和由boot_alloc()分配的内存位于加载内核的区域，从0xf0000000开始，正是我们映射所有物理内存的区域。因此，要将该区域中的虚拟地址转换为物理地址，内核可以简单地减去0xf0000000。您应该使用PADDR(va)来做这个减法。**
 
 在未来的实验中，经常会将相同的物理页面同时映射到多个虚拟地址(或多个环境的地址空间)。将在对应于物理页面的struct PageInfo的pp_ref字段中保存对每个物理页面的引用数量的计数。当物理页的此计数为零时，可以释放该页，因为不再使用它。一般来说，这个计数应该等于物理页在所有页表中出现在UTOP下面的次数(UTOP上面的映射大部分是由内核在引导时设置的，永远不应该被释放，所以没有必要引用计数它们)。我们还将使用它来跟踪指向页目录页的指针数量，以及页目录对页表页的引用数量。
 
@@ -203,7 +203,7 @@ x应该是uintptr_t。
 
 pgdir_walk()代码：
 ```c
-
+//这个函数的目的就是返回一个指向对应线性地址va的 pte。
 pte_t *
 pgdir_walk(pde_t *pgdir, const void *va, int create)
 {
@@ -235,6 +235,8 @@ pgdir_walk(pde_t *pgdir, const void *va, int create)
 
 boot_map_region()代码：
 ```c
+//这个函数的目的是添加size大小的虚拟地址和物理地址的映射关系，调用pgdir_walk()依次分配即可。
+//与boot_alloc()联合使用。
 static void
 boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm)
 {
@@ -255,6 +257,8 @@ boot_map_region(pde_t *pgdir, uintptr_t va, size_t size, physaddr_t pa, int perm
 
 page_lookup()代码：
 ```c
+//函数目的是返回虚拟地址  va 对应的页的struct PageInfo *,
+//它将会被 page_remove()调用，所以不应该再将pgdir_walk()的create参数置1了，它不再需要申请空间了。
 struct PageInfo *
 page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 {
@@ -272,6 +276,9 @@ page_lookup(pde_t *pgdir, void *va, pte_t **pte_store)
 
 page_remove()代码：
 ```c
+//函数目的：解除虚拟地址“va”的物理页的映射。
+//tlb_invalidate()的直接调用即可。
+//page_decref()作用：减少页面上的引用计数，如果没有更多的引用，则释放它。
 void
 page_remove(pde_t *pgdir, void *va)
 {
@@ -290,6 +297,7 @@ page_remove(pde_t *pgdir, void *va)
 
 page_insert()代码：
 ```c
+//函数目的：将物理页面'pp'映射到虚拟地址'va'。
 int
 page_insert(pde_t *pgdir, struct PageInfo *pp, void *va, int perm)
 {
@@ -310,7 +318,7 @@ page_insert(pde_t *pgdir, struct PageInfo *pp, void *va, int perm)
 报告成功！
 
 ## Part 3: Kernel Address Space
-JOS将处理器的32位线性地址空间分为两部分。我们将在实验3中开始加载和运行的用户环境(进程)将控制下部的布局和内容，而内核始终保持对上部的完全控制。分隔线是由inc/memlayout.h中的符号ULIM任意定义的，其为内核保留了大约256MB(0xffffffff-0xef800000)的虚拟地址空间。这就解释了为什么我们需要在实验1中给内核提供如此高的链接地址:否则内核的虚拟地址空间中就没有足够的空间同时映射到下面的用户环境中
+JOS将处理器的32位线性地址空间分为两部分。我们将在实验3中开始加载和运行的用户环境(进程)将控制下部的布局和内容，而内核始终保持对上部的完全控制。**分隔线是由inc/memlayout.h中的符号ULIM任意定义的，其为内核保留了大约256MB(0xffffffff-0xef800000)的虚拟地址空间。（但是要注意，在lab3中env_setup_vm()可以看出，UTOP之上皆是内核空间，这些内存被所有进程统一映射,除了uvpt）** 这就解释了为什么我们需要在实验1中给内核提供如此高的链接地址:否则内核的虚拟地址空间中就没有足够的空间同时映射到下面的用户环境中
 
 对于本部分和后面的实验，参考inc/memlayout.h中的JOS内存布局图是很有帮助的！
 

@@ -12,7 +12,7 @@
 	.globl uvpt
 	.set uvpt, UVPT /*0xef400000*/
 	.globl uvpd
-	.set uvpd, (UVPT+(UVPT>>12)*4)  /* 偏移量是总页数*4(bytes)，所以相加即是页目录所在地址，可以用其访问页目录*/
+	.set uvpd, (UVPT+(UVPT>>12)*4)  /* */
 
 
 // Entrypoint - this is where the kernel (or our parent environment)
